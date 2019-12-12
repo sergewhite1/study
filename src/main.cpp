@@ -18,6 +18,7 @@ static void listing8();
 static void listing9();
 static void listing10();
 static void listing11();
+static void listing12();
 
 int main() {
   std::cout << "STL iterators demo" << std::endl;
@@ -33,6 +34,7 @@ int main() {
   //listing9();
   //listing10();
   //listing11();
+  listing12();
 
   return 0;
 }
@@ -214,5 +216,20 @@ static void listing11() {
   for (const auto & elem : v2) {
     std::cout << elem << ' ';
   }
+  std::cout << std::endl;
+}
+
+static void listing12() {
+  std::cout << "6.5.3 Reverse Iterators" << std::endl;
+  std::vector<int> coll;
+  for (int i = 1; i <=9; ++i) {
+    coll.push_back(i);
+  }
+
+  // print to screen all elements in reverse order
+  std::copy(
+    coll.crbegin(), coll.crend(),               // source
+    std::ostream_iterator<int>(std::cout, " ")  // destination
+  );
   std::cout << std::endl;
 }
