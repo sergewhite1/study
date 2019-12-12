@@ -1,2 +1,3 @@
 SOURCES += \
-  main.cpp
+  src/main.cpp
+
