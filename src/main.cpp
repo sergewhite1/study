@@ -19,6 +19,20 @@ static void listing9();
 static void listing10();
 static void listing11();
 static void listing12();
+static void listing13();
+
+// PRINT_ELEMENTS()
+// prints optional string optstr,
+// after it prints all elements of collection coll
+// in all string, delimited by spaces
+template <typename T>
+inline void PRINT_ELEMENTS(const T& coll, const std::string optstr="") {
+  std::cout << optstr;
+  for (const auto & elem : coll) {
+    std::cout << elem << ' ';
+  }
+  std::cout << std::endl;
+}
 
 int main() {
   std::cout << "STL iterators demo" << std::endl;
@@ -34,7 +48,8 @@ int main() {
   //listing9();
   //listing10();
   //listing11();
-  listing12();
+  //listing12();
+  listing13();
 
   return 0;
 }
@@ -232,4 +247,10 @@ static void listing12() {
     std::ostream_iterator<int>(std::cout, " ")  // destination
   );
   std::cout << std::endl;
+}
+
+static void listing13() {
+  std::cout << "6.6 User generic fucntion" << std::endl;
+  std::list<int> coll = {1, 2, 3, 4, 5, 6, 7};
+  PRINT_ELEMENTS(coll, "All elements: ");
 }
