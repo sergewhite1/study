@@ -20,6 +20,7 @@ static void listing10();
 static void listing11();
 static void listing12();
 static void listing13();
+static void listing14();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -49,7 +50,8 @@ int main() {
   //listing10();
   //listing11();
   //listing12();
-  listing13();
+  //listing13();
+  listing14();
 
   return 0;
 }
@@ -253,4 +255,50 @@ static void listing13() {
   std::cout << "6.6 User generic fucntion" << std::endl;
   std::list<int> coll = {1, 2, 3, 4, 5, 6, 7};
   PRINT_ELEMENTS(coll, "All elements: ");
+}
+
+static void listing14() {
+  std::cout << "6.7.1 Remove Erase Of Elements." << std::endl;
+
+  std::list<int> coll;
+
+  // insert elements from 6 to 1 and from 1 to 6
+  for(int i = 1; i <= 6; ++i) {
+    coll.push_front(i);
+    coll.push_back(i);
+  }
+
+  // print all elements
+  std::cout << "pre:   ";
+  std::copy(
+    coll.cbegin(), coll.cend(),                 // source
+    std::ostream_iterator<int>(std::cout, " ")  // destination
+  );
+  std::cout << std::endl;
+
+  std::list<int>::iterator end = std::remove(
+    coll.begin(), coll.end(), // range
+    3                         // value
+  );
+
+  // print result elements
+  std::cout << "post:  ";
+  std::copy(
+    coll.begin(), end,                          // source
+    std::ostream_iterator<int>(std::cout, " ")  // destination
+  );
+  std::cout << std::endl;
+
+  std::cout << "number of removed elements: " << std::distance(end, coll.end())
+            << std::endl;
+
+  coll.erase(end, coll.end());
+
+  // print final collection
+  std::cout << "final: ";
+  std::copy(
+    coll.cbegin(), coll.cend(),                          // source
+    std::ostream_iterator<int>(std::cout, " ")  // destination
+  );
+  std::cout << std::endl;
 }
