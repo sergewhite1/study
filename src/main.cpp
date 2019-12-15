@@ -21,6 +21,7 @@ static void listing11();
 static void listing12();
 static void listing13();
 static void listing14();
+static void listing15();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -51,7 +52,8 @@ int main() {
   //listing11();
   //listing12();
   //listing13();
-  listing14();
+  //listing14();
+  listing15();
 
   return 0;
 }
@@ -299,6 +301,34 @@ static void listing14() {
   std::copy(
     coll.cbegin(), coll.cend(),                          // source
     std::ostream_iterator<int>(std::cout, " ")  // destination
+  );
+  std::cout << std::endl;
+}
+
+
+static void listing15() {
+  std::cout << "6.7.2 Work with associated and unordered containers" << std::endl;
+
+  // unordered set with elements from 1 to 9
+  std::set<int> coll = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+  // print all elements of collection
+  std::copy(
+    coll.cbegin(), coll.cend(),                // source
+    std::ostream_iterator<int>(std::cout, " ") // destination
+  );
+  std::cout << std::endl;
+
+  // Erase all elemnets value 3
+  // algorithm remove does not work
+  // instead we use function member erase
+
+  int num = coll.erase(3);
+  std::cout << "number of erased elememts: " << num << std::endl;
+
+  std::copy(
+    coll.cbegin(), coll.cend(),                // source
+    std::ostream_iterator<int>(std::cout, " ") // destination
   );
   std::cout << std::endl;
 }
