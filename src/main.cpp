@@ -22,6 +22,7 @@ static void listing12();
 static void listing13();
 static void listing14();
 static void listing15();
+static void listing16();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -53,7 +54,8 @@ int main() {
   //listing12();
   //listing13();
   //listing14();
-  listing15();
+  //listing15();
+  listing16();
 
   return 0;
 }
@@ -331,4 +333,28 @@ static void listing15() {
     std::ostream_iterator<int>(std::cout, " ") // destination
   );
   std::cout << std::endl;
+}
+
+
+static void listing16() {
+  std::cout << "6.7.3 Algorithms and Member Functions." << std::endl;
+
+  std::list<int> coll;
+  // insert elements from 6 to 1 and from 1 to 6
+  for (int i = 1; i <= 6; ++i) {
+    coll.push_front(i);
+    coll.push_back(i);
+  }
+  PRINT_ELEMENTS(coll, "before: ");
+
+  // remove all elements with value 3 (low performance)
+  coll.erase(
+    std::remove(coll.begin(), coll.end(), 3),
+    coll.end()
+  );
+
+  // remove all elements with value 4 (high performace)
+  coll.remove(4);
+
+  PRINT_ELEMENTS(coll, "after:  ");
 }
