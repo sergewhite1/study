@@ -23,6 +23,7 @@ static void listing13();
 static void listing14();
 static void listing15();
 static void listing16();
+static void listing17();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -35,6 +36,10 @@ inline void PRINT_ELEMENTS(const T& coll, const std::string optstr="") {
     std::cout << elem << ' ';
   }
   std::cout << std::endl;
+}
+
+static void print(const int& elem) {
+  std::cout << elem << ' ';
 }
 
 int main() {
@@ -55,7 +60,8 @@ int main() {
   //listing13();
   //listing14();
   //listing15();
-  listing16();
+  //listing16();
+  listing17();
 
   return 0;
 }
@@ -357,4 +363,22 @@ static void listing16() {
   coll.remove(4);
 
   PRINT_ELEMENTS(coll, "after:  ");
+}
+
+static void listing17() {
+  std::cout << "6.8.1-1 Use functions as algorithm argument." << std::endl;
+
+  std::vector<int> coll;
+
+  // insert elemms from 1 to 9
+  for (int i = 1; i <= 9; ++i) {
+    coll.push_back(i);
+  }
+
+  // print to screen all elems
+  std::for_each(
+    coll.cbegin(), coll.cend(),
+    print
+  );
+  std::cout << std::endl;
 }
