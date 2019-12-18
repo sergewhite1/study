@@ -24,6 +24,7 @@ static void listing14();
 static void listing15();
 static void listing16();
 static void listing17();
+static void listing18();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -40,6 +41,10 @@ inline void PRINT_ELEMENTS(const T& coll, const std::string optstr="") {
 
 static void print(const int& elem) {
   std::cout << elem << ' ';
+}
+
+static int square(int value) {
+  return value * value;
 }
 
 int main() {
@@ -61,7 +66,8 @@ int main() {
   //listing14();
   //listing15();
   //listing16();
-  listing17();
+  //listing17();
+  listing18();
 
   return 0;
 }
@@ -366,7 +372,7 @@ static void listing16() {
 }
 
 static void listing17() {
-  std::cout << "6.8.1-1 Use functions as algorithm argument." << std::endl;
+  std::cout << "6.8.1 Use functions as algorithm argument (std::for_each)" << std::endl;
 
   std::vector<int> coll;
 
@@ -381,4 +387,27 @@ static void listing17() {
     print
   );
   std::cout << std::endl;
+}
+
+static void listing18() {
+  std::cout << "6.8.1 Use functions as algorithm argument (std::transform)" << std::endl;
+
+  std::set<int> coll1;
+  std::vector<int> coll2;
+
+  // insert elems from 1 to 9 to coll1
+  for(int i = 1; i <= 9; ++i) {
+    coll1.insert(i);
+  }
+  PRINT_ELEMENTS(coll1, "inited:  ");
+
+  // coll1 -> coll2
+  // square every value
+ 
+  std::transform(
+    coll1.cbegin(), coll1.cend(),
+    std::back_inserter(coll2),
+    square
+  );
+  PRINT_ELEMENTS(coll2, "squared: ");
 }
