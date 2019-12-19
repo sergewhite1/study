@@ -25,6 +25,7 @@ static void listing15();
 static void listing16();
 static void listing17();
 static void listing18();
+static void listing19();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -47,6 +48,20 @@ static int square(int value) {
   return value * value;
 }
 
+// unary predicat whch return true if number is prime
+bool isPrime(int number) {
+  number = abs(number);
+
+  if (number == 0 || number == 1) {
+    return false;
+  }
+
+  int divisor;
+  for (divisor = number / 2; number % divisor != 0; --divisor);
+
+  return divisor == 1;
+}
+
 int main() {
   std::cout << "STL iterators demo" << std::endl;
 
@@ -67,7 +82,8 @@ int main() {
   //listing15();
   //listing16();
   //listing17();
-  listing18();
+  //listing18();
+  listing19();
 
   return 0;
 }
@@ -410,4 +426,28 @@ static void listing18() {
     square
   );
   PRINT_ELEMENTS(coll2, "squared: ");
+}
+
+static void listing19() {
+  std::cout << "6.8.2 Predicats. Unary" << std::endl;
+
+  std::list<int> coll;
+
+  // insert elements from 24 to 30
+  for (int i = 24; i <= 30; ++i) {
+    coll.push_back(i);
+  }
+
+  // find prime number
+  auto pos = std::find_if(
+    coll.cbegin(), coll.cend(),
+    isPrime
+  );
+  if (pos != coll.cend()) {
+    // found
+    std::cout << *pos << " - is prime number" << std::endl;
+  } else {
+    // not found
+    std::cout << "prime number not fond" << std::endl;
+  }
 }
