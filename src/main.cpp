@@ -26,6 +26,7 @@ static void listing16();
 static void listing17();
 static void listing18();
 static void listing19();
+static void listing20();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -62,6 +63,31 @@ bool isPrime(int number) {
   return divisor == 1;
 }
 
+class Person {
+public:
+  Person(const std::string& firstname, const std::string &lastname)
+  : firstname_(firstname),
+    lastname_(lastname) {}
+
+  std::string firstname() const {return firstname_;}
+  std::string lastname() const {return lastname_;}
+
+private:
+  std::string firstname_;
+  std::string lastname_;
+};
+
+std::ostream& operator<<(std::ostream &stream, const Person &person) {
+  stream << person.firstname() << ' ' << person.lastname();
+  return stream;
+}
+
+static bool personSortCriterion(const Person &p1, const Person &p2) {
+  return p1.lastname() < p2.lastname() || (
+    (p1.lastname() == p2.lastname()) && (p1.firstname() < p2.firstname())
+    );
+}
+
 int main() {
   std::cout << "STL iterators demo" << std::endl;
 
@@ -83,8 +109,9 @@ int main() {
   //listing16();
   //listing17();
   //listing18();
-  listing19();
-
+  //listing19();
+  listing20();
+  
   return 0;
 }
 
@@ -450,4 +477,24 @@ static void listing19() {
     // not found
     std::cout << "prime number not fond" << std::endl;
   }
+}
+
+static void listing20() {
+  std::cout << "6.8.2 Predicats. Binary." << std::endl;
+
+  std::deque<Person> coll;
+
+  coll.push_back(Person("Serge", "Beloff"));
+  coll.push_back(Person("Antonio", "Vivaldi"));
+  coll.push_back(Person("Jean", "Fourier"));
+
+
+  PRINT_ELEMENTS(coll, "unsorted container: ");
+
+  std::sort(
+    coll.begin(), coll.end(),
+    personSortCriterion
+  );
+
+  PRINT_ELEMENTS(coll, "sorted container:   ");
 }
