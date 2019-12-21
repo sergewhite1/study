@@ -27,6 +27,9 @@ static void listing17();
 static void listing18();
 static void listing19();
 static void listing20();
+static void listing21();
+static void listing22();
+static void listing23();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -88,6 +91,27 @@ static bool personSortCriterion(const Person &p1, const Person &p2) {
     );
 }
 
+static void add10(int& elem) {
+  elem +=10;
+}
+
+template<int value>
+static void add(int& elem) {
+  elem += value;
+}
+
+// functional object add value during init
+class AddValue {
+public:
+  AddValue(int value): value_(value) {}
+  void operator()(int& elem) {
+    elem += value_;
+  }
+
+private:
+  int value_ = 0;
+};
+
 int main() {
   std::cout << "STL iterators demo" << std::endl;
 
@@ -110,7 +134,10 @@ int main() {
   //listing17();
   //listing18();
   //listing19();
-  listing20();
+  //listing20();
+  //listing21();
+  //listing22();
+  listing23();
   
   return 0;
 }
@@ -497,4 +524,45 @@ static void listing20() {
   );
 
   PRINT_ELEMENTS(coll, "sorted container:   ");
+}
+
+static void listing21() {
+  std::cout << "6.10.1-1 Function Object Definition. For each add 10" << std::endl;
+
+  std::vector<int> coll;
+  for (int i = 1; i <= 9; ++i) {
+    coll.push_back(i);
+  }
+  PRINT_ELEMENTS(coll, "init:  ");
+
+  std::for_each(coll.begin(), coll.end(), add10);
+  PRINT_ELEMENTS(coll, "add10: ");
+}
+
+static void listing22() {
+  std::cout << "6.10.1-2 Function Object Definition. "
+    "Add different values we know at compile time" << std::endl;
+
+  std::vector<int> coll;
+  for (int i = 1; i <= 9; ++i) {
+    coll.push_back(i);
+  }
+  PRINT_ELEMENTS(coll, "init:    ");
+
+  std::for_each(coll.begin(), coll.end(), add<10>);
+  PRINT_ELEMENTS(coll, "add<10>: ");
+}
+
+static void listing23() {
+  std::cout << "6.10.1-3 Function Object Definition. "
+    "Add different values we know in run time" << std::endl;
+ 
+  std::list<int> coll;
+  for (int i = 1; i <= 9; ++i) {
+    coll.push_back(i);
+  }
+  PRINT_ELEMENTS(coll, "init:         ");
+
+  std::for_each(coll.begin(), coll.end(), AddValue(10));
+  PRINT_ELEMENTS(coll, "AddValue(10): ");
 }
