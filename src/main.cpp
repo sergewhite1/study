@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <functional>
 #include <deque>
 #include <iostream>
 #include <iterator>
@@ -31,6 +32,7 @@ static void listing21();
 static void listing22();
 static void listing23();
 static void listing24(); 
+static void listing25();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -139,7 +141,8 @@ int main() {
   //listing21();
   //listing22();
   //listing23();
-  listing24();
+  //listing24();
+  listing25();
 
   return 0;
 }
@@ -591,4 +594,46 @@ static void listing24() {
     std::multiplies<int>()      // operation
   );
   PRINT_ELEMENTS(coll, "square:     ");
+}
+
+static void listing25() {
+  std::cout << "6.10.3 Binders." << std::endl;
+
+  std::set<int, std::greater<int>> coll1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+  std::deque<int> coll2;
+
+  //NOTE: Thanks to greater<>() sort criteria
+  //elements follow in reverse order
+  PRINT_ELEMENTS(coll1, "init:      ");
+
+  // copy element from coll1 to coll2 with multiply
+  std::transform(
+    coll1.cbegin(), coll1.cend(),  // source
+    std::back_inserter(coll2),     // destination
+
+    // operation
+    std::bind(std::multiplies<int>(), std::placeholders::_1, 10)
+  );
+  PRINT_ELEMENTS(coll2, "transform: ");
+
+  // replace 70 -> 42
+  std::replace_if(
+    coll2.begin(), coll2.end(), //range
+
+    // replace range
+    std::bind(std::equal_to<int>(), std::placeholders::_1, 70),
+
+    42 // new value
+  );
+  PRINT_ELEMENTS(coll2, "replace:   ");
+
+  // erase element with value from range [50; 80]
+  coll2.erase(std::remove_if(
+      coll2.begin(), coll2.end(),
+      std::bind(std::logical_and<bool>(),
+        std::bind(std::greater_equal<int>(), std::placeholders::_1, 50),
+        std::bind(std::less_equal<int>(), std::placeholders::_1, 80))),
+    coll2.end()
+  );
+  PRINT_ELEMENTS(coll2, "remove:    ");
 }
