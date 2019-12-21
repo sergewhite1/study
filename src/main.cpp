@@ -30,6 +30,7 @@ static void listing20();
 static void listing21();
 static void listing22();
 static void listing23();
+static void listing24(); 
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -137,8 +138,9 @@ int main() {
   //listing20();
   //listing21();
   //listing22();
-  listing23();
-  
+  //listing23();
+  listing24();
+
   return 0;
 }
 
@@ -565,4 +567,28 @@ static void listing23() {
 
   std::for_each(coll.begin(), coll.end(), AddValue(10));
   PRINT_ELEMENTS(coll, "AddValue(10): ");
+}
+
+static void listing24() {
+  std::cout << "6.10.2 Standard Functional Objects" << std::endl;
+
+  std::deque<int> coll = { 1, 2, 3, 5, 7, 11, 13, 17, 19 };
+  PRINT_ELEMENTS(coll, "init:        ");
+
+  // change sign of all elements in collection to another
+  std::transform(
+    coll.cbegin(), coll.cend(), // source
+    coll.begin(),               // destination
+    std::negate<int>()          // operation
+  );
+  PRINT_ELEMENTS(coll, "change sign: ");
+
+  // square all elements in coll
+  std::transform(
+    coll.cbegin(), coll.cend(), // the 1st sourse
+    coll.cbegin(),              // the 2nd source
+    coll.begin(),               // destination
+    std::multiplies<int>()      // operation
+  );
+  PRINT_ELEMENTS(coll, "square:     ");
 }
