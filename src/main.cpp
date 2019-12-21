@@ -33,6 +33,7 @@ static void listing22();
 static void listing23();
 static void listing24(); 
 static void listing25();
+static void listing26();
 
 // PRINT_ELEMENTS()
 // prints optional string optstr,
@@ -77,16 +78,20 @@ public:
 
   std::string firstname() const {return firstname_;}
   std::string lastname() const {return lastname_;}
+  void save() const {
+    std::cout << "Save of " << *this << std::endl;
+  }
+ 
+  
+  friend std::ostream& operator<<(std::ostream &stream, const Person &person) {
+    stream << person.firstname() << ' ' << person.lastname();
+    return stream;
+  }
 
 private:
   std::string firstname_;
   std::string lastname_;
 };
-
-std::ostream& operator<<(std::ostream &stream, const Person &person) {
-  stream << person.firstname() << ' ' << person.lastname();
-  return stream;
-}
 
 static bool personSortCriterion(const Person &p1, const Person &p2) {
   return p1.lastname() < p2.lastname() || (
@@ -142,7 +147,8 @@ int main() {
   //listing22();
   //listing23();
   //listing24();
-  listing25();
+  //listing25();
+  listing26();
 
   return 0;
 }
@@ -636,4 +642,22 @@ static void listing25() {
     coll2.end()
   );
   PRINT_ELEMENTS(coll2, "remove:    ");
+}
+
+static void listing26() {
+  std::cout << "6.10.3 Binders. Binder in for_each algorithm." << std::endl;
+
+  std::deque<Person> coll;
+
+  coll.push_back(Person("Serge", "Beloff"));
+  coll.push_back(Person("Antonio", "Vivaldi"));
+  coll.push_back(Person("Jean", "Fourier"));
+
+
+  PRINT_ELEMENTS(coll, "init: ");
+
+  std::for_each(
+    coll.cbegin(), coll.cend(),
+    std::bind(&Person::save, std::placeholders::_1)
+  );
 }
