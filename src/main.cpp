@@ -8,6 +8,9 @@
 #include <unordered_set>
 #include <vector>
 
+#include "binder_demo.h"
+#include "person.h"
+
 static void listing1();
 static void listing2();
 static void listing3();
@@ -70,29 +73,6 @@ bool isPrime(int number) {
   return divisor == 1;
 }
 
-class Person {
-public:
-  Person(const std::string& firstname, const std::string &lastname)
-  : firstname_(firstname),
-    lastname_(lastname) {}
-
-  std::string firstname() const {return firstname_;}
-  std::string lastname() const {return lastname_;}
-  void save() const {
-    std::cout << "Save of " << *this << std::endl;
-  }
- 
-  
-  friend std::ostream& operator<<(std::ostream &stream, const Person &person) {
-    stream << person.firstname() << ' ' << person.lastname();
-    return stream;
-  }
-
-private:
-  std::string firstname_;
-  std::string lastname_;
-};
-
 static bool personSortCriterion(const Person &p1, const Person &p2) {
   return p1.lastname() < p2.lastname() || (
     (p1.lastname() == p2.lastname()) && (p1.firstname() < p2.firstname())
@@ -148,7 +128,9 @@ int main() {
   //listing23();
   //listing24();
   //listing25();
-  listing26();
+  //listing26();
+
+  binder_demo::listing1();
 
   return 0;
 }
