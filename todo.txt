@@ -1,0 +1,2 @@
+//TODO: conspect Linux TTY how set buffer size
+//TODO: Unit tests
