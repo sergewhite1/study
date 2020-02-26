@@ -1,7 +1,13 @@
 project (sso)
 
-add_executable(${PROJECT_NAME}
-  main.cpp
+add_library(wht_string_lib OBJECT 
   wht_string.cpp
   wht_string.h
 )
+
+
+add_executable(${PROJECT_NAME} $<TARGET_OBJECTS:wht_string_lib>
+  main.cpp
+)
+
+#target_link_libraries(${PROJECT_NAME} wht_string_lib)
