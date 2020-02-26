@@ -1,0 +1,4 @@
+file: /etc/default/grub
+GRUB_CMDLINE_LINUX="fbcon=scrollback:2048k"
+sudo update-grub
+reboot
