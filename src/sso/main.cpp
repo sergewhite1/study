@@ -8,5 +8,7 @@ int main() {
   wht::string s("BLA BLA BLA...");
   std::cout << "s= " << s << std::endl;
 
+	std::cout << "sizeof(size_t)=" << sizeof(size_t) << std::endl;
+
   return 0;
 }

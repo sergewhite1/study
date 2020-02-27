@@ -1,12 +1,26 @@
 #include "wht_string.h"
 
+#include <cstring>
+
 namespace wht {
 
 string::string() {
+	*local_ = '\0';
+  data_ = local_;
 }
 
 string::string(const char* str) {
-  //TODO: wht::string ctor
+  size_t len = strlen(str);
+  if (len == 0) {
+    *local_ = '\0';
+    data_ = local_;
+  } else {
+    if (len + 1 >= MAX_LOCAL_SIZE) {
+      data_ = new char[len + 1];
+    }
+    strncpy(data_, str, len + 1);
+    length_ = len;
+  }
 }
 
 string::string(const string& obj) {
@@ -27,29 +41,37 @@ string& string::operator=(string&& obj) {
 	return *this;
 }
 
-bool string::empty() const {
-	return empty_;
+string::~string() {
+	clear();
 }
 
+bool string::empty() const {
+	return length() == 0;
+}
 
 size_t string::length() const {
-	//TODO: wht::string::length
-	return 0;
+	return length_;
 }
 
 const char* string::data() const {
-	//TODO: wht::string::data
-	return nullptr;
+  return data_;
 }
 
 const char* string::c_str() const {
-	//TODO: wht::string::c_str
+	return data();
 }
 
-std::ostream& operator << (std::ostream& rhs, const wht::string& lhs) {
-  //TODO:  std::ostream& operator << (std::ostream& rhs, const wht::string& lhs)
-  rhs << "AAAA!!!";
-  return rhs;
+void string::clear() {
+	if (data_ != local_) {
+		delete []data_;
+		data_ = local_;
+   *local_ = '\0';
+	}
+}
+
+std::ostream& operator << (std::ostream& lhs, const wht::string& rhs) {
+  lhs << rhs.data();
+  return lhs;
 }
 
 } // namespace wht

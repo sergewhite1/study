@@ -1,6 +1,6 @@
 #include <ostream>
 
-namespace wht{
+namespace wht {
 
 class string {
 public:
@@ -10,16 +10,22 @@ public:
   string(string&&);
   string& operator=(const string&);
   string& operator=(string&&);
+  ~string();
 
   bool empty() const;
   size_t length() const;
   const char* data() const;
   const char* c_str() const;
+  void clear();
 
 private:
-	bool empty_ = true;
+  static const size_t MAX_LOCAL_SIZE = 32;
+
+	char *data_;  
+  size_t length_ = 0;
+	char local_[MAX_LOCAL_SIZE];
 };
 
-std::ostream& operator << (std::ostream& rhs, const wht::string& lhs);
+std::ostream& operator << (std::ostream& lhs, const wht::string& rhs);
 
 } // namespace wht
