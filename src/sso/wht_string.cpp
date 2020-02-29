@@ -10,11 +10,10 @@ string::string() {
 }
 
 string::string(const char* str) {
-  size_t len = strlen(str);
-  if (len == 0) {
-    *local_ = '\0';
-    data_ = local_;
-  } else {
+  *local_ = '\0';
+  data_ = local_;
+  size_t len =  str == nullptr ? 0 : strlen(str);
+  if (len) {
     if (len + 1 >= MAX_LOCAL_SIZE) {
       data_ = new char[len + 1];
     }
@@ -24,20 +23,48 @@ string::string(const char* str) {
 }
 
 string::string(const string& obj) {
-	//TODO: wht::string copy ctor
+  data_ = local_;
+	memcpy(local_, obj.local_, sizeof(local_));
+  if (obj.length() + 1 >= MAX_LOCAL_SIZE) {
+		data_ = new char [obj.length() + 1];
+    strcpy(data_, obj.data());
+  }
+  length_ = obj.length();
 }
 
 string::string(string&& obj) {
-	//TODO: wht::string move ctor
+	std::swap(data_, obj.data_);
+	std::swap(length_, obj.length_);
+	memcpy(local_, obj.local_, sizeof(local_));
+	if (length_ + 1 < MAX_LOCAL_SIZE) {
+		data_ = local_;
+  }
 }
 
 string& string::operator=(const string& obj) {
-	//TODO: wht::string operator=
+	if (this == &obj) {
+		return *this;
+  }
+  clear();
+	memcpy(local_, obj.local_, sizeof(local_));
+	if (obj.length() + 1 >= MAX_LOCAL_SIZE) {
+		data_ = new char[obj.length() + 1];
+		strcpy(data_, obj.data());
+	}
+	length_ = obj.length();
 	return *this;
 }
 
 string& string::operator=(string&& obj) {
-	//TODO: wht::string move operator=
+  if (this == &obj) {
+		return *this;
+	}
+	std::swap(data_, obj.data_);
+	std::swap(length_, obj.length_);
+	memcpy(local_, obj.local_, sizeof(local_));
+	if (length_ + 1 < MAX_LOCAL_SIZE) {
+		data_ = local_;
+	}
 	return *this;
 }
 
@@ -64,9 +91,10 @@ const char* string::c_str() const {
 void string::clear() {
 	if (data_ != local_) {
 		delete []data_;
-		data_ = local_;
-   *local_ = '\0';
 	}
+	data_ = local_;
+  *local_ = '\0';
+	length_ = 0;
 }
 
 std::ostream& operator << (std::ostream& lhs, const wht::string& rhs) {
