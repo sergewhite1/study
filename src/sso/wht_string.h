@@ -19,8 +19,12 @@ public:
   void clear();
 
 private:
+#ifdef WHT_STRING_TESTING
+public:
+#endif
   static const size_t MAX_LOCAL_SIZE = 32;
 
+private:
 	char *data_;  
   size_t length_ = 0;
 	char local_[MAX_LOCAL_SIZE];

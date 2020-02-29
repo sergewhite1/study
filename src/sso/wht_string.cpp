@@ -14,7 +14,7 @@ string::string(const char* str) {
   data_ = local_;
   size_t len =  str == nullptr ? 0 : strlen(str);
   if (len) {
-    if (len + 1 >= MAX_LOCAL_SIZE) {
+    if (len + 1 > MAX_LOCAL_SIZE) {
       data_ = new char[len + 1];
     }
     strncpy(data_, str, len + 1);
