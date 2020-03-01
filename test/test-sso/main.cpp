@@ -12,7 +12,7 @@ static char* create_test_string(size_t size);
 
 typedef int (*UnitTestProc)();
 
-static int UnitTest1() {
+static int UnitTest01() {
 	// default ctor
 	wht::string s;
 	if (s.empty() == false) {
@@ -30,7 +30,7 @@ static int UnitTest1() {
 	return 0;
 }
 
-static int UnitTest2() {
+static int UnitTest02() {
 	// ctor; short string
 	const char short_string[] = "BLA";
   const size_t len = strlen(short_string);
@@ -50,7 +50,7 @@ static int UnitTest2() {
 }
 
 
-static int UnitTest3() {
+static int UnitTest03() {
 	// ctor; long string
 	const size_t len = strlen(LONG_STRING);
 	wht::string s(LONG_STRING);
@@ -66,8 +66,25 @@ static int UnitTest3() {
 	return 0;
 }
 
-static int UnitTest4() {
-	// ctor MAX_LOCAL_SIZE-1
+
+static int UnitTest04() {
+	// ctor; 1 symbol string
+  const char c[] = "A";
+  wht::string s(c);
+  if (s.empty() == true) {
+		return 1;
+	}
+	if (s.length() != 1) {
+		return 1;
+	}
+	if (strcmp(s.data(), c) != 0) {
+		return 1;
+	}
+	return 0;
+}
+
+static int UnitTest05() {
+	// ctor; MAX_LOCAL_SIZE-1
   int ret = 1;
   const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
   char *c = create_test_string(size);
@@ -85,12 +102,13 @@ static int UnitTest4() {
 		}
 		ret = 0;
   } while(false);
-
+    
+	free(c);
 	return ret;
 }
 
-static int UnitTest5() {
-  // ctor MAX_LOCAL_SIZE
+static int UnitTest06() {
+  // ctor; MAX_LOCAL_SIZE
   int ret = 1;
   const size_t size =  wht::string::MAX_LOCAL_SIZE;
   char *c = create_test_string(size);
@@ -113,8 +131,8 @@ static int UnitTest5() {
 	return ret;
 }
 
-static int UnitTest6() { 
-	// ctror MAX_LOCA_SIZE + 1
+static int UnitTest07() { 
+	// ctror; MAX_LOCA_SIZE + 1
 	int ret = 1;
   const size_t size =  wht::string::MAX_LOCAL_SIZE + 1;
   char *c = create_test_string(size);
@@ -138,8 +156,8 @@ static int UnitTest6() {
 }
 
 
-static int UnitTest7() { 
-	// ctor empty string
+static int UnitTest08() { 
+	// ctor; empty string
 	wht::string s("");
 
   if (s.empty() == false) {
@@ -156,8 +174,8 @@ static int UnitTest7() {
 }
 
 
-static int UnitTest8() { 
-	// ctor nullptr
+static int UnitTest09() { 
+	// ctor; nullptr
 	wht::string s(nullptr);
 
   if (s.empty() == false)  {
@@ -173,7 +191,7 @@ static int UnitTest8() {
 	return 0;
 }
 
-static int UnitTest9() {
+static int UnitTest10() {
 	// copy ctor; short string
   const char short_string[] = "BLA";
   const size_t size = sizeof(short_string);
@@ -194,8 +212,8 @@ static int UnitTest9() {
 	return 0;
 } 
 
-static int UnitTest10() {
-	// copy ctor: long string
+static int UnitTest11() {
+	// copy ctor; long string
   wht::string s1(LONG_STRING);
   wht::string s2(s1);
 
@@ -205,15 +223,34 @@ static int UnitTest10() {
 	if (s2.length() != sizeof(LONG_STRING) - 1) {
 		return 1;
 	}
-  if (strcmp(s2.data(), LONG_STRING) != 0){
+  if (strcmp(s2.data(), LONG_STRING) != 0) {
 		return 1;
   }
  
 	return 0;
 }
 
-static int UnitTest11() {
-	// copy ctor: MAX_LOCAL_SIZE - 1
+static int UnitTest12() {
+	// copy ctor; 1 symbol string
+  const char c[] = "B";
+  wht::string s1(c);
+  wht::string s2(s1);
+
+  if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != 1) {
+		return 1;
+	}
+  if (strcmp(s2.data(), c) != 0) {
+		return 1;
+  }
+ 
+	return 0;
+}
+
+static int UnitTest13() {
+	// copy ctor; MAX_LOCAL_SIZE - 1
   int ret = 1;
   const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
   char *c = create_test_string(size);
@@ -232,12 +269,13 @@ static int UnitTest11() {
 		}
 		ret = 0;
   } while(false);
-
+  
+  free(c);
 	return ret;
 }
 
-static int UnitTest12() {
-	// copy ctor: MAX_LOCAL_SIZE
+static int UnitTest14() {
+	// copy ctor; MAX_LOCAL_SIZE
   int ret = 1;
   const size_t size =  wht::string::MAX_LOCAL_SIZE;
   char *c = create_test_string(size);
@@ -261,8 +299,8 @@ static int UnitTest12() {
 	return ret;
 }
 
-static int UnitTest13() {
-	// copy ctor: MAX_LOCA_SIZE + 1
+static int UnitTest15() {
+	// copy ctor; MAX_LOCA_SIZE + 1
 	int ret = 1;
   const size_t size =  wht::string::MAX_LOCAL_SIZE + 1;
   char *c = create_test_string(size);
@@ -286,8 +324,8 @@ static int UnitTest13() {
 	return ret;
 }
 
-static int UnitTest14() {
-	// copy ctor: empty string
+static int UnitTest16() {
+	// copy ctor; empty string
 	wht::string s1("");
   wht::string s2(s1);  
 
@@ -317,8 +355,8 @@ static int UnitTest14() {
 	return 0;
 }
 
-static int UnitTest15() {
-	// copy ctor: nullptr
+static int UnitTest17() {
+	// copy ctor; nullptr
 	wht::string s1(nullptr);
 	wht::string s2(s1);
 
@@ -335,8 +373,8 @@ static int UnitTest15() {
 	return 0;
 }
 
-static int UnitTest16() {
-	// move ctor: short string
+static int UnitTest18() {
+	// move ctor; short string
   const char short_string[] = "BLA";
   const size_t size = sizeof(short_string);
   static_assert(size < wht::string::MAX_LOCAL_SIZE, "");
@@ -356,10 +394,173 @@ static int UnitTest16() {
 	return 0;
 }
 
-static const UnitTestProc UNIT_TESTS[] = {nullptr, UnitTest1, UnitTest2,
-  UnitTest3, UnitTest4, UnitTest5, UnitTest6, UnitTest7, UnitTest8,
-  UnitTest9, UnitTest10, UnitTest11, UnitTest12, UnitTest13, UnitTest14,
-  UnitTest15, UnitTest16};
+static int UnitTest19() {
+	// move ctor; long string
+  wht::string s1(LONG_STRING);
+  wht::string s2(std::move(s1));
+
+  if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != sizeof(LONG_STRING) - 1) {
+		return 1;
+	}
+  if (strcmp(s2.data(), LONG_STRING) != 0) {
+		return 1;
+  }
+ 
+	return 0;
+}
+
+static int UnitTest20() {
+	// move ctor; symbol string
+  const char c[] = "C";
+  wht::string s1(c);
+  wht::string s2(std::move(s1));
+
+  if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != 1) {
+		return 1;
+	}
+  if (strcmp(s2.data(), c) != 0) {
+		return 1;
+  }
+ 
+	return 0;
+}
+
+static int UnitTest21() {
+	// move ctor; MAX_LOCAL_SIZE - 1
+  int ret = 1;
+  const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
+  char *c = create_test_string(size);
+
+	wht::string s1(c);
+  wht::string s2(std::move(s1));
+  do {
+		if (s2.empty() == true) {
+			break;
+		}
+		if (s2.length() != size - 1) {
+			break;
+		}
+		if (strcmp(s2.data(), c) != 0) {
+			break;
+		}
+		ret = 0;
+  } while(false);
+	
+	free(c);
+	return ret;
+}
+
+static int UnitTest22() {
+	// move ctor; MAX_LOCAL_SIZE
+  int ret = 1;
+  const size_t size =  wht::string::MAX_LOCAL_SIZE;
+  char *c = create_test_string(size);
+
+  wht::string s1(c);
+	wht::string s2(std::move(s1));
+  do {
+		if (s2.empty() == true) {
+			break;
+		}
+		if (s2.length() != size - 1) {
+			break;
+		}
+		if (strcmp(s2.data(), c) != 0) {
+			break;
+		}
+		ret = 0;
+  } while (false);
+
+	free(c);
+	return ret;
+}
+
+static int UnitTest23() {
+	// move ctor; MAX_LOCA_SIZE + 1
+	int ret = 1;
+  const size_t size =  wht::string::MAX_LOCAL_SIZE + 1;
+  char *c = create_test_string(size);
+
+  wht::string s1(c);
+	wht::string s2(std::move(s1));
+  do {
+		if (s2.empty() == true) {
+			break;
+		}
+		if (s2.length() != size - 1) {
+			break;
+		}
+		if (strcmp(s2.data(), c) != 0) {
+			break;
+		}
+		ret = 0;
+  } while (false);
+
+	free(c);
+	return ret;
+}
+
+static int UnitTest24() {
+	// move ctor; empty string
+	wht::string s1("");
+  wht::string s2(std::move(s1));  
+
+  if (s2.empty() == false) {
+		return 1;
+	}
+	if (s2.length() != 0) {
+		return 1;
+	} 
+	if (*(s2.data()) != '\0') {
+		return 1;
+	}
+
+  wht::string s3;
+  wht::string s4(std::move(s3));
+  
+  if (s4.empty() == false) {
+		return 1;
+	}
+	if (s4.length() != 0) {
+		return 1;
+	} 
+	if (*(s4.data()) != '\0') {
+		return 1;
+	}
+
+	return 0;
+}
+
+static int UnitTest25() {
+	// move ctor; nullptr
+	wht::string s1(nullptr);
+	wht::string s2(std::move(s1));
+
+  if (s2.empty() == false)  {
+		return 1;
+  }
+  if (s2.length() != 0) {
+		return 1;
+	}
+	if (*(s2.data()) != '\0') {
+		return 1;
+	}
+
+	return 0;
+}
+
+static const UnitTestProc UNIT_TESTS[] = {nullptr, 
+  UnitTest01, UnitTest02, UnitTest03, UnitTest04, UnitTest05, UnitTest06,
+  UnitTest07, UnitTest08, UnitTest09, UnitTest10, UnitTest11, UnitTest12,
+  UnitTest13, UnitTest14, UnitTest15, UnitTest16, UnitTest17, UnitTest18,
+	UnitTest19, UnitTest20, UnitTest21, UnitTest22, UnitTest23, UnitTest24,
+	UnitTest25};
 
 int main(int argc, const char* argv[]) {
 	std::cout << "test-sso"	<< std::endl;
