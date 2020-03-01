@@ -335,9 +335,31 @@ static int UnitTest15() {
 	return 0;
 }
 
-static const UnitTestProc UNIT_TESTS[] = {nullptr, UnitTest1, UnitTest2, UnitTest3,
-	UnitTest4, UnitTest5, UnitTest6, UnitTest7, UnitTest8, UnitTest9, UnitTest10,
-  UnitTest11, UnitTest12, UnitTest13, UnitTest14, UnitTest15};
+static int UnitTest16() {
+	// move ctor: short string
+  const char short_string[] = "BLA";
+  const size_t size = sizeof(short_string);
+  static_assert(size < wht::string::MAX_LOCAL_SIZE, "");
+
+	wht::string s1(short_string);
+  wht::string s2(std::move(s1));
+  if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != size - 1) {
+		return 1;
+	}
+  if (strcmp(s2.data(), short_string) != 0){
+		return 1;
+  }
+
+	return 0;
+}
+
+static const UnitTestProc UNIT_TESTS[] = {nullptr, UnitTest1, UnitTest2,
+  UnitTest3, UnitTest4, UnitTest5, UnitTest6, UnitTest7, UnitTest8,
+  UnitTest9, UnitTest10, UnitTest11, UnitTest12, UnitTest13, UnitTest14,
+  UnitTest15, UnitTest16};
 
 int main(int argc, const char* argv[]) {
 	std::cout << "test-sso"	<< std::endl;

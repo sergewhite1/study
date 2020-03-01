@@ -14,7 +14,7 @@ include_directories(test-sso
 	${CMAKE_SOURCE_DIR}/src/sso
 )
 
-foreach(i RANGE 1 15)
+foreach(i RANGE 1 16)
 	add_test(test-sso-${i} test-sso ${i})
 endforeach(i)
 

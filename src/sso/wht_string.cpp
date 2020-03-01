@@ -33,11 +33,20 @@ string::string(const string& obj) {
 }
 
 string::string(string&& obj) {
-	std::swap(data_, obj.data_);
-	std::swap(length_, obj.length_);
-	memcpy(local_, obj.local_, sizeof(local_));
-	if (length_ + 1 < MAX_LOCAL_SIZE) {
-		data_ = local_;
+  *local_ = '\0';
+  data_ = local_;
+
+  // swap local data
+  char temp[MAX_LOCAL_SIZE];
+  memcpy(temp, local_, sizeof(temp));
+  memcpy(local_, obj.local_, sizeof(local_));
+  memcpy(obj.local_, temp, sizeof(obj.local_));
+
+  std::swap(length_, obj.length_);
+
+  if (length_ + 1 > MAX_LOCAL_SIZE) {
+    data_ = obj.data_;
+    obj.data_ = obj.local_;
   }
 }
 
