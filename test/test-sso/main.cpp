@@ -413,7 +413,7 @@ static int UnitTest19() {
 }
 
 static int UnitTest20() {
-	// move ctor; symbol string
+	// move ctor; 1 symbol string
   const char c[] = "C";
   wht::string s1(c);
   wht::string s2(std::move(s1));
@@ -555,12 +555,249 @@ static int UnitTest25() {
 	return 0;
 }
 
+static int UnitTest26() {
+	// operator=; short string
+  const char short_string[] = "BLA";
+  const size_t size = sizeof(short_string);
+  static_assert(size < wht::string::MAX_LOCAL_SIZE, "");
+
+	wht::string s1(short_string);
+	wht::string s2("SOME STRING. BLA_BLA_BLA!!!!!!!2");
+
+  s2 = s1;
+
+  if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != size - 1) {
+		return 1;
+	}
+  if (strcmp(s2.data(), short_string) != 0){
+		return 1;
+  }
+
+	return 0;
+}
+
+static int UnitTest27() {
+	// operator=; long string
+  wht::string s1(LONG_STRING);
+  wht::string s2("FWEJFKWEJFKWEJWEKJFKLWEJ WDWSDW ssscfscfsdvsdv");
+	
+	s2 = s1;	
+
+  if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != sizeof(LONG_STRING) - 1) {
+		return 1;
+	}
+  if (strcmp(s2.data(), LONG_STRING) != 0) {
+		return 1;
+  }
+ 
+	return 0;
+}
+
+static int UnitTest28() {
+	// operator=; 1 symbol string
+  const char c[] = "D";
+  wht::string s1(c);
+  wht::string s2("ZXCVVSSDFEEFEFEFJHDFJWHDJWHDJHWJHJHWJDHWJDHJWHDJW");
+
+	s2 = s1;
+
+  if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != 1) {
+		return 1;
+	}
+  if (strcmp(s2.data(), c) != 0) {
+		return 1;
+  }
+ 
+	return 0;
+}
+
+static int UnitTest29() {
+	// operator=; MAX_LOCAL_SIZE - 1
+  int ret = 1;
+  const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
+  char *c = create_test_string(size);
+
+	wht::string s1(c);
+  wht::string s2("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+
+	s2 = s1;
+
+  do {
+		if (s2.empty() == true) {
+			break;
+		}
+		if (s2.length() != size - 1) {
+			break;
+		}
+		if (strcmp(s2.data(), c) != 0) {
+			break;
+		}
+		ret = 0;
+  } while(false);
+	
+	free(c);
+	return ret;
+}
+
+static int UnitTest30() {
+	// operator=; MAX_LOCAL_SIZE
+  int ret = 1;
+  const size_t size =  wht::string::MAX_LOCAL_SIZE;
+  char *c = create_test_string(size);
+
+  wht::string s1(c);
+	wht::string s2("hello");
+
+	s2 = s1;
+	
+  do {
+		if (s2.empty() == true) {
+			break;
+		}
+		if (s2.length() != size - 1) {
+			break;
+		}
+		if (strcmp(s2.data(), c) != 0) {
+			break;
+		}
+		ret = 0;
+  } while (false);
+
+	free(c);
+	return ret;
+}
+
+static int UnitTest31() {
+	// operator=; MAX_LOCA_SIZE + 1
+	int ret = 1;
+  const size_t size = wht::string::MAX_LOCAL_SIZE + 1;
+  char *c = create_test_string(size);
+
+  wht::string s1(c);
+	wht::string s2("IIIIIIIIIOOOOOOOOOOPPPPPPPPPPPPZZZZZZZZZZZXXXXXXXXXXXCCV");
+
+	s2 = s1;
+
+  do {
+		if (s2.empty() == true) {
+			break;
+		}
+		if (s2.length() != size - 1) {
+			break;
+		}
+		if (strcmp(s2.data(), c) != 0) {
+			break;
+		}
+		ret = 0;
+  } while (false);
+
+	free(c);
+	return ret;
+}
+
+static int UnitTest32() {
+	// operator=;  empty string
+	wht::string s1("");
+  wht::string s2("hello");  
+
+	s2 = s1;
+
+  if (s2.empty() == false) {
+		return 1;
+	}
+	if (s2.length() != 0) {
+		return 1;
+	} 
+	if (*(s2.data()) != '\0') {
+		return 1;
+	}
+
+  wht::string s3;
+  wht::string s4("DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL");
+
+	s4 = s3;  
+
+  if (s4.empty() == false) {
+		return 1;
+	}
+	if (s4.length() != 0) {
+		return 1;
+	} 
+	if (*(s4.data()) != '\0') {
+		return 1;
+	}
+
+	return 0;
+}
+
+static int UnitTest33() {
+	// operator=; nullptr
+	wht::string s1(nullptr);
+	wht::string s2("abcd !!!!!d");
+
+	s2 = s1;
+
+  if (s2.empty() == false)  {
+		return 1;
+  }
+  if (s2.length() != 0) {
+		return 1;
+	}
+	if (*(s2.data()) != '\0') {
+		return 1;
+	}
+
+	return 0;
+}
+
+static int UnitTest34() {
+  // operator=; self assign
+  const char str[]="hello";
+  const size_t size = sizeof(str);
+	wht::string s1(str);
+  wht::string &s2 = s1;
+	
+	s2 = s1;
+
+	if (s1.empty() == true) {
+		return 1;
+	}
+	if (s1.length() != size - 1) {
+		return 1;
+	}
+	if (strcmp(s1.data(), str) != 0) {
+		return 1;
+	}
+
+	if (s2.empty() == true) {
+		return 1;
+	}
+	if (s2.length() != size - 1) {
+		return 1;
+	}
+	if (strcmp(s2.data(), str) != 0) {
+		return 1;
+	}
+
+	return 0;
+}
+
 static const UnitTestProc UNIT_TESTS[] = {nullptr, 
   UnitTest01, UnitTest02, UnitTest03, UnitTest04, UnitTest05, UnitTest06,
   UnitTest07, UnitTest08, UnitTest09, UnitTest10, UnitTest11, UnitTest12,
   UnitTest13, UnitTest14, UnitTest15, UnitTest16, UnitTest17, UnitTest18,
 	UnitTest19, UnitTest20, UnitTest21, UnitTest22, UnitTest23, UnitTest24,
-	UnitTest25};
+	UnitTest25, UnitTest26, UnitTest27, UnitTest28, UnitTest29, UnitTest30,
+	UnitTest31, UnitTest32, UnitTest33, UnitTest34};
 
 int main(int argc, const char* argv[]) {
 	std::cout << "test-sso"	<< std::endl;

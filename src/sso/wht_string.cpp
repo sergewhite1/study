@@ -56,7 +56,7 @@ string& string::operator=(const string& obj) {
   }
   clear();
 	memcpy(local_, obj.local_, sizeof(local_));
-	if (obj.length() + 1 >= MAX_LOCAL_SIZE) {
+  if (obj.length() + 1 > MAX_LOCAL_SIZE) {
 		data_ = new char[obj.length() + 1];
 		strcpy(data_, obj.data());
 	}
