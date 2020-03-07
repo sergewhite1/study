@@ -4,7 +4,7 @@ namespace wht {
 
 class string {
 public:
-	string();
+  string();
   explicit string(const char* str);
   string(const string&);
   string(string&&);
@@ -25,9 +25,9 @@ public:
   static const size_t MAX_LOCAL_SIZE = 32;
 
 private:
-	char *data_;  
+  char *data_;  
   size_t length_ = 0;
-	char local_[MAX_LOCAL_SIZE];
+  char local_[MAX_LOCAL_SIZE];
 };
 
 std::ostream& operator << (std::ostream& lhs, const wht::string& rhs);

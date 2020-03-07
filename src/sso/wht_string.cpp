@@ -5,7 +5,7 @@
 namespace wht {
 
 string::string() {
-	*local_ = '\0';
+  *local_ = '\0';
   data_ = local_;
 }
 
@@ -24,9 +24,9 @@ string::string(const char* str) {
 
 string::string(const string& obj) {
   data_ = local_;
-	memcpy(local_, obj.local_, sizeof(local_));
+  memcpy(local_, obj.local_, sizeof(local_));
   if (obj.length() + 1 > MAX_LOCAL_SIZE) {
-		data_ = new char [obj.length() + 1];
+  	data_ = new char [obj.length() + 1];
     strcpy(data_, obj.data());
   }
   length_ = obj.length();
@@ -51,25 +51,25 @@ string::string(string&& obj) {
 }
 
 string& string::operator=(const string& obj) {
-	if (this == &obj) {
-		return *this;
+  if (this == &obj) {
+  	return *this;
   }
   clear();
-	memcpy(local_, obj.local_, sizeof(local_));
+  memcpy(local_, obj.local_, sizeof(local_));
   if (obj.length() + 1 > MAX_LOCAL_SIZE) {
-		data_ = new char[obj.length() + 1];
-		strcpy(data_, obj.data());
-	}
-	length_ = obj.length();
-	return *this;
+  	data_ = new char[obj.length() + 1];
+  	strcpy(data_, obj.data());
+  }
+  length_ = obj.length();
+  return *this;
 }
 
 string& string::operator=(string&& obj) {
   if (this == &obj) {
-		return *this;
+  	return *this;
   }
 
-	std::swap(data_, obj.data_);
+  std::swap(data_, obj.data_);
   std::swap(length_, obj.length_);
 
   char temp[MAX_LOCAL_SIZE];
@@ -78,25 +78,25 @@ string& string::operator=(string&& obj) {
   memcpy(obj.local_, temp, sizeof(obj.local_));
 
   if (length_ + 1 <= MAX_LOCAL_SIZE) {
-		data_ = local_;
+  	data_ = local_;
   }
   if (obj.length_ + 1 <= MAX_LOCAL_SIZE) {
     obj.data_ = obj.local_;
   }
 
-	return *this;
+  return *this;
 }
 
 string::~string() {
-	clear();
+  clear();
 }
 
 bool string::empty() const {
-	return length() == 0;
+  return length() == 0;
 }
 
 size_t string::length() const {
-	return length_;
+  return length_;
 }
 
 const char* string::data() const {
@@ -104,16 +104,16 @@ const char* string::data() const {
 }
 
 const char* string::c_str() const {
-	return data();
+  return data();
 }
 
 void string::clear() {
-	if (data_ != local_) {
-		delete []data_;
-	}
-	data_ = local_;
+  if (data_ != local_) {
+  	delete []data_;
+  }
+  data_ = local_;
   *local_ = '\0';
-	length_ = 0;
+  length_ = 0;
 }
 
 std::ostream& operator << (std::ostream& lhs, const wht::string& rhs) {
