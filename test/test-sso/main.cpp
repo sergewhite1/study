@@ -3,12 +3,28 @@
 
 #include "wht_string.h"
 
+/* COMMON TEST SCHEME: 
+ * - short string
+ * - long string
+ * - 1 symbol string
+ * - MAX_LOCAL_SIZE - 1 string
+ * - MAX_LOCAL_SIZE string
+ * - MAX_LOCAL_SIZE + 1 string
+ * - empty string
+ * - null pointer string
+ */
+
 static const char LONG_STRING[]="A VERY LONG STRING BLA_BLA_BLA !!!!! YES!!!";
 
 static_assert(sizeof(LONG_STRING) > wht::string::MAX_LOCAL_SIZE, "");
 
 // NOTE: free should be called.
 static char* create_test_string(size_t size);
+
+// white string test
+// return values: 0 - success; 1 - error.
+static int str_test(const wht::string* ws, bool is_empty, size_t len, 
+  const char *cbuff); 
 
 typedef int (*UnitTestProc)();
 
@@ -791,13 +807,30 @@ static int UnitTest34() {
 	return 0;
 }
 
+static int UnitTest35() {
+  // move operator=; (short string) = (short string)
+  const char str1[] = "hello";
+  static_assert(sizeof(str1) < wht::string::MAX_LOCAL_SIZE, "");
+
+  const char str2[] = "short";
+  static_assert(sizeof(str2) < wht::string::MAX_LOCAL_SIZE, "");
+
+  wht::string s1(str1);
+  wht::string s2(str2);
+  
+  s1 = std::move(s2);
+
+  return str_test(&s1, false, sizeof(str2) - 1, str2) + 
+         str_test(&s2, false, sizeof(str1) - 1, str1);
+}
+
 static const UnitTestProc UNIT_TESTS[] = {nullptr, 
   UnitTest01, UnitTest02, UnitTest03, UnitTest04, UnitTest05, UnitTest06,
   UnitTest07, UnitTest08, UnitTest09, UnitTest10, UnitTest11, UnitTest12,
   UnitTest13, UnitTest14, UnitTest15, UnitTest16, UnitTest17, UnitTest18,
 	UnitTest19, UnitTest20, UnitTest21, UnitTest22, UnitTest23, UnitTest24,
 	UnitTest25, UnitTest26, UnitTest27, UnitTest28, UnitTest29, UnitTest30,
-	UnitTest31, UnitTest32, UnitTest33, UnitTest34};
+	UnitTest31, UnitTest32, UnitTest33, UnitTest34, UnitTest35};
 
 int main(int argc, const char* argv[]) {
 	std::cout << "test-sso"	<< std::endl;
@@ -826,3 +859,21 @@ static char* create_test_string(size_t size) {
   ret[size - 1] = '\0';
 	return ret;
 }
+
+
+static int str_test(const wht::string* ws, bool is_empty, size_t len, 
+  const char *cbuff) {
+
+  if (ws->empty() != is_empty) {
+    return 1;
+  }
+  if (ws->length() != len) {
+    return 1;
+  }
+  if (strcmp(ws->data(), cbuff) != 0) {
+    return 1;
+  }
+
+  return 0;
+} 
+

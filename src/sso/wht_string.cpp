@@ -67,13 +67,23 @@ string& string::operator=(const string& obj) {
 string& string::operator=(string&& obj) {
   if (this == &obj) {
 		return *this;
-	}
+  }
+
 	std::swap(data_, obj.data_);
-	std::swap(length_, obj.length_);
-	memcpy(local_, obj.local_, sizeof(local_));
-	if (length_ + 1 < MAX_LOCAL_SIZE) {
+  std::swap(length_, obj.length_);
+
+  char temp[MAX_LOCAL_SIZE];
+  memcpy(temp, local_, sizeof(temp));
+  memcpy(local_, obj.local_, sizeof(local_));
+  memcpy(obj.local_, temp, sizeof(obj.local_));
+
+  if (length_ + 1 <= MAX_LOCAL_SIZE) {
 		data_ = local_;
-	}
+  }
+  if (obj.length_ + 1 <= MAX_LOCAL_SIZE) {
+    obj.data_ = obj.local_;
+  }
+
 	return *this;
 }
 
