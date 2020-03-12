@@ -935,6 +935,108 @@ static int UnitTest73() {
   return ret;
 }
 
+static int UnitTest74() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (short string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  const char str2[] = "hello";
+
+  static_assert(sizeof(str2) < wht::string::MAX_LOCAL_SIZE, "");
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+
+  return ret;
+}
+
+static int UnitTest75() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (long string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  const char str2[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
+  static_assert(sizeof(str2) > wht::string::MAX_LOCAL_SIZE, "");
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+
+  return ret;
+}
+
+static int UnitTest76() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (1 symbol string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  const char str2[] = "D";
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+
+  return ret;
+}
+
+static int UnitTest77() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (MAX_LOCAL_SIZE - 1 string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest78() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (MAX_LOCAL_SIZE  string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE);
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest79() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (MAX_LOCAL_SIZE + 1 string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest80() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (empty string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  const char str2[] = "";
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+
+  return ret;
+}
+
+static int UnitTest81() {
+  // move operator=; (MAX_LOCAL_SIZE + 1 string) = (nullptr string)
+  char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  char *str2 = nullptr;
+
+  int ret = move_assign_test(str1, str2);
+  free(str1);
+
+  return ret;
+}
+
 static const UnitTestProc UNIT_TESTS[] = {nullptr, 
   UnitTest01, UnitTest02, UnitTest03, UnitTest04, UnitTest05, UnitTest06,
   UnitTest07, UnitTest08, UnitTest09, UnitTest10, UnitTest11, UnitTest12,
@@ -948,7 +1050,8 @@ static const UnitTestProc UNIT_TESTS[] = {nullptr,
   UnitTest55, UnitTest56, UnitTest57, UnitTest58, UnitTest59, UnitTest60,
   UnitTest61, UnitTest62, UnitTest63, UnitTest64, UnitTest65, UnitTest66,
   UnitTest67, UnitTest68, UnitTest69, UnitTest70, UnitTest71, UnitTest72,
-  UnitTest73};
+  UnitTest73, UnitTest74, UnitTest75, UnitTest76, UnitTest77, UnitTest78,
+  UnitTest79, UnitTest80, UnitTest81};
 
 int main(int argc, const char* argv[]) {
   std::cout << "test-sso"	<< std::endl;
