@@ -33,7 +33,7 @@ static int str_test(const wht::string* ws, bool is_empty, size_t len,
 
 typedef int (*UnitTestProc)();
 
-static int UnitTest01() {
+static int UnitTest001() {
   // default ctor
 
   wht::string ws;
@@ -44,7 +44,7 @@ static int UnitTest01() {
 // return value: 0 - success; otherwise - error;
 static int move_assign_test(const char* str1, const char* str2);
 
-static int UnitTest02() {
+static int UnitTest002() {
   // ctor; short string
 
   const char short_string[] = "BLA";
@@ -57,7 +57,7 @@ static int UnitTest02() {
 }
 
 
-static int UnitTest03() {
+static int UnitTest003() {
   // ctor; long string
 
   const size_t len = strlen(LONG_STRING);
@@ -68,7 +68,7 @@ static int UnitTest03() {
 }
 
 
-static int UnitTest04() {
+static int UnitTest004() {
   // ctor; 1 symbol string
 
   const char c[] = "A";
@@ -78,7 +78,7 @@ static int UnitTest04() {
   return str_test(&ws, false, 1, c);
 }
 
-static int UnitTest05() {
+static int UnitTest005() {
   // ctor; MAX_LOCAL_SIZE-1
 
   const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
@@ -92,7 +92,7 @@ static int UnitTest05() {
   return ret;
 }
 
-static int UnitTest06() {
+static int UnitTest006() {
   // ctor; MAX_LOCAL_SIZE
 
   const size_t size =  wht::string::MAX_LOCAL_SIZE;
@@ -106,7 +106,7 @@ static int UnitTest06() {
   return ret;
 }
 
-static int UnitTest07() { 
+static int UnitTest007() { 
   // ctror; MAX_LOCA_SIZE + 1
 
   const size_t size =  wht::string::MAX_LOCAL_SIZE + 1;
@@ -121,7 +121,7 @@ static int UnitTest07() {
 }
 
 
-static int UnitTest08() { 
+static int UnitTest008() { 
   // ctor; empty string
 
   wht::string ws("");
@@ -130,7 +130,7 @@ static int UnitTest08() {
 }
 
 
-static int UnitTest09() { 
+static int UnitTest009() { 
   // ctor; nullptr
 
   wht::string ws(nullptr);
@@ -138,7 +138,7 @@ static int UnitTest09() {
   return str_test(&ws, true, 0, "");
 }
 
-static int UnitTest10() {
+static int UnitTest010() {
   // copy ctor; short string
 
   const char short_string[] = "BLA";
@@ -151,7 +151,7 @@ static int UnitTest10() {
   return str_test(&ws2, false, size - 1, short_string);
 } 
 
-static int UnitTest11() {
+static int UnitTest011() {
   // copy ctor; long string
 
   wht::string ws1(LONG_STRING);
@@ -160,7 +160,7 @@ static int UnitTest11() {
   return str_test(&ws2, false, sizeof(LONG_STRING) - 1, LONG_STRING);
 }
 
-static int UnitTest12() {
+static int UnitTest012() {
   // copy ctor; 1 symbol string
 
   const char c[] = "B";
@@ -171,7 +171,7 @@ static int UnitTest12() {
   return str_test(&ws2, false, 1, c);
 }
 
-static int UnitTest13() {
+static int UnitTest013() {
   // copy ctor; MAX_LOCAL_SIZE - 1
 
   const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
@@ -186,7 +186,7 @@ static int UnitTest13() {
   return ret;
 }
 
-static int UnitTest14() {
+static int UnitTest014() {
   // copy ctor; MAX_LOCAL_SIZE
 
   const size_t size =  wht::string::MAX_LOCAL_SIZE;
@@ -201,7 +201,7 @@ static int UnitTest14() {
   return ret;
 }
 
-static int UnitTest15() {
+static int UnitTest015() {
   // copy ctor; MAX_LOCA_SIZE + 1
 
   const size_t size =  wht::string::MAX_LOCAL_SIZE + 1;
@@ -216,7 +216,7 @@ static int UnitTest15() {
   return ret;
 }
 
-static int UnitTest16() {
+static int UnitTest016() {
   // copy ctor; empty string
 
   wht::string ws1("");
@@ -229,7 +229,7 @@ static int UnitTest16() {
          str_test(&ws4, true, 0, "");
 }
 
-static int UnitTest17() {
+static int UnitTest017() {
   // copy ctor; nullptr
 
   wht::string ws1(nullptr);
@@ -238,7 +238,7 @@ static int UnitTest17() {
   return str_test(&ws2, true, 0, "");
 }
 
-static int UnitTest18() {
+static int UnitTest018() {
   // move ctor; short string
 
   const char short_string[] = "BLA";
@@ -251,7 +251,7 @@ static int UnitTest18() {
   return str_test(&ws2, false, size - 1, short_string);
 }
 
-static int UnitTest19() {
+static int UnitTest019() {
   // move ctor; long string
 
   wht::string ws1(LONG_STRING);
@@ -260,7 +260,7 @@ static int UnitTest19() {
   return str_test(&ws2, false, sizeof(LONG_STRING) - 1, LONG_STRING);
 }
 
-static int UnitTest20() {
+static int UnitTest020() {
   // move ctor; 1 symbol string
 
   const char c[] = "C";
@@ -270,7 +270,7 @@ static int UnitTest20() {
   return str_test(&ws2, false, 1, c);
 }
 
-static int UnitTest21() {
+static int UnitTest021() {
   // move ctor; MAX_LOCAL_SIZE - 1
 
   const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
@@ -285,7 +285,7 @@ static int UnitTest21() {
   return ret;
 }
 
-static int UnitTest22() {
+static int UnitTest022() {
   // move ctor; MAX_LOCAL_SIZE
 
   const size_t size =  wht::string::MAX_LOCAL_SIZE;
@@ -300,7 +300,7 @@ static int UnitTest22() {
   return ret;
 }
 
-static int UnitTest23() {
+static int UnitTest023() {
   // move ctor; MAX_LOCA_SIZE + 1
 
   const size_t size =  wht::string::MAX_LOCAL_SIZE + 1;
@@ -315,7 +315,7 @@ static int UnitTest23() {
   return ret;
 }
 
-static int UnitTest24() {
+static int UnitTest024() {
   // move ctor; empty string
 
   wht::string ws1("");
@@ -328,7 +328,7 @@ static int UnitTest24() {
          str_test(&ws4, true, 0, "");
 }
 
-static int UnitTest25() {
+static int UnitTest025() {
   // move ctor; nullptr
 
   wht::string ws1(nullptr);
@@ -337,7 +337,7 @@ static int UnitTest25() {
   return str_test(&ws2, true, 0, "");
 }
 
-static int UnitTest26() {
+static int UnitTest026() {
   // operator=; short string
 
   const char short_string[] = "BLA";
@@ -352,7 +352,7 @@ static int UnitTest26() {
   return str_test(&ws2, false, size - 1, short_string);
 }
 
-static int UnitTest27() {
+static int UnitTest027() {
   // operator=; long string
 
   wht::string ws1(LONG_STRING);
@@ -362,7 +362,7 @@ static int UnitTest27() {
   return str_test(&ws2, false, sizeof(LONG_STRING) - 1, LONG_STRING);
 }
 
-static int UnitTest28() {
+static int UnitTest028() {
   // operator=; 1 symbol string
 
   const char c[] = "D";
@@ -374,7 +374,7 @@ static int UnitTest28() {
   return str_test(&ws2, false, 1, c);
 }
 
-static int UnitTest29() {
+static int UnitTest029() {
   // operator=; MAX_LOCAL_SIZE - 1
 
   const size_t size = wht::string::MAX_LOCAL_SIZE - 1;
@@ -391,7 +391,7 @@ static int UnitTest29() {
   return ret;
 }
 
-static int UnitTest30() {
+static int UnitTest030() {
   // operator=; MAX_LOCAL_SIZE
 
   const size_t size =  wht::string::MAX_LOCAL_SIZE;
@@ -408,7 +408,7 @@ static int UnitTest30() {
   return ret;
 }
 
-static int UnitTest31() {
+static int UnitTest031() {
   // operator=; MAX_LOCA_SIZE + 1
 
   const size_t size = wht::string::MAX_LOCAL_SIZE + 1;
@@ -425,7 +425,7 @@ static int UnitTest31() {
   return ret;
 }
 
-static int UnitTest32() {
+static int UnitTest032() {
   // operator=;  empty string
 
   wht::string ws1("");
@@ -442,7 +442,7 @@ static int UnitTest32() {
          str_test(&ws4, true, 0, "");
 }
 
-static int UnitTest33() {
+static int UnitTest033() {
   // operator=; nullptr
 
   wht::string ws1(nullptr);
@@ -453,7 +453,7 @@ static int UnitTest33() {
   return str_test(&ws2, true, 0, "");
 }
 
-static int UnitTest34() {
+static int UnitTest034() {
   // operator=; self assign
 
   const char str[]="hello";
@@ -467,7 +467,7 @@ static int UnitTest34() {
   return str_test(&ws1, false, size - 1, str);
 }
 
-static int UnitTest35() {
+static int UnitTest035() {
   // move operator=; (short string) = (short string)
 
   const char str1[] = "hello";
@@ -479,7 +479,7 @@ static int UnitTest35() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest36() {
+static int UnitTest036() {
   // move operator=; (short string) = (long string)
 
   const char str1[] = "hello";
@@ -492,7 +492,7 @@ static int UnitTest36() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest37() {
+static int UnitTest037() {
   // move operator=; (short string) = (1 symbol string)
 
   const char str1[] = "hello";
@@ -503,7 +503,7 @@ static int UnitTest37() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest38() {
+static int UnitTest038() {
   // move operator=; (short string) = (MAX_LOCAL_SIZE - 1 string) 
 
   const char str1[] = "hello";
@@ -517,7 +517,7 @@ static int UnitTest38() {
   return ret;
 }
 
-static int UnitTest39() {
+static int UnitTest039() {
   // move operator=; (short string) = (MAX_LOCAL_SIZE string) 
 
   const char str1[] = "hello";
@@ -531,7 +531,7 @@ static int UnitTest39() {
   return ret;
 }
 
-static int UnitTest40() {
+static int UnitTest040() {
   // move operator=; (short string) = (MAX_LOCAL_SIZE + 1 string) 
 
   const char str1[] = "hello";
@@ -545,7 +545,7 @@ static int UnitTest40() {
   return ret;
 }
 
-static int UnitTest41() {
+static int UnitTest041() {
   // move operator=; (short string) = (empty string) 
 
   const char str1[] = "hello";
@@ -554,7 +554,7 @@ static int UnitTest41() {
   return move_assign_test(str1, "");
 }
 
-static int UnitTest42() {
+static int UnitTest042() {
   // move operator=; (short string) = (empty string) 
 
   const char str1[] = "hello";
@@ -563,7 +563,7 @@ static int UnitTest42() {
   return move_assign_test(str1, nullptr);
 }
 
-static int UnitTest43() {
+static int UnitTest043() {
   // move operator=; (long string) = (short string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -575,7 +575,7 @@ static int UnitTest43() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest44() {
+static int UnitTest044() {
   // move operator=; (long string) = (long string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -587,7 +587,7 @@ static int UnitTest44() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest45() {
+static int UnitTest045() {
   // move operator=; (long string) = (1 symbol string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -598,7 +598,7 @@ static int UnitTest45() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest46() {
+static int UnitTest046() {
   // move operator=; (long string) = (MAX_LOCAL_SIZE - 1 string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -611,7 +611,7 @@ static int UnitTest46() {
   return ret;
 }
 
-static int UnitTest47() {
+static int UnitTest047() {
   // move operator=; (long string) = (MAX_LOCAL_SIZE string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -624,7 +624,7 @@ static int UnitTest47() {
   return ret;
 }
 
-static int UnitTest48() {
+static int UnitTest048() {
   // move operator=; (long string) = (MAX_LOCAL_SIZE + 1 string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -637,7 +637,7 @@ static int UnitTest48() {
   return ret;
 }
 
-static int UnitTest49() {
+static int UnitTest049() {
   // move operator=; (long string) = (empty string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -646,7 +646,7 @@ static int UnitTest49() {
   return move_assign_test(str1, "");
 }
 
-static int UnitTest50() {
+static int UnitTest050() {
   // move operator=; (long string) = (nullptr string) 
 
   const char str1[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
@@ -655,7 +655,7 @@ static int UnitTest50() {
   return move_assign_test(str1, nullptr);
 }
 
-static int UnitTest51() {
+static int UnitTest051() {
   // move operator=; (1 symbol string) = (short string)
 
   const char str1[] = "K";
@@ -666,7 +666,7 @@ static int UnitTest51() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest52() {
+static int UnitTest052() {
   // move operator=; (1 symbol string) = (long string)
 
   const char str1[] = "K";
@@ -677,7 +677,7 @@ static int UnitTest52() {
   return move_assign_test(str1, str2);
 }
 
-static int UnitTest53() {
+static int UnitTest053() {
   // move operator=; (1 symbol string) = (MAX_LOCAL_SIZE - 1 string)
 
   const char str1[] = "K";
@@ -690,7 +690,7 @@ static int UnitTest53() {
   return ret;
 }
 
-static int UnitTest54() {
+static int UnitTest054() {
   // move operator=; (1 symbol string) = (MAX_LOCAL_SIZE string)
 
   const char str1[] = "K";
@@ -703,7 +703,7 @@ static int UnitTest54() {
   return ret;
 }
 
-static int UnitTest55() {
+static int UnitTest055() {
   // move operator=; (1 symbol string) = (MAX_LOCAL_SIZE + 1 string)
 
   const char str1[] = "K";
@@ -716,7 +716,7 @@ static int UnitTest55() {
   return ret;
 }
 
-static int UnitTest56() {
+static int UnitTest056() {
   // move operator=; (1 symbol string) = (empty string)
 
   const char str1[] = "K";
@@ -724,7 +724,7 @@ static int UnitTest56() {
   return move_assign_test(str1, "");
 }
 
-static int UnitTest57() {
+static int UnitTest057() {
   // move operator=; (1 symbol string) = (nullptr string)
 
   const char str1[] = "K";
@@ -732,7 +732,7 @@ static int UnitTest57() {
   return move_assign_test(str1, nullptr);
 }
 
-static int UnitTest58() {
+static int UnitTest058() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (short string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -745,7 +745,7 @@ static int UnitTest58() {
   return ret;
 }
 
-static int UnitTest59() {
+static int UnitTest059() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (long string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -758,7 +758,7 @@ static int UnitTest59() {
   return ret;
 }
 
-static int UnitTest60() {
+static int UnitTest060() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (1 symbol string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -770,7 +770,7 @@ static int UnitTest60() {
   return ret;
 }
 
-static int UnitTest61() {
+static int UnitTest061() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (MAX_LOCAL_SIZE - 1 string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -783,7 +783,7 @@ static int UnitTest61() {
   return ret;
 }
 
-static int UnitTest62() {
+static int UnitTest062() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (MAX_LOCAL_SIZE  string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -796,7 +796,7 @@ static int UnitTest62() {
   return ret;
 }
 
-static int UnitTest63() {
+static int UnitTest063() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (MAX_LOCAL_SIZE + 1 string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -809,7 +809,7 @@ static int UnitTest63() {
   return ret;
 }
 
-static int UnitTest64() {
+static int UnitTest064() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (empty string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -821,7 +821,7 @@ static int UnitTest64() {
   return ret;
 }
 
-static int UnitTest65() {
+static int UnitTest065() {
   // move operator=; (MAX_LOCAL_SIZE - 1 string) = (nullptr string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
 
@@ -833,7 +833,7 @@ static int UnitTest65() {
   return ret;
 }
 
-static int UnitTest66() {
+static int UnitTest066() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (short string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -847,7 +847,7 @@ static int UnitTest66() {
   return ret;
 }
 
-static int UnitTest67() {
+static int UnitTest067() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (long string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -860,7 +860,7 @@ static int UnitTest67() {
   return ret;
 }
 
-static int UnitTest68() {
+static int UnitTest068() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (1 symbol string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -872,7 +872,7 @@ static int UnitTest68() {
   return ret;
 }
 
-static int UnitTest69() {
+static int UnitTest069() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (MAX_LOCAL_SIZE - 1 string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -885,7 +885,7 @@ static int UnitTest69() {
   return ret;
 }
 
-static int UnitTest70() {
+static int UnitTest070() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (MAX_LOCAL_SIZE  string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -898,7 +898,7 @@ static int UnitTest70() {
   return ret;
 }
 
-static int UnitTest71() {
+static int UnitTest071() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (MAX_LOCAL_SIZE + 1 string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -911,7 +911,7 @@ static int UnitTest71() {
   return ret;
 }
 
-static int UnitTest72() {
+static int UnitTest072() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (empty string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -923,7 +923,7 @@ static int UnitTest72() {
   return ret;
 }
 
-static int UnitTest73() {
+static int UnitTest073() {
   // move operator=; (MAX_LOCAL_SIZE  string) = (nullptr string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE);
 
@@ -935,7 +935,7 @@ static int UnitTest73() {
   return ret;
 }
 
-static int UnitTest74() {
+static int UnitTest074() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (short string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -949,7 +949,7 @@ static int UnitTest74() {
   return ret;
 }
 
-static int UnitTest75() {
+static int UnitTest075() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (long string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -962,7 +962,7 @@ static int UnitTest75() {
   return ret;
 }
 
-static int UnitTest76() {
+static int UnitTest076() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (1 symbol string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -974,7 +974,7 @@ static int UnitTest76() {
   return ret;
 }
 
-static int UnitTest77() {
+static int UnitTest077() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (MAX_LOCAL_SIZE - 1 string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -987,7 +987,7 @@ static int UnitTest77() {
   return ret;
 }
 
-static int UnitTest78() {
+static int UnitTest078() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (MAX_LOCAL_SIZE  string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -1000,7 +1000,7 @@ static int UnitTest78() {
   return ret;
 }
 
-static int UnitTest79() {
+static int UnitTest079() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (MAX_LOCAL_SIZE + 1 string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -1013,7 +1013,7 @@ static int UnitTest79() {
   return ret;
 }
 
-static int UnitTest80() {
+static int UnitTest080() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (empty string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -1025,7 +1025,7 @@ static int UnitTest80() {
   return ret;
 }
 
-static int UnitTest81() {
+static int UnitTest081() {
   // move operator=; (MAX_LOCAL_SIZE + 1 string) = (nullptr string)
   char *str1 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
 
@@ -1037,21 +1037,190 @@ static int UnitTest81() {
   return ret;
 }
 
+static int UnitTest082() {
+  // move operator=; (empty string) = (short string)
+  const char str1[] = "";
+
+  const char str2[] = "hello";
+  static_assert(sizeof(str2) < wht::string::MAX_LOCAL_SIZE, "");
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest083() {
+  // move operator=; (empty string) = (long string)
+  const char str1[] = "";
+
+  const char str2[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
+  static_assert(sizeof(str2) > wht::string::MAX_LOCAL_SIZE, "");
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest084() {
+  // move operator=; (empty string) = (1 symbol string)
+  const char str1[] = "";
+
+  const char str2[] = "D";
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest085() {
+  // move operator=; (empty string) = (MAX_LOCAL_SIZE - 1 string)
+  const char str1[] = "";
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
+
+  int ret = move_assign_test(str1, str2);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest086() {
+  // move operator=; (empty string) = (MAX_LOCAL_SIZE  string)
+  const char str1[] = "";
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE);
+
+  int ret = move_assign_test(str1, str2);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest087() {
+  // move operator=; (empty string) = (MAX_LOCAL_SIZE + 1 string)
+  const char str1[] = "";
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  int ret = move_assign_test(str1, str2);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest088() {
+  // move operator=; (empty string) = (empty string)
+  const char str1[] = "";
+
+  const char str2[] = "";
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest089() {
+  // move operator=; (empty string) = (nullptr string)
+  const char str1[] = "";
+
+  const char *str2 = nullptr;
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest090() {
+  // move operator=; (nullptr string) = (short string)
+  const char *str1 = nullptr;
+
+  const char str2[] = "hello";
+  static_assert(sizeof(str2) < wht::string::MAX_LOCAL_SIZE, "");
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest091() {
+  // move operator=; (nullptr string) = (long string)
+  const char *str1 = nullptr;
+
+  const char str2[] = "DHJFHDJHFJDHFJDHFJKHJFKLAKL:DKLASDKLSDKLSKLDKLSKDLSKDLSKDL";
+  static_assert(sizeof(str2) > wht::string::MAX_LOCAL_SIZE, "");
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest092() {
+  // move operator=; (nullptr string) = (1 symbol string)
+  const char *str1 = nullptr;
+
+  const char str2[] = "D";
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest093() {
+  // move operator=; (nullptr string) = (MAX_LOCAL_SIZE - 1 string)
+  const char *str1 = nullptr;
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE - 1);
+
+  int ret = move_assign_test(str1, str2);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest094() {
+  // move operator=; (nullptr string) = (MAX_LOCAL_SIZE  string)
+  const char *str1 = nullptr;
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE);
+
+  int ret = move_assign_test(str1, str2);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest095() {
+  // move operator=; (nullptr string) = (MAX_LOCAL_SIZE + 1 string)
+  const char *str1 = nullptr;
+
+  char *str2 = create_test_string(wht::string::MAX_LOCAL_SIZE + 1);
+
+  int ret = move_assign_test(str1, str2);
+  free(str2);
+
+  return ret;
+}
+
+static int UnitTest096() {
+  // move operator=; (nullptr string) = (empty string)
+  const char *str1 = nullptr;
+
+  const char str2[] = "";
+
+  return move_assign_test(str1, str2);
+}
+
+static int UnitTest097() {
+  // move operator=; (nullptr string) = (nullptr string)
+  const char *str1 = nullptr;
+
+  const char *str2 = nullptr;
+
+  return move_assign_test(str1, str2);
+}
+
 static const UnitTestProc UNIT_TESTS[] = {nullptr, 
-  UnitTest01, UnitTest02, UnitTest03, UnitTest04, UnitTest05, UnitTest06,
-  UnitTest07, UnitTest08, UnitTest09, UnitTest10, UnitTest11, UnitTest12,
-  UnitTest13, UnitTest14, UnitTest15, UnitTest16, UnitTest17, UnitTest18,
-  UnitTest19, UnitTest20, UnitTest21, UnitTest22, UnitTest23, UnitTest24,
-  UnitTest25, UnitTest26, UnitTest27, UnitTest28, UnitTest29, UnitTest30,
-  UnitTest31, UnitTest32, UnitTest33, UnitTest34, UnitTest35, UnitTest36,
-  UnitTest37, UnitTest38, UnitTest39, UnitTest40, UnitTest41, UnitTest42,
-  UnitTest43, UnitTest44, UnitTest45, UnitTest46, UnitTest47, UnitTest48,
-  UnitTest49, UnitTest50, UnitTest51, UnitTest52, UnitTest53, UnitTest54,
-  UnitTest55, UnitTest56, UnitTest57, UnitTest58, UnitTest59, UnitTest60,
-  UnitTest61, UnitTest62, UnitTest63, UnitTest64, UnitTest65, UnitTest66,
-  UnitTest67, UnitTest68, UnitTest69, UnitTest70, UnitTest71, UnitTest72,
-  UnitTest73, UnitTest74, UnitTest75, UnitTest76, UnitTest77, UnitTest78,
-  UnitTest79, UnitTest80, UnitTest81};
+  UnitTest001, UnitTest002, UnitTest003, UnitTest004, UnitTest005, UnitTest006,
+  UnitTest007, UnitTest008, UnitTest009, UnitTest010, UnitTest011, UnitTest012,
+  UnitTest013, UnitTest014, UnitTest015, UnitTest016, UnitTest017, UnitTest018,
+  UnitTest019, UnitTest020, UnitTest021, UnitTest022, UnitTest023, UnitTest024,
+  UnitTest025, UnitTest026, UnitTest027, UnitTest028, UnitTest029, UnitTest030,
+  UnitTest031, UnitTest032, UnitTest033, UnitTest034, UnitTest035, UnitTest036,
+  UnitTest037, UnitTest038, UnitTest039, UnitTest040, UnitTest041, UnitTest042,
+  UnitTest043, UnitTest044, UnitTest045, UnitTest046, UnitTest047, UnitTest048,
+  UnitTest049, UnitTest050, UnitTest051, UnitTest052, UnitTest053, UnitTest054,
+  UnitTest055, UnitTest056, UnitTest057, UnitTest058, UnitTest059, UnitTest060,
+  UnitTest061, UnitTest062, UnitTest063, UnitTest064, UnitTest065, UnitTest066,
+  UnitTest067, UnitTest068, UnitTest069, UnitTest070, UnitTest071, UnitTest072,
+  UnitTest073, UnitTest074, UnitTest075, UnitTest076, UnitTest077, UnitTest078,
+  UnitTest079, UnitTest080, UnitTest081, UnitTest082, UnitTest083, UnitTest084,
+  UnitTest085, UnitTest086, UnitTest087, UnitTest088, UnitTest089, UnitTest090,
+  UnitTest091, UnitTest092, UnitTest093, UnitTest094, UnitTest095, UnitTest096,
+  UnitTest097};
 
 int main(int argc, const char* argv[]) {
   std::cout << "test-sso"	<< std::endl;
