@@ -39,6 +39,8 @@ private:
     } short_string_;
   } data_;
   static_assert(sizeof(data_.short_string_) > sizeof(data_.long_string_));
+
+  void assign(const string& obj);
   bool is_local() const;
 };
 

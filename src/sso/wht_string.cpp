@@ -25,15 +25,7 @@ string::string(const char* str) {
 }
 
 string::string(const string& obj) {
-  if (obj.is_local()) {
-    data_ = obj.data_;
-  } else {
-    data_.long_string_.data_ = new char[obj.length() + 1];
-    strncpy(data_.long_string_.data_, obj.data_.long_string_.data_, 
-      obj.length() + 1);
-    data_.long_string_.length_ = obj.length();
-    data_.short_string_.length_ = 0xFF;
-  }
+  assign(obj);
 }
 
 string::string(string&& obj) {
@@ -46,16 +38,7 @@ string& string::operator=(const string& obj) {
   }
 
   clear();
-
-  if(obj.is_local()) {
-    data_ = obj.data_;
-  } else {
-    data_.long_string_.data_ = new char[obj.length() + 1];
-    strncpy(data_.long_string_.data_, obj.data_.long_string_.data_, 
-      obj.length() + 1);
-    data_.long_string_.length_ = obj.length();
-    data_.short_string_.length_ = 0xFF;
-  }
+  assign(obj);
 
   return *this;
 }
@@ -100,6 +83,19 @@ void string::clear() {
   }
 
   data_.short_string_.length_ = 0;
+}
+
+void string::assign(const string& obj) {
+  if(obj.is_local()) {
+    data_ = obj.data_;
+  } else {
+    data_.long_string_.data_ = new char[obj.length() + 1];
+    strncpy(data_.long_string_.data_, obj.data_.long_string_.data_,
+      obj.length() + 1);
+    data_.long_string_.length_ = obj.length();
+    data_.short_string_.length_ = 0xFF;
+  }
+
 }
 
 bool string::is_local() const {
