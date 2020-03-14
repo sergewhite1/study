@@ -7,7 +7,7 @@ public:
   string();
   explicit string(const char* str);
   string(const string&);
-  string(string&&) = default;
+  string(string&&);
   string& operator=(const string&);
   string& operator=(string&&);
   ~string();

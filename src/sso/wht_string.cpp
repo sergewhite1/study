@@ -28,23 +28,27 @@ string::string(const string& obj) {
   assign(obj);
 }
 
-string& string::operator=(const string& rhs) {
-  if (this == &rhs) {
+string::string(string&& obj) {
+ std::swap(data_, obj.data_);
+}
+
+string& string::operator=(const string& obj) {
+  if (this == &obj) {
     return *this;
   }
 
   clear();
-  assign(rhs);
+  assign(obj);
 
   return *this;
 }
 
-string& string::operator=(string&& rhs) {
-  if (this == &rhs) {
+string& string::operator=(string&& obj) {
+  if (this == &obj) {
   	return *this;
   }
   
-  std::swap(data_, rhs.data_);
+  std::swap(data_, obj.data_);
 
   return *this;
 }
