@@ -22,12 +22,24 @@ private:
 #ifdef WHT_STRING_TESTING
 public:
 #endif
-  static const size_t MAX_LOCAL_SIZE = 32;
-
+  static const size_t MAX_LOCAL_SIZE = 31;
+  
 private:
-  char *data_;  
-  size_t length_ = 0;
-  char local_[MAX_LOCAL_SIZE];
+  union {
+    struct {
+      char *data_;  
+      size_t length_;
+    } long_string_;
+    struct {
+      char data_[MAX_LOCAL_SIZE];
+
+      // for short string 0..MAX_LOCAL_SIZE - 1
+      // for long string 0xFF
+      unsigned char length_;
+    } short_string_;
+  } data_;
+  static_assert(sizeof(data_.short_string_) > sizeof(data_.long_string_));
+  bool is_local() const;
 };
 
 std::ostream& operator << (std::ostream& lhs, const wht::string& rhs);
