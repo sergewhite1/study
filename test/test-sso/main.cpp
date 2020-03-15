@@ -148,7 +148,8 @@ static int UnitTest010() {
   wht::string ws1(short_string);
   wht::string ws2(ws1);
 
-  return str_test(&ws2, false, size - 1, short_string);
+  return str_test(&ws1, false, size - 1, short_string) +
+         str_test(&ws2, false, size - 1, short_string);
 } 
 
 static int UnitTest011() {
@@ -157,7 +158,8 @@ static int UnitTest011() {
   wht::string ws1(LONG_STRING);
   wht::string ws2(ws1);
 
-  return str_test(&ws2, false, sizeof(LONG_STRING) - 1, LONG_STRING);
+  return str_test(&ws1, false, sizeof(LONG_STRING) - 1, LONG_STRING) +
+         str_test(&ws2, false, sizeof(LONG_STRING) - 1, LONG_STRING);
 }
 
 static int UnitTest012() {
@@ -168,7 +170,8 @@ static int UnitTest012() {
   wht::string ws1(c);
   wht::string ws2(ws1);
 
-  return str_test(&ws2, false, 1, c);
+  return  str_test(&ws1, false, 1, c) +
+          str_test(&ws2, false, 1, c);
 }
 
 static int UnitTest013() {
@@ -180,7 +183,8 @@ static int UnitTest013() {
   wht::string ws1(c);
   wht::string ws2(ws1);
 
-  int ret = str_test(&ws2, false, size - 1, c);
+  int ret = str_test(&ws1, false, size - 1, c) + 
+            str_test(&ws2, false, size - 1, c);
   free(c);
 
   return ret;
@@ -195,7 +199,8 @@ static int UnitTest014() {
   wht::string ws1(c);
   wht::string ws2(ws1);
 
-  int ret = str_test(&ws2, false, size - 1, c);
+  int ret = str_test(&ws1, false, size - 1, c) +
+            str_test(&ws2, false, size - 1, c);
   free(c);
 
   return ret;
@@ -210,7 +215,8 @@ static int UnitTest015() {
   wht::string ws1(c);
   wht::string ws2(ws1);
 
-  int ret = str_test(&ws2, false, size - 1, c);
+  int ret = str_test(&ws1, false, size - 1, c) +
+            str_test(&ws2, false, size - 1, c);
   free(c);
 
   return ret;
@@ -235,7 +241,8 @@ static int UnitTest017() {
   wht::string ws1(nullptr);
   wht::string ws2(ws1);
 
-  return str_test(&ws2, true, 0, "");
+  return str_test(&ws1, true, 0, "") +
+         str_test(&ws2, true, 0, "");
 }
 
 static int UnitTest018() {
@@ -248,7 +255,8 @@ static int UnitTest018() {
   wht::string ws1(short_string);
   wht::string ws2(std::move(ws1));
 
-  return str_test(&ws2, false, size - 1, short_string);
+  return str_test(&ws1, true, 0, "") +
+         str_test(&ws2, false, size - 1, short_string);
 }
 
 static int UnitTest019() {
@@ -257,7 +265,8 @@ static int UnitTest019() {
   wht::string ws1(LONG_STRING);
   wht::string ws2(std::move(ws1));
 
-  return str_test(&ws2, false, sizeof(LONG_STRING) - 1, LONG_STRING);
+  return str_test(&ws1, true, 0, "") +
+         str_test(&ws2, false, sizeof(LONG_STRING) - 1, LONG_STRING);
 }
 
 static int UnitTest020() {
@@ -267,7 +276,8 @@ static int UnitTest020() {
   wht::string ws1(c);
   wht::string ws2(std::move(ws1));
 
-  return str_test(&ws2, false, 1, c);
+  return str_test(&ws1, true, 0, "") +
+         str_test(&ws2, false, 1, c);
 }
 
 static int UnitTest021() {
@@ -279,7 +289,8 @@ static int UnitTest021() {
   wht::string ws1(c);
   wht::string ws2(std::move(ws1));
 
-  int ret = str_test(&ws2, false, size - 1, c);
+  int ret = str_test(&ws1, true, 0, "") +
+            str_test(&ws2, false, size - 1, c);
   free(c);
 
   return ret;
@@ -294,7 +305,8 @@ static int UnitTest022() {
   wht::string ws1(c);
   wht::string ws2(std::move(ws1));
 
-  int ret = str_test(&ws2, false, size - 1, c);
+  int ret = str_test(&ws1, true, 0, "") +
+            str_test(&ws2, false, size - 1, c);
   free(c);
 
   return ret;
@@ -309,7 +321,8 @@ static int UnitTest023() {
   wht::string ws1(c);
   wht::string ws2(std::move(ws1));
 
-  int ret = str_test(&ws2, false, size - 1, c);
+  int ret = str_test(&ws1, true, 0, "") +
+            str_test(&ws2, false, size - 1, c);
   free(c);
 
   return ret;
@@ -334,7 +347,8 @@ static int UnitTest025() {
   wht::string ws1(nullptr);
   wht::string ws2(std::move(ws1));
 
-  return str_test(&ws2, true, 0, "");
+  return str_test(&ws1, true, 0, "") +
+         str_test(&ws2, true, 0, "");
 }
 
 static int UnitTest026() {
