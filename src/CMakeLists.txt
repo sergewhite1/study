@@ -1,3 +1,4 @@
+add_subdirectory(mt)
 add_subdirectory(sso)
 add_subdirectory(stack-research)
 add_subdirectory(stl-iterators-training)
