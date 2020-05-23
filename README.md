@@ -1,5 +1,8 @@
 ## Study programming. 
 
+# memory-maps
+  How to see memory maps on Linux.
+
 # sso
   Short String Optimization. 
 
