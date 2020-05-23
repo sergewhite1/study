@@ -14,3 +14,6 @@
 
 # testbyteorder
   Test Byte Order (big endian, little endian).
+
+# valgrind-demo
+  Demo of memory leak detection.
