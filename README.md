@@ -6,6 +6,9 @@
 # memory-maps
   How to see memory maps on Linux.
 
+# sumlib & sumlibdemo
+  Demonstrate post build action (copy library).
+
 # sso
   Short String Optimization. 
 

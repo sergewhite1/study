@@ -1,3 +1,4 @@
+add_subdirectory(cmake-study)
 add_subdirectory(memory)
 add_subdirectory(mt)
 add_subdirectory(sso)
