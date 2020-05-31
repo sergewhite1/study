@@ -11,6 +11,4 @@ add_library(${PROJECT_NAME} SHARED
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-add_custom_command(
-  TARGET sumlib POST_BUILD
-  COMMAND cmake -E copy_if_different *.so ../sumlibdemo/)
+include(${CMAKE_HOME_DIRECTORY}/src/vts_copy_lib.cmake)
