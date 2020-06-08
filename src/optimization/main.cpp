@@ -1,7 +1,14 @@
 #include <cstring>
 #include <iostream>
 
+#include "technosphera/technosphera_timer.h"
+
 static void f() {
+  int res = 0;
+  for(int i = 0; i < 10; ++i) {
+    res += i;
+  }
+//  std::cout << "res= " << res << std::endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -22,15 +29,20 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  const int N = 10000;
+  const int N = 2000000000;
   
   std::cout << "FLAG= " << a << " N= " << N << std::endl;
 
-  for (size_t i = 0; i < N; ++i) {
-    if(a) {
-      f();
-    } else {
-      f();
+  {
+    technosphera::Timer t;
+
+    for (size_t i = 0; i < N; ++i) {
+//      std::cout << "ITER:" << i << std::endl;
+      if(a) {
+        f();
+      } else {
+        f();
+      }
     }
   }
   
