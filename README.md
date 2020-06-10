@@ -6,6 +6,11 @@
 # memory-maps
   How to see memory maps on Linux.
 
+# memory-model-atomic-operations
+  Multithreading Practice.
+  Anthony Williams. C++ Concurency in Action. Chapter 5.2.
+  std::atomic_flag demo for spinlock_mutex.
+
 # sumlib & sumlibdemo
   Demonstrate post build action (copy library).
 
