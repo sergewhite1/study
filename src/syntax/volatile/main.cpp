@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 static int f(int* ptr_x) {
   std::cout << "f(int* ptr_x). ptr_x=" << ptr_x <<  " *ptr_x=" << *ptr_x << std::endl;
@@ -20,25 +21,55 @@ static int f(const volatile int* ptr_x) {
   return *ptr_x + 4;
 }
 
+class A {
+public:
+  int f() {
+    std::cout << "A::f()" << std::endl; 
+    return 1;
+  }
+
+  int f() const {
+    std::cout << "A::f() const" << std::endl; 
+    return 2;
+  }
+
+  int f() volatile {
+    std::cout << "A::f() volatile" << std::endl; 
+    return 3;
+  
+  }
+  int f() const volatile {
+    std::cout << "A::f() const volatile" << std::endl; 
+    return 4;
+  }
+
+};
+
 int main() {
   std::cout << "volatile demo" << std::endl;
-  int x1 = 0;
-  int y1 = f(&x1);
-  std::cout << "y1=" << y1 << std::endl;
+  std::cout << "1. function demo" << std::endl;
+  int x1 = 123456;
 
-  int x2 = 0;
-  int y2 = f(const_cast<const int*>(&x2));
-  std::cout << "y2= " << y2 << std::endl;
+  f(&x1);
 
-  int data3 = 100;
-  volatile int * x3 = &data3;
-  int y3 = f(x3);
-  std::cout << "y3= " << y3 << std::endl;
+  f(const_cast<const int*>(&x1));
 
-  int data4 = 200;
-  const volatile int * x4 = &data4;
-  int y4 = f(x4);
-  std::cout << "y4= " << y4 << std::endl;
+  f(const_cast<volatile int*>(&x1));
+
+  f(const_cast<const volatile int*>(&x1));
+
+  std::cout << "======================================" << std::endl;
+
+  std::cout << "2. member-function demo" << std::endl;
+  auto a_uptr = std::make_unique<A>();
+
+  a_uptr->f();
+
+  const_cast<const A*>(a_uptr.get())->f();
+
+  const_cast<volatile A*>(a_uptr.get())->f();
+
+  const_cast<const volatile A*>(a_uptr.get())->f();
 
   return 0;
 }
