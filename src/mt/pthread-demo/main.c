@@ -20,17 +20,26 @@ int getch(void)
     return ch;
 }
 
+static void* release_proc(void* arg) {
+  printf("release_proc\n");
+}
+
 static void* thread_proc(void* arg) {
   pthread_t thread = pthread_self();
   printf("thread_proc: %ld\n", thread);
+
+  pthread_cleanup_push( (void*) release_proc, NULL);
 
   for (int i = 10; i >= 0; --i) {
     fprintf(stdout, "%d ", i);
     fflush(stdout);
 
     // sleep - is cancellation point
+    // otherwise use pthread_testcancel
     sleep(1);
   }
+
+  pthread_cleanup_pop(0);
 
   return NULL;
 }
