@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+#define VK_ESCAPE       0x1B // esc key
+
 int getch(void);
 
 struct big_calc_data_t {

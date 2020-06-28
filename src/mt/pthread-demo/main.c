@@ -1,22 +1,23 @@
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 #include "utils.h"
-
-#define VK_ESCAPE       0x1B // esc key
 
 static void* release_proc(void* arg) {
   printf("release_proc\n");
   struct big_calc_data_t * pdata = (struct big_calc_data_t*) arg;
   big_calc_data_release(pdata);
+  return NULL;
 }
 
 static void* thread_proc(void* arg) {
+  (void) arg;
+
   pthread_t thread = pthread_self();
   printf("thread_proc: %ld\n", thread);
 
-  const int N = 1000;
 
   struct big_calc_data_t big_calc_data;
   big_calc_data_init(&big_calc_data);
@@ -35,14 +36,25 @@ static void* thread_proc(void* arg) {
   printf("\n");
 
   printf("start of big calculation...\n");
+  const size_t ARRAY_SIZE = 1000;
+  const size_t REALIZ_COUNT = 100000;
 
-  big_calc_data_malloc(&big_calc_data, N);
+  big_calc_data_malloc(&big_calc_data, ARRAY_SIZE);
 
-  for (size_t i = 0; i < 1000; ++i) {
+  for (size_t i = 0; i < REALIZ_COUNT; ++i) {
+   if (i % 10 == 0) {
+     pthread_testcancel();
+
+     // printf is also cancellation point
+     //fprintf(stdout, "Iteration: %ld.  ", i);
+     //fflush(stdout);
+   }
    do_big_calculation(&big_calc_data);
   }
 
-  printf("end of bif calculation.\n");
+  printf("out_acc_am[0]=%f\n", big_calc_data.out_acc_am[0]);
+
+  printf("end of big calculation.\n");
 
   pthread_cleanup_pop(0);
 
@@ -53,6 +65,8 @@ static void* thread_proc(void* arg) {
 
 int main() {
   printf("pthread demo\n");
+
+  srand((unsigned int)time(NULL));
 
   pthread_t thread = pthread_self();
   printf("Main thread: %ld\n", thread);

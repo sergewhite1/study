@@ -1,5 +1,6 @@
 #include "utils.h"
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,17 +29,47 @@ static void arr_zero(size_t N, double *arr) {
 }
 
 static void arr_acc(size_t N, const double* arr_cur, double* arr_acc) {
+  for (size_t i = 0; i < N; ++i) {
+    arr_acc[i] += arr_cur[i];
+  }
+}
+
+static double sqr(double x) {
+  return x * x;
+}
+
+static double generate_random() {
+  return (double) rand() / RAND_MAX;
 }
 
 static void generate_input(size_t N, double* arr_re, double* arr_im) {
+  for (size_t i = 0; i < N; ++i) {
+    arr_re[i] = generate_random();
+    arr_im[i] = generate_random();
+  }
 }
 
 static void dft(size_t N, const double* inp_re, const double* inp_im,
                                 double* out_re,       double* out_im) {
+  arr_zero(N, out_re);
+  arr_zero(N, out_im);
+
+  for (size_t k = 0; k < N; ++k) {
+    for (size_t n = 0; n < N; ++n) {
+      out_re[k] += inp_re[n] * cos(2 * M_PI * k * n / N) +
+                   inp_im[n] * sin(2 * M_PI * k * n / N);
+
+      out_im[k] -= inp_re[n] * sin(2 * M_PI * k * n / N) +
+                   inp_im[n] * cos(2 * M_PI * k * n / N);
+    }
+  }
 }
 
 static void calc_amp(size_t N, const double *re, const double *im,
                      double *am) {
+  for(size_t i = 0; i < N; ++i) {
+    am[i] = hypot(re[i], im[i]);
+  }
 }
 
 void big_calc_data_init(struct big_calc_data_t* pdata) {
@@ -46,6 +77,7 @@ void big_calc_data_init(struct big_calc_data_t* pdata) {
 }
 
 int big_calc_data_malloc(struct big_calc_data_t* pdata, size_t N) {
+  pdata->N = N;
   pdata->inp_cur_re = (double*) malloc(N * sizeof(double));
   pdata->inp_cur_im = (double*) malloc(N * sizeof(double));
   pdata->inp_cur_am = (double*) malloc(N * sizeof(double));
