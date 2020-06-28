@@ -4,6 +4,6 @@ set(PROJECT_NAME pthread-demo)
 
 project(${PROJECT_NAME})
 
-add_executable(${PROJECT_NAME} main.c)
+add_executable(${PROJECT_NAME} main.c utils.c utils.h)
 
 target_link_libraries(${PROJECT_NAME} pthread)
