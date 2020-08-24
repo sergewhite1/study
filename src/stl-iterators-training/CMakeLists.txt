@@ -1,10 +1,8 @@
-message(STATUS "stl-iterators-demo: before update: CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
+cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_CXX_FLAGS "")
+set(PROJECT_NAME stl-iterators-training)
 
-message(STATUS "stl-iterators-demo: after  update: CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
-
-project(stl-iterators-training)
+project(${PROJECT_NAME})
 
 add_executable(${PROJECT_NAME} 
   binder_demo.cpp
@@ -13,3 +11,5 @@ add_executable(${PROJECT_NAME}
   person.h
   main.cpp
 )
+
+set_default_compiler_options(${PROJECT_NAME})

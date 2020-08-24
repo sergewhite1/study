@@ -34,10 +34,6 @@ static void arr_acc(size_t N, const double* arr_cur, double* arr_acc) {
   }
 }
 
-static double sqr(double x) {
-  return x * x;
-}
-
 static double generate_random() {
   return (double) rand() / RAND_MAX;
 }

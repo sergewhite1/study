@@ -11,6 +11,8 @@
 #include "binder_demo.h"
 #include "person.h"
 
+#pragma GCC diagnostic ignored "-Wunused-function"
+
 static void listing1();
 static void listing2();
 static void listing3();
@@ -643,3 +645,5 @@ static void listing26() {
     std::bind(&Person::save, std::placeholders::_1)
   );
 }
+
+#pragma GCC diagnostic pop

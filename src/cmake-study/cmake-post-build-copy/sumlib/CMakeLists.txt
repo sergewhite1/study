@@ -9,6 +9,8 @@ add_library(${PROJECT_NAME} SHARED
   sumlib.cpp
 )
 
+set_default_compiler_options(${PROJECT_NAME})
+
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 include(${CMAKE_HOME_DIRECTORY}/src/vts_copy_lib.cmake)

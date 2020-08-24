@@ -1,20 +1,22 @@
-message(STATUS "test-sso: CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR}")
+cmake_minimum_required(VERSION 3.10)
 
-message(STATUS "test-sso: before update: CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
+set(PROJECT_NAME test-sso)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DWHT_STRING_TESTING")
+project(${PROJECT_NAME})
 
-message(STATUS "test-sso: after  update: CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
-
-add_executable(test-sso $<TARGET_OBJECTS:wht_string_lib>
+add_executable(${PROJECT_NAME} $<TARGET_OBJECTS:wht_string_lib>
   main.cpp
 )
 
-include_directories(test-sso
+set_default_compiler_options(${PROJECT_NAME})
+
+target_compile_definitions(${PROJECT_NAME}  PUBLIC WHT_STRING_TESTING)
+
+include_directories(${PROJECT_NAME}
   ${CMAKE_SOURCE_DIR}/src/sso
 )
 
 foreach(i RANGE 1 97)
-  add_test(test-sso-${i} test-sso ${i})
+  add_test(${PROJECT_NAME}-${i} ${PROJECT_NAME} ${i})
 endforeach(i)
 
