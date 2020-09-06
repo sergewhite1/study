@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME memory-model-atomic-operations)
-
-project(${PROJECT_NAME})
+project(memory-model-atomic-operations)
 
 add_executable(${PROJECT_NAME} main.cpp)
 

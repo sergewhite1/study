@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME optimization)
-
-project(${PROJECT_NAME})
+project(optimization)
 
 add_executable(${PROJECT_NAME} main.cpp)
 

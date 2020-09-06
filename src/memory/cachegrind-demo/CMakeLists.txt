@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME "cachegrind-demo")
+project(cachegrind-demo)
 
 function(f project is_matrix_sum_by_col)
 

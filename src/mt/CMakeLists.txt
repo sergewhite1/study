@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME mt)
+project(mt)
 
 add_subdirectory(barrier-for-n-threads)
 add_subdirectory(memory-model-atomic-operations)

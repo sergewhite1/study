@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+
 project (sso)
 
 add_library(wht_string_lib OBJECT 

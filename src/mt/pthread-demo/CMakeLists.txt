@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME pthread-demo)
-
-project(${PROJECT_NAME})
+project(pthread-demo)
 
 add_executable(${PROJECT_NAME} main.c utils.c utils.h)
 

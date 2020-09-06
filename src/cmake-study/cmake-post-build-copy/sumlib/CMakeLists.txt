@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME sumlib)
-
-project(${PROJECT_NAME})
+project(sumlib)
 
 add_library(${PROJECT_NAME} SHARED
   include/sumlib.h
