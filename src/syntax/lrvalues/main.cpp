@@ -24,11 +24,14 @@ public:
     len_ = myString.len_;
   }
 
+//  MyString(MyString&&) = delete;
+
   MyString(MyString&& myString) {
-    std::cout << "MyString::MyString(MyString&& myString) this = " << this << " &myString = " << &myString;
+    std::cout << "MyString::MyString(MyString&& myString) this = " << this << " &myString = " << &myString << std::endl;
     std::swap(data_, myString.data_);
     std::swap(len_, myString.len_);
   }
+
 
   MyString& operator=(const MyString&) = delete;
   MyString& operator=(MyString&&) = delete;
@@ -56,6 +59,17 @@ private:
   size_t len_ = 0;
 };
 
+static MyString createMyString(int n) {
+  MyString ret1("String from createMyString func. ret1");
+  MyString ret2("String from createMyString func. ret1");
+
+  if (n < 10 ) {
+    return ret1;
+  }
+  
+  return ret2;
+}
+
 //static void f(MyString s) {
 //  std::cout << "void f(MyString s) s = " << s.c_str() << std::endl;
 //}
@@ -76,15 +90,17 @@ static void h(std::string&& s) {
 }
 
 int main() {
-  MyString s("hello");
-  std::cout << s.c_str() << std::endl;
+  MyString ms = createMyString(5);
+  std::cout << "my string = " << ms.c_str() << std::endl;
+  //MyString s("hello");
+  //std::cout << s.c_str() << std::endl;
 
   //f(s);
-  f(std::move(s));
+  //f(std::move(s));
 
-  std::cout << "s = " << s.c_str() << std::endl;
+  //std::cout << "s = " << s.c_str() << std::endl;
 
-  std::string s1 = "My name is ";
-  std::string s2 = "W";
-  h(s1 + s2);
+  //std::string s1 = "My name is ";
+  //std::string s2 = "W";
+  //h(s1 + s2);
 }
