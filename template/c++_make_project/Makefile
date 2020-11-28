@@ -1,13 +1,15 @@
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS= -O0 -Wall
 EXECUTABLE=hello
 
 $(EXECUTABLE): main.o
 	$(CC) main.o -o $(EXECUTABLE)
 
 main.o: main.cpp
-	$(CC) $(CFLAGS)  main.cpp -o main.o
+	$(CC) -S $(CFLAGS) main.cpp 
+	$(CC) -c main.s -o main.o
 
 clean:
+	rm -v *.s
 	rm -v *.o
 	rm -v $(EXECUTABLE)
