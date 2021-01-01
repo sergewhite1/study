@@ -23,11 +23,16 @@ int main() {
       break;
     }
 
+    const char inet_addr_str[]="127.0.0.1";
+    uint16_t port = 4040;
+
     sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    server_addr.sin_port = htons(4040);
+    server_addr.sin_addr.s_addr = inet_addr(inet_addr_str);
+    server_addr.sin_port = htons(port);
+
+    std::cout << "Connecting to endpoint: " << inet_addr_str << ":" << port << std::endl;
 
     int connect_res = connect(fd, (const sockaddr*)(&server_addr), sizeof(server_addr));
     if (connect_res == 0) {
@@ -51,6 +56,9 @@ int main() {
       ret = 1;
       break;
     }
+
+    //std::cout << "Press 0<ENTER> to contiue...";
+    //std::cin >> write_res;
 
   } while(0);
 

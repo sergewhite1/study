@@ -23,11 +23,15 @@ int main() {
       break;
     }
 
+    uint16_t port = 4040;
+
     sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    server_addr.sin_port = htons(4040);
+    server_addr.sin_port = htons(port);
+
+    std::cout << "Binding to endpoint: 0.0.0.0:" << port << std::endl;
 
     int bind_res = bind(listener_fd, (const sockaddr*)(&server_addr), sizeof(server_addr));
     if (bind_res == 0) {
@@ -67,6 +71,9 @@ int main() {
       ret = 1;
       break;
     }
+
+    //std::cout << "Press 0<ENTER> to contiue...";
+    //std::cin >> read_res;
   } while (0);
 
   if (fd) {
