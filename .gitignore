@@ -1,4 +1,5 @@
 /build-stl-iterators-Desktop_Qt_5_10_1_GCC_64bit-Debug
 /out
+.vscode
 CMakeLists.txt.user
 stl-iterators.pro.user
