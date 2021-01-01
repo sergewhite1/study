@@ -39,6 +39,8 @@ int main() {
     } else {
       std::cout << "Bind failed!" << gai_strerror(bind_res) << std::endl;
       std::cout << "Errno=" << errno << " : " << strerror(errno) << std::endl;
+      ret = 1;
+      break;
     }
 
     int listen_res = listen(listener_fd, 1);
