@@ -1,0 +1,8 @@
+WARNING: DO BACKUP
+/etc/default/console-setup
+
+Then do reboot.
+
+Another command:
+dpkg-reconfigure -plow console-setup
+
