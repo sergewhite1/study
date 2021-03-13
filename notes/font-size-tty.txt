@@ -6,3 +6,5 @@ Then do reboot.
 Another command:
 dpkg-reconfigure -plow console-setup
 
+Another command (file ~/.console-setup exists):
+setupcon --current-tty  --font-only
