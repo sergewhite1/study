@@ -7,4 +7,6 @@ Another command:
 dpkg-reconfigure -plow console-setup
 
 Another command (file ~/.console-setup exists):
-setupcon --current-tty  --font-only
+if [[ "$TERM" == "linux" ]]; then
+  setupcon --current-tty  --font-only
+fi
