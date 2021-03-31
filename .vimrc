@@ -24,5 +24,13 @@ call plug#end()
 map <C-n> :NERDTreeToggle<CR>
 
 set number " Show line number
+
 set hlsearch
 set incsearch
+
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
+set ruler
+set showcmd
