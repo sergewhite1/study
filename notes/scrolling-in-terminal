@@ -1,0 +1,8 @@
+Scrolling in terminal (tty).
+For scroll use Shift+PageUp, Shift+PageDown. When you switch between terminals tty, history buffer is clear.
+
+Scrolling in screen util.
+1. Ctrl+A, Esc
+2. Use Arrow Up, Arrow Down for scroll
+3. Esc or q for exit.
+When you're scolling you can copy text. For this press Enter to start selection. When you finish selection press Enter again. To paste copied text use Ctrl+A, ]
