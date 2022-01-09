@@ -1,0 +1,4 @@
+add_subdirectory(beloff_unit_test)
+add_subdirectory(spellcheck)
+add_subdirectory(wordstat)
+add_subdirectory(wordstatlib)

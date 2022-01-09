@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "beloff_unit_test.h"
+
 #include "single_word_stat.h"
 #include "word_stat.h"
 
-typedef int (*test_proc_t)(const char** test_name);
-
-int sws_init_test(const char** test_name)
+static int sws_init_test(const char** filename, const char** testname)
 {
-  *test_name = __func__;
+  *filename = BUT_FILENAME;
+  *testname = BUT_FUNCTION;
 
   struct single_word_stat sws_obj;
   sws_obj.count = 111;
@@ -25,9 +26,10 @@ int sws_init_test(const char** test_name)
   return 1;
 }
 
-int sws_release_test(const char** test_name)
+static int sws_release_test(const char** filename, const char** testname)
 {
-  *test_name = __func__;
+  *filename = BUT_FILENAME;
+  *testname = BUT_FUNCTION;
 
   struct single_word_stat sws_obj;
 
@@ -50,9 +52,10 @@ int sws_release_test(const char** test_name)
   return 1;
 }
 
-int ws_init_test(const char** test_name)
+static int ws_init_test(const char** filename, const char** testname)
 {
-  *test_name = __func__;
+  *filename = BUT_FILENAME;
+  *testname = BUT_FUNCTION;
 
   struct word_stat ws_obj;
   ws_obj.data = (struct single_word_stat**)0xff;
@@ -71,9 +74,10 @@ int ws_init_test(const char** test_name)
   return 1;
 }
 
-int ws_add_word_test(const char** test_name)
+static int ws_add_word_test(const char** filename, const char** testname)
 {
-  *test_name = __func__;
+  *filename = BUT_FILENAME;
+  *testname = BUT_FUNCTION;
 
   struct word_stat ws;
 
@@ -118,9 +122,11 @@ int ws_add_word_test(const char** test_name)
   return ret;
 }
 
-int ws_sort_by_single_word_stat_count_test(const char** test_name)
+static int ws_sort_by_single_word_stat_count_test(const char** filename,
+                                                  const char** testname)
 {
-  *test_name = __func__;
+  *filename = BUT_FILENAME;
+  *testname = BUT_FUNCTION;
 
   /* Input data: "zzz hello World hello dev zzz"
    * Expected result:
@@ -172,9 +178,10 @@ int ws_sort_by_single_word_stat_count_test(const char** test_name)
   return ret;
 }
 
-int ws_add_line_test(const char** test_name)
+static int ws_add_line_test(const char** filename, const char** testname)
 {
-  *test_name = __func__;
+  *filename = BUT_FILENAME;
+  *testname = BUT_FUNCTION;
 
   struct word_stat ws;
 
@@ -236,44 +243,12 @@ int ws_add_line_test(const char** test_name)
   return ret;
 }
 
-const test_proc_t TEST_PROC[] = {
-  sws_init_test
-  ,sws_release_test
-  ,ws_init_test
-  ,ws_add_word_test
-  ,ws_sort_by_single_word_stat_count_test
-  ,ws_add_line_test
-};
-
-const int TEST_COUNT = sizeof(TEST_PROC) / sizeof(TEST_PROC[0]);
-
-int main()
+void register_wordstat_ut()
 {
-  int ret = 0;
-  int success_count = 0;
-  int failed_count = 0;
-  for (int i = 0; i < TEST_COUNT; ++i)
-  {
-    const char* test_name = NULL;
-
-    int err = TEST_PROC[i](&test_name);
-
-    if (err == 0)
-    {
-      printf("Test %d of %d %-44s success\n", i + 1, TEST_COUNT, test_name);
-      success_count++;
-    }
-    else
-    {
-      printf("Test %d of %d %-44s failed\n", i + 1, TEST_COUNT, test_name);
-      failed_count++;
-      ret = 1;
-    }
-  }
-
-  printf("=======================================\n");
-  printf("Total test count: %d success: %d failed: %d\n",
-         TEST_COUNT, success_count, failed_count);
-
-  return ret;
+  but_add_test(sws_init_test);
+  but_add_test(sws_release_test);
+  but_add_test(ws_init_test);
+  but_add_test(ws_add_word_test);
+  but_add_test(ws_sort_by_single_word_stat_count_test);
+  but_add_test(ws_add_line_test);
 }

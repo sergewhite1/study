@@ -1,12 +1,10 @@
-add_subdirectory(wordstatlib)
-
 set(wordstat "wordstat")
 
 add_executable(${wordstat}
   main.c
   show_help.c)
 
-target_include_directories(${wordstat} PRIVATE wordstatlib)
+target_include_directories(${wordstat} PRIVATE ../wordstatlib)
 
 target_link_libraries(${wordstat} wordstatlib)
 

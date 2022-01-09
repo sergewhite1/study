@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "get_next_word.h"
+
 static void ws_add_new_word(struct word_stat* ws_ptr, const char* word)
 {
   int curr_idx = ws_ptr->size;
@@ -176,54 +178,14 @@ void ws_add_line(struct word_stat* ws_ptr, const char* line)
     return;
   }
 
-  const char* ptr = line;
+  const char* curr_ptr = line;
+  size_t curr_pos = 0;
 
-  size_t begin_idx = 0;
-  size_t curr_idx = 0;
-  size_t len = 0;
   char* word = NULL;
-  size_t max_word_len = 0;
 
-  while (1)
+  while ((word = get_next_word(&curr_ptr, &curr_pos)) != NULL)
   {
-    if (isalpha(*ptr) != 0)
-    {
-      len++;
-    }
-    else
-    {
-      if (len > 0)
-      {
-        if (len > max_word_len)
-        {
-          free(word);
-          word = (char*) malloc((len + 1) * sizeof(char));
-          if (word == NULL)
-          {
-            printf("%s: malloc error\n", __func__);
-            return;
-          }
-
-          max_word_len = len;
-        }
-
-        memcpy(word, &line[begin_idx], len * sizeof(char));
-        word[len] = '\0';
-        ws_add_word(ws_ptr, word);
-      }
-
-      begin_idx = curr_idx + 1;
-      len = 0;
-    }
-
-    if (*ptr == '\0' || *ptr == '\n')
-    {
-      break;
-    }
-
-    ++ptr;
-    ++curr_idx;
+    ws_add_word(ws_ptr, word);
+    free(word);
   }
-
-  free(word);
 }
