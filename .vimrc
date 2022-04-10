@@ -34,3 +34,5 @@ set shiftwidth=2
 
 set ruler
 set showcmd
+
+set completeopt-=preview
