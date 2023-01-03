@@ -19,13 +19,9 @@ static int sws_init_test(const char** filename, const char** testname)
   sws_init(&sws_obj);
 
   CHECK_EQUAL_UL(sws_obj.count, 0UL);
+  CHECK_STR_IS_NULL(sws_obj.word);
 
-  if ((sws_obj.count == 0) && (sws_obj.word == NULL))
-  {
-    return 0;
-  }
-
-  return 1;
+  return 0;
 }
 
 static int sws_release_test(const char** filename, const char** testname)
@@ -46,12 +42,10 @@ static int sws_release_test(const char** filename, const char** testname)
 
   sws_release(&sws_obj);
 
-  if ((sws_obj.count == 0) && (sws_obj.word == NULL))
-  {
-    return 0;
-  }
+  CHECK_EQUAL_UL(sws_obj.count, 0UL);
+  CHECK_STR_IS_NULL(sws_obj.word);
 
-  return 1;
+  return 0;
 }
 
 static int ws_init_test(const char** filename, const char** testname)
@@ -66,14 +60,11 @@ static int ws_init_test(const char** filename, const char** testname)
 
   ws_init(&ws_obj);
 
-  if ((ws_obj.data == NULL) &&
-      (ws_obj.size == 0) &&
-      (ws_obj.capacity == 0))
-  {
-    return 0;
-  }
+  CHECK_PTR_IS_NULL(ws_obj.data);
+  CHECK_EQUAL_UL(ws_obj.size, 0UL);
+  CHECK_EQUAL_UL(ws_obj.size, 0UL);
 
-  return 1;
+  return 0;
 }
 
 static int ws_add_word_test(const char** filename, const char** testname)

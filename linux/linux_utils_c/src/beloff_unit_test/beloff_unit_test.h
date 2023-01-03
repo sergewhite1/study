@@ -9,7 +9,7 @@
 #define CHECK_EQUAL_UL(actual_res, expected_res) \
   if (actual_res != expected_res) \
   { \
-    printf("File: %s Line: %d %s != %s %s = %zu %s = %zu \n" \
+    printf("File: %s Line: %d %s != %s %s = %zu %s = %zu\n" \
            ,__FILE__       \
            ,__LINE__       \
            ,#actual_res    \
@@ -22,6 +22,33 @@
               \
     return 1; \
   }
+
+#define CHECK_PTR_IS_NULL(ptr) \
+  if (ptr != NULL) \
+  { \
+    printf("File: %s Line: %d %s actual result=%p expected result=NULL\n" \
+           ,__FILE__     \
+           ,__LINE__     \
+           ,#ptr         \
+           ,ptr          \
+           );            \
+                         \
+    return 1;            \
+  }
+
+#define CHECK_STR_IS_NULL(str) \
+  if (str != NULL) \
+  { \
+    printf("File: %s Line: %d %s actual result=%s expected result=NULL\n" \
+           ,__FILE__    \
+           ,__LINE__    \
+           ,#str        \
+           ,str         \
+           );           \
+                        \
+    return 1;           \
+  }
+
 
 int but_run();
 
