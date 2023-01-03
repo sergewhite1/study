@@ -18,6 +18,8 @@ static int sws_init_test(const char** filename, const char** testname)
 
   sws_init(&sws_obj);
 
+  CHECK_EQUAL_UL(sws_obj.count, 0UL);
+
   if ((sws_obj.count == 0) && (sws_obj.word == NULL))
   {
     return 0;
