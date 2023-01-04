@@ -9,8 +9,7 @@
 
 static int sws_init_test(const char** filename, const char** testname)
 {
-  *filename = BUT_FILENAME;
-  *testname = BUT_FUNCTION;
+  BUT_BEGIN
 
   struct single_word_stat sws_obj;
   sws_obj.count = 111;
@@ -21,13 +20,12 @@ static int sws_init_test(const char** filename, const char** testname)
   CHECK_EQUAL_UL(sws_obj.count, 0UL);
   CHECK_STR_IS_NULL(sws_obj.word);
 
-  return 0;
+  BUT_END
 }
 
 static int sws_release_test(const char** filename, const char** testname)
 {
-  *filename = BUT_FILENAME;
-  *testname = BUT_FUNCTION;
+  BUT_BEGIN
 
   struct single_word_stat sws_obj;
 
@@ -45,13 +43,12 @@ static int sws_release_test(const char** filename, const char** testname)
   CHECK_EQUAL_UL(sws_obj.count, 0UL);
   CHECK_STR_IS_NULL(sws_obj.word);
 
-  return 0;
+  BUT_END
 }
 
 static int ws_init_test(const char** filename, const char** testname)
 {
-  *filename = BUT_FILENAME;
-  *testname = BUT_FUNCTION;
+  BUT_BEGIN
 
   struct word_stat ws_obj;
   ws_obj.data = (struct single_word_stat**)0xff;
@@ -64,13 +61,12 @@ static int ws_init_test(const char** filename, const char** testname)
   CHECK_EQUAL_UL(ws_obj.size, 0UL);
   CHECK_EQUAL_UL(ws_obj.size, 0UL);
 
-  return 0;
+  BUT_END
 }
 
 static int ws_add_word_test(const char** filename, const char** testname)
 {
-  *filename = BUT_FILENAME;
-  *testname = BUT_FUNCTION;
+  BUT_BEGIN
 
   struct word_stat ws;
 
@@ -81,45 +77,34 @@ static int ws_add_word_test(const char** filename, const char** testname)
   ws_add_word(&ws, "hello");
   ws_add_word(&ws, "dev");
 
-  int ret = 0;
-
   do
   {
-    if (ws.size != 3)
+    CHECK_EQUAL_UL(ws.size, 3UL);
+    if (ret)
     {
-      ret = 1;
       break;
     }
 
-    if ((strcmp(ws.data[0]->word, "hello") != 0) || ws.data[0]->count != 2)
-    {
-      ret = 1;
-      break;
-    }
+    CHECK_EQUAL_STR(ws.data[0]->word, "hello");
+    CHECK_EQUAL_UL (ws.data[0]->count, 2UL);
 
-    if ((strcmp(ws.data[1]->word, "World") != 0) || ws.data[1]->count != 1)
-    {
-      ret = 1;
-      break;
-    }
+    CHECK_EQUAL_STR(ws.data[1]->word, "World");
+    CHECK_EQUAL_UL (ws.data[1]->count, 1UL);
 
-    if ((strcmp(ws.data[2]->word, "dev") != 0) || ws.data[2]->count != 1)
-    {
-      ret = 1;
-      break;
-    }
+    CHECK_EQUAL_STR(ws.data[2]->word, "dev");
+    CHECK_EQUAL_UL (ws.data[2]->count, 1UL);
+
   } while (0);
 
   ws_release(&ws);
 
-  return ret;
+  BUT_END
 }
 
 static int ws_sort_by_single_word_stat_count_test(const char** filename,
                                                   const char** testname)
 {
-  *filename = BUT_FILENAME;
-  *testname = BUT_FUNCTION;
+  BUT_BEGIN
 
   /* Input data: "zzz hello World hello dev zzz"
    * Expected result:
@@ -144,23 +129,26 @@ static int ws_sort_by_single_word_stat_count_test(const char** filename,
 
   //ws_print(&ws);
 
-  int ret = 0;
-
   do
   {
-    if (ws.size != 4)
+    CHECK_EQUAL_UL(ws.size, 4UL);
+    if (ret)
     {
-      ret = 1;
       break;
     }
 
-    if ((strcmp(ws.data[0]->word, "World") != 0) || (ws.data[0]->count != 1) ||
-        (strcmp(ws.data[1]->word, "dev"  ) != 0) || (ws.data[1]->count != 1) ||
-        (strcmp(ws.data[2]->word, "hello") != 0) || (ws.data[2]->count != 2) ||
-        (strcmp(ws.data[3]->word, "zzz")   != 0) || (ws.data[3]->count != 2))
-    {
-      ret = 1;
-    }
+    CHECK_EQUAL_STR(ws.data[0]->word, "World");
+    CHECK_EQUAL_UL (ws.data[0]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[1]->word, "dev");
+    CHECK_EQUAL_UL (ws.data[1]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[2]->word, "hello");
+    CHECK_EQUAL_UL (ws.data[2]->count, 2UL);
+
+    CHECK_EQUAL_STR(ws.data[3]->word, "zzz");
+    CHECK_EQUAL_UL (ws.data[3]->count, 2UL);
+
   } while (0);
 
   ws_release(&ws);
@@ -168,13 +156,12 @@ static int ws_sort_by_single_word_stat_count_test(const char** filename,
   // for valgrind test
   ws_sort_by_single_word_stat_count(&ws);
 
-  return ret;
+  BUT_END
 }
 
 static int ws_add_line_test(const char** filename, const char** testname)
 {
-  *filename = BUT_FILENAME;
-  *testname = BUT_FUNCTION;
+  BUT_BEGIN
 
   struct word_stat ws;
 
@@ -204,36 +191,51 @@ static int ws_add_line_test(const char** filename, const char** testname)
 
   ws_sort_by_single_word_stat_count(&ws);
 
-  int ret = 0;
-
   do
   {
-    if (ws.size != 10)
+    CHECK_EQUAL_UL(ws.size, 10UL);
+    if (ret)
     {
-      ret = 1;
       break;
     }
 
-    if ((strcmp(ws.data[0]->word, "Line" ) != 0) || (ws.data[0]->count != 1) ||
-        (strcmp(ws.data[1]->word, "Test" ) != 0) || (ws.data[1]->count != 1) ||
-        (strcmp(ws.data[2]->word, "and"  ) != 0) || (ws.data[2]->count != 1) ||
-        (strcmp(ws.data[3]->word, "file" ) != 0) || (ws.data[3]->count != 1) ||
-        (strcmp(ws.data[4]->word, "hello") != 0) || (ws.data[4]->count != 1) ||
-        (strcmp(ws.data[5]->word, "last" ) != 0) || (ws.data[5]->count != 1) ||
-        (strcmp(ws.data[6]->word, "one"  ) != 0) || (ws.data[6]->count != 1) ||
-        (strcmp(ws.data[7]->word, "the"  ) != 0) || (ws.data[7]->count != 1) ||
-        (strcmp(ws.data[8]->word, "verylongword") != 0) || (ws.data[8]->count != 1) ||
-        (strcmp(ws.data[9]->word, "word" ) != 0) || (ws.data[9]->count != 1))
-    {
-      ret = 1;
-    }
+    CHECK_EQUAL_STR(ws.data[0]->word, "Line");
+    CHECK_EQUAL_UL (ws.data[0]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[1]->word, "Test");
+    CHECK_EQUAL_UL (ws.data[1]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[2]->word, "and");
+    CHECK_EQUAL_UL (ws.data[2]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[3]->word, "file");
+    CHECK_EQUAL_UL (ws.data[3]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[4]->word, "hello");
+    CHECK_EQUAL_UL (ws.data[4]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[5]->word, "last");
+    CHECK_EQUAL_UL (ws.data[5]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[6]->word, "one");
+    CHECK_EQUAL_UL (ws.data[6]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[7]->word, "the");
+    CHECK_EQUAL_UL (ws.data[7]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[8]->word, "verylongword");
+    CHECK_EQUAL_UL (ws.data[8]->count, 1UL);
+
+    CHECK_EQUAL_STR(ws.data[9]->word, "word");
+    CHECK_EQUAL_UL (ws.data[9]->count, 1UL);
+
   } while (0);
 
   //ws_print(&ws);
 
   ws_release(&ws);
 
-  return ret;
+  BUT_END
 }
 
 void register_wordstat_ut()

@@ -6,6 +6,14 @@
 #define BUT_FILENAME (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #define BUT_FUNCTION __FUNCTION__
 
+#define BUT_BEGIN \
+  *filename = BUT_FILENAME; \
+  *testname = BUT_FUNCTION; \
+  int ret = 0;
+
+#define BUT_END return ret;
+
+
 #define CHECK_EQUAL_UL(actual_res, expected_res) \
   if (actual_res != expected_res) \
   { \
@@ -20,7 +28,7 @@
            ,expected_res   \
            ); \
               \
-    return 1; \
+    ret = 1;  \
   }
 
 #define CHECK_PTR_IS_NULL(ptr) \
@@ -33,7 +41,7 @@
            ,ptr          \
            );            \
                          \
-    return 1;            \
+    ret = 1;             \
   }
 
 #define CHECK_STR_IS_NULL(str) \
@@ -46,9 +54,25 @@
            ,str         \
            );           \
                         \
-    return 1;           \
+    ret = 1;            \
   }
 
+#define CHECK_EQUAL_STR(actual_res, expected_res) \
+  if (strcmp(actual_res, expected_res) != 0) \
+  { \
+    printf("File: %s Line: %d %s != %s, %s=%s, %s=%s\n" \
+      ,__FILE__        \
+      ,__LINE__        \
+      ,#actual_res     \
+      ,#expected_res   \
+      ,#actual_res     \
+      ,actual_res      \
+      ,#expected_res   \
+      ,expected_res    \
+    );                 \
+                       \
+    ret = 1;           \
+  }
 
 int but_run();
 
