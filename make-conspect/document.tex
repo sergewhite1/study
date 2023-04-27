@@ -7,6 +7,26 @@
 
 Поэтому сперва рассмотрим сборку С/C++ проектов
 
+\vspace{0.2cm}
+
+\begin{tikzpicture}
+	\draw [help lines] (0, 0) grid (16, 10);
+
+	\node (c_file_0) at (0, 10) [shape=rectangle,draw]{.c};
+	\node (c_file_1) at (0, 9)  [shape=rectangle,draw]{.c};
+	\node (c_file_2) at (0, 8)  [shape=rectangle,draw]{.c};
+	\node (preproc)  at (2, 9)  [shape=rectangle,draw,minimum height=3cm]{Preproc.};
+
+	\draw[->] (c_file_0.east) -- (preproc);
+	\draw[->] (c_file_1) -- (preproc);
+	\draw[->] (c_file_2) -- (preproc);
+\end{tikzpicture}
+
+\vspace{2cm}
+=============================================
+
+Далее идут черновоки по latex'у :)
+
 % pgfmanual, page 142
 
 \begin{tikzpicture}[fill=blue!20]
@@ -24,5 +44,25 @@ We are working on
 	\draw (0,-1.5) -- (0,1.5);
 	\draw (0, 0) circle [radius=1];
 \end{tikzpicture}.
+
+\begin{tikzpicture}
+	\draw [help lines] (-2, -2) grid (2, 3);
+	\path ( 0,2) node [shape=circle,draw] {}
+	( 0,1) node [shape=circle,draw] {}
+	( 0,0) node [shape=circle,draw] {}
+	( 1,1) node [shape=rectangle,draw] {}
+	(-1,1) node [shape=rectangle,draw] {};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+	\draw [help lines] (-2, -2) grid (2, 3);
+	\node (A)  at ( 0,2) [shape=circle,draw] {A};
+	\node (B) at ( 0,1) [shape=circle,draw] {B};
+	\node (C) at ( 0,0) [shape=circle,draw] {C};
+	\node (D) at ( 1,1) [shape=rectangle,draw] {D};
+	\node (E) at (-1,1) [shape=rectangle,draw] {E};
+
+	\draw[->] (E.east) -- (B.west);
+\end{tikzpicture}
 
 \end{document}}
