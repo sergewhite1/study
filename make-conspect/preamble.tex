@@ -1,0 +1,76 @@
+\documentclass[a4paper, 12pt]{article}
+
+% Работа с русским языком ======================================================
+
+\usepackage[T2A]{fontenc}             % Кодировка
+\usepackage[english, russian]{babel}  % Локализация и переносы
+\usepackage[utf8]{inputenc}           % Кодировка исходного текста
+\usepackage{indentfirst}              % Красная строка в первом абзаце
+
+% Оформление страницы ==========================================================
+
+% Поля
+
+\usepackage{geometry}
+\geometry{top=25mm}
+\geometry{bottom=30mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+
+\linespread{1.5} % Коэффициент межстрочного интервала
+
+% Колонтитулы
+
+\usepackage{titleps}
+\newpagestyle{main}{
+	\setheadrule{0.4pt}
+	\sethead{left}{center}{right}
+	\setfootrule{0.4pt}
+	\setfoot{left}{\thepage}{right}
+}
+
+\pagestyle{main}
+
+% Работа с картинками ==========================================================
+\usepackage{graphicx} % Для вставки рисунков
+
+% Математика ===================================================================
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+\newcommand{\deriv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\R}{\mathbb R}
+
+\renewcommand{\phi}{\varphi}
+
+\DeclareMathOperator{\Kerr}{Ker}
+\DeclareMathOperator{\Ree}{Re}
+\DeclareMathOperator{\Imm}{Im}
+
+% Здесь звёздочка перевод нижний индекс под оператор в формуле только на лной строке
+\DeclareMathOperator*{\argmax}{argmax}
+
+% Бинарная операция
+\newcommand{\percent}{\mathbin{\%}}
+
+\usepackage{amsthm}    % Создание теорем
+\theoremstyle{plain}   % {plain, definition, remark}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{corollary}{Следствие}[theorem]
+
+% Звёздочка отменяет нумерацию
+\newtheorem*{definition}{Определение}
+
+% ==============================================================================
+
+\newenvironment{myenv}
+    {\begin{center}\bfseries}
+    {\end{center}}
+
+\usepackage{hyperref}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,through,backgrounds}
+\usepackage{tkz-euclide}
