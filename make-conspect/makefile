@@ -1,5 +1,4 @@
-document.pdf: document.tex preamble.tex \
-              img/picture.png
+document.pdf: document.tex preamble.tex
 	pdflatex $<
 
 .PHONY: clean
