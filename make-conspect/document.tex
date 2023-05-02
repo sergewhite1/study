@@ -15,7 +15,7 @@
 
 \vspace{0.2cm}
 
-Данный конспект рассматривает make применительно к сборке C/C++ проектов
+Данный конспект рассматривает make применительно к сборке C/C++ проектов на ОС Linux с использование компилятора gcc
 
 Поэтому сперва рассмотрим сборку С/C++ проектов
 
@@ -78,16 +78,61 @@
 	\hline
 \end{tabular}
 
-\vspace{0.2cm}
+\clearpage
 
 Далее для справки приведены некоторые команды gcc.
 
+Для начала рассмотрим получение результата работы препроцессора. Расммотрим такой код (файл main.cpp):
+
+
+\begin{lstlisting}
+#include <iostream>
+
+#define CONST_A 100
+
+int main()
+{
+  std::cout << "CONST_A=" << CONST_A << std::endl;
+  return 0;
+}
+\end{lstlisting}
+
+
+Следующая команда позволяет получить выход препроцессора:
+
+\begin{lstlisting}[language=csh]
+gcc -E main.cpp > main.cpp.i
+\end{lstlisting}
+
+В результате получаем большой файл. Вот его последние строки:
+
+\begin{lstlisting}[firstnumber=28636]
+# 2 "main.cpp" 2
 
 
 
 
-\vspace{2cm}
-=============================================
+# 5 "main.cpp"
+int main()
+{
+	std::cout << "CONST_A=" << 100 << std::endl;
+	return 0;
+}
+\end{lstlisting}
+
+Компиляция исходного файла в объектный происходит следующей командой:
+
+\begin{lstlisting}[language=csh]
+gcc -c main.cpp
+\end{lstlisting}
+
+В результате получится файл main.o Имя выходного файлы можно задавать явно:
+
+\begin{lstlisting}[language=csh]
+gcc -c main.cpp -o main.o
+\end{lstlisting}
+
+\clearpage
 
 Далее идут черновоки по latex'у :)
 
