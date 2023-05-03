@@ -1,4 +1,4 @@
-document.pdf: document.tex preamble.tex
+make-conspect.pdf: make-conspect.tex preamble.tex
 	pdflatex $<
 
 .PHONY: clean
