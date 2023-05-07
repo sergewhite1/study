@@ -26,41 +26,41 @@
 %	\draw [help lines] (0, 0) grid (16, 12);
 
 	\node (c_file_0) at ( 0, 11)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm]{.c};
-	\node (c_file_1) at ( 0, 8)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm]{.c};
-	\node (c_file_2) at ( 0, 5)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm]{.c};
-	\node (preproc)  at ( 3, 8)  [shape=rectangle, draw, minimum width=2cm, minimum height=8cm, text width=1.7cm]{Preproc.\\\#include\\\#ifndef\\\#define\\...};
-	\node (compiler) at ( 6, 8)  [shape=rectangle, draw, minimum width=2cm, minimum height=8cm]{Compiler};
+	\node (c_file_1) at ( 0,  8)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm]{.c};
+	\node (c_file_2) at ( 0,  5)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm]{.c};
+	\node (preproc)  at ( 3,  8)  [shape=rectangle, draw, minimum width=2cm, minimum height=8cm, text width=1.7cm]{Preproc.\\\#include\\\#ifndef\\\#define\\...};
+	\node (compiler) at ( 6,  8)  [shape=rectangle, draw, minimum width=2cm, minimum height=8cm]{Compiler};
 	\node (o_file_0) at ( 9, 11)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.o\\(.obj)};
-	\node (o_file_1) at ( 9, 8)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.o\\(.obj)};
-	\node (o_file_2) at ( 9, 5)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.o\\(.obj)};
-	\node (linker)   at (12, 8)  [shape=rectangle, draw, minimum width=2cm, minimum height=8cm]{Linker};
-	\node (exe)      at (15, 8)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm, text width=1cm]{exe\\(.exe)};
+	\node (o_file_1) at ( 9,  8)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.o\\(.obj)};
+	\node (o_file_2) at ( 9,  5)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.o\\(.obj)};
+	\node (linker)   at (12,  8)  [shape=rectangle, draw, minimum width=2cm, minimum height=8cm]{Linker};
+	\node (exe)      at (15,  8)  [shape=rectangle, draw, minimum width=2cm, minimum height=2cm, text width=1cm]{exe\\(.exe)};
 
 	\draw[->] (c_file_0.east) -- ++(right:1);
 	\draw[->] (c_file_1.east) -- ++(right:1);
 	\draw[->] (c_file_2.east) -- ++(right:1);
 
-	\draw[->] (4,11) -- (5,11);
-	\draw[->] (4,8) -- (5,8);
-	\draw[->] (4,5) -- (5,5);
+	\draw[->] ( 4, 11) -- (5,11);
+	\draw[->] ( 4,  8) -- (5, 8);
+	\draw[->] ( 4,  5) -- (5, 5);
 
-	\draw[->] (7,11) -- (8,11);
-	\draw[->] (7,8) -- (8,8);
-	\draw[->] (7,5) -- (8,5);
+	\draw[->] ( 7, 11) -- (8,11);
+	\draw[->] ( 7,  8) -- (8, 8);
+	\draw[->] ( 7,  5) -- (8, 5);
 
 	\draw[->] (10, 11) -- (11, 11);
-	\draw[->] (10, 8) -- (11, 8);
-	\draw[->] (10, 5) -- (11, 5);
+	\draw[->] (10,  8) -- (11,  8);
+	\draw[->] (10,  5) -- (11,  5);
 
-	\draw[->] (13, 8) -- (14, 8);
+	\draw[->] (13,  8) -- (14,  8);
 
-	\node (or_1) at (15, 6.5) [shape=rectangle]{or};
+	\node (or_1)       at (15, 6.5) [shape=rectangle]{or};
 
-	\node (static_lib) at (15, 5) [shape=rectangle,draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.a\\(.lib)};
+	\node (static_lib) at (15,   5) [shape=rectangle,draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.a\\(.lib)};
 
-	\node (or_2) at (15, 3.5) [shape=rectangle]{or};
+	\node (or_2)       at (15, 3.5) [shape=rectangle]{or};
 
-	\node (dynamic_lb) at (15, 2) [shape=rectangle,draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.so\\(.dll)};
+	\node (dynamic_lb) at (15,   2) [shape=rectangle,draw, minimum width=2cm, minimum height=2cm, text width=1cm]{.so\\(.dll)};
 
 \end{tikzpicture}
 
@@ -198,6 +198,54 @@ Num:    Value          Size Type    Bind   Vis      Ndx Name
 $ c++filt _ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
 std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
 \end{lstlisting}
+
+В качестве примера рассмотрим программу решения квадратного уравнения. О квадратном уравнении см. Приложение-1
+
+\clearpage
+
+\textbf{Приложенние-1}
+
+Квадратным уравнением называется уравнение вида:
+
+\begin{equation}
+  ax^2 + bx + c = 0, \qquad a \ne 0 \
+\end{equation}
+
+Его решение. \\
+$D$ - дискриминант
+
+\begin{equation}
+  D = b^2 - 4ac
+\end{equation}
+
+\begin{equation}
+  x_{1,2} = \frac{-b \pm \sqrt{D}}{2a}
+\end{equation}
+
+Доказательство
+
+Составим числовой пример. Рассмотрим выражение $x^2 + 10x$. При $x=2$ получаем $2^2 + 10 \cdot 2 = 24$ Таким образом получаем следующее уравнение со занием корня:
+
+\begin{equation*}
+  x^2 + 10x - 24 = 0, \qquad x = 2
+\end{equation*}
+
+Для его решения выделим полный квадрат. Т.е. сведём это уравнение к виду $(x + p)^2 = h$, где $p$ и $h$ какие-то числа. Такое уравнение уже можно решить с помощью квадратного корня. Для выделения полного квадрата вспомним формулу квадрата суммы:
+
+\begin{equation}
+  \left( a + b \right)^2 = a^2 + 2ab + b^2
+\end{equation}
+
+Используем символы $x$ и $p$:
+
+\begin{equation*}
+  \left( x + p \right)^2 = x^2 + 2xp + p^2
+\end{equation*}
+
+Пусть,\\
+$ 10x = 2xp $ \\
+$ 10 = 2p   $ \\
+$ p = 5     $ \\
 
 \clearpage
 
