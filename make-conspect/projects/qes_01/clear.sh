@@ -1,3 +1,3 @@
 set -x
 
-rm -v qes_exe *.o
+rm -v qes_exe qes_ut *.o

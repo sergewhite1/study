@@ -8,6 +8,8 @@ static ut_test_case_proc_t* test_cases = NULL;
 static int total_count = 0;
 static int capacity    = 0;
 
+static int assert_count = 0;
+
 static void ut_release()
 {
   if (test_cases != NULL)
@@ -69,6 +71,8 @@ int ut_run()
     }
   } 
 
+  printf("ASSERT COUNT: %d\n", assert_count);
+
   printf("TEST CASES   TOTAL: %d   SUCCESS: %d   FAILED: %d\n", 
          total_count, 
          success_count, 
@@ -86,4 +90,9 @@ int ut_run()
   ut_release();
 
   return ret;
+}
+
+void ut_increment_assert_count()
+{
+  assert_count++;
 }
