@@ -4,8 +4,11 @@ Quadratic Equation Solver (Version: 01)
 Simple C project with make demo.
 To build project run:
 
-$ make
+$ ./build.sh
 $ /qes_exe
+
+To clean project run:
+$ ./clean.sh
 
 ===============================================================================
 

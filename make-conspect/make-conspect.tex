@@ -205,6 +205,27 @@ std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_tr
 
 \texttt{\setstretch{0}\verbatiminput{qes_01.txt}}
 
+Для начала расположим все файлы в одном каталоге. Далее представлены листинги.
+
+\lstinputlisting[caption={qes.h}]{projects/qes_01/qes.h}
+\lstinputlisting[caption={qes.c}]{projects/qes_01/qes.c}
+\lstinputlisting[caption={main.c}]{projects/qes_01/main.c}
+\lstinputlisting[caption={ut.h}]{projects/qes_01/ut.h}
+\lstinputlisting[caption={ut.h}]{projects/qes_01/ut.c}
+\lstinputlisting[caption={qes\_ut.c}]{projects/qes_01/qes_ut.c}
+
+\textbf{Шаг 1. Сборка обычным bash скриптом}
+
+Артефакты сборки будут находится в одном каталоге с исходными файлами.
+
+\lstinputlisting[caption={build.sh}, language=sh]{projects/qes_01/build.sh}
+
+Для очисти будем вызывать скрипт clean.sh:
+
+\lstinputlisting[caption={build.sh}, language=sh]{projects/qes_01/clear.sh}
+
+Недостаток такого подхода очевиден. Теряется раздельная компиляция. Каждый раз проект будет собираться заново.
+
 \clearpage
 
 \textbf{Приложение-1}
