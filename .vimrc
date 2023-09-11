@@ -23,6 +23,9 @@ call plug#end()
 " mappings
 map <C-n> :NERDTreeToggle<CR>
 
+" https://superuser.com/questions/1284561/why-is-vim-starting-in-replace-mode
+set t_u7=
+
 set number " Show line number
 
 set hlsearch
