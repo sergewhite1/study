@@ -1,4 +1,4 @@
-#include "qes.h"
+#include "ques.h"
 
 #include <float.h>
 #include <math.h>

@@ -201,28 +201,28 @@ std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_tr
 
 В качестве примера рассмотрим программу решения квадратного уравнения. О квадратном уравнении см. Приложение-1
 
-Программу назовем qes\_exe (qes - от Quadratic Equation Solver). Это консольное приложение, которое запрашивает у пользователя коэффициенты уравнения $a$, $b$ и $c$. В результате выводит дискриминант. В случае не отрицательного дискриминанта выводятся корни. Программа работает только в области вещественных чисел. Также сделаем юнит-тесты.  Это программа qes\_ut. Для начала все файлы с исходным кодом разместим в одном каталоге. У нас получается следующая структура файлов (на "рисунке" показаны зависимости):
+Программу назовем ques\_exe\footnote{ques - от Quadratic Equation Solver; exe - executable; читается как [квэс].}. Это консольное приложение, которое запрашивает у пользователя коэффициенты уравнения $a$, $b$ и $c$. В результате выводит дискриминант. В случае не отрицательного дискриминанта выводятся корни. Программа работает только в области вещественных чисел. Также сделаем юнит-тесты.  Это программа ques\_ut. Для начала все файлы с исходным кодом разместим в одном каталоге. У нас получается следующая структура файлов (на "рисунке" показаны зависимости):
 
-\texttt{\setstretch{0}\verbatiminput{qes_01.txt}}
+\texttt{\setstretch{0}\verbatiminput{ques_01.txt}}
 
 Для начала расположим все файлы в одном каталоге. Далее представлены листинги.
 
-\lstinputlisting[caption={qes.h}]{projects/qes_01/qes.h}
-\lstinputlisting[caption={qes.c}]{projects/qes_01/qes.c}
-\lstinputlisting[caption={main.c}]{projects/qes_01/main.c}
-\lstinputlisting[caption={ut.h}]{projects/qes_01/ut.h}
-\lstinputlisting[caption={ut.h}]{projects/qes_01/ut.c}
-\lstinputlisting[caption={qes\_ut.c}]{projects/qes_01/qes_ut.c}
+\lstinputlisting[caption={ques.h}]{projects/ques_01/ques.h}
+\lstinputlisting[caption={ques.c}]{projects/ques_01/ques.c}
+\lstinputlisting[caption={main.c}]{projects/ques_01/main.c}
+\lstinputlisting[caption={ut.h}]{projects/ques_01/ut.h}
+\lstinputlisting[caption={ut.h}]{projects/ques_01/ut.c}
+\lstinputlisting[caption={ques\_ut.c}]{projects/ques_01/ques_ut.c}
 
 \textbf{Шаг 1. Сборка обычным bash скриптом}
 
 Артефакты сборки будут находится в одном каталоге с исходными файлами.
 
-\lstinputlisting[caption={build.sh}, language=sh]{projects/qes_01/build.sh}
+\lstinputlisting[caption={build.sh}, language=sh]{projects/ques_01/build.sh}
 
 Для очисти будем вызывать скрипт clean.sh:
 
-\lstinputlisting[caption={clean.sh}, language=sh]{projects/qes_01/clear.sh}
+\lstinputlisting[caption={clean.sh}, language=sh]{projects/ques_01/clear.sh}
 
 В общем схема рабочая. Что хотелось бы улучшить? Каждый раз при вызове скрипта build.sh происходит полная сборка проекта. В дальнейшем при изменении некоторых исходных файлов хотелось бы использовать уже существующие, скомпилированные объектные файлы. То есть компилировать только требуемые исходники и перекомпоновать проект (слинковать заново). С точки зрения производительности компиляция является более тяжеловесной чем линковка, особенно когда компиляция происходит с оптимизацией. Поэтому для ускорения итерации\footnote{здесь под итерацией понимается: изменение файла с исходным кодом, сборка проекта и его запуск} хочется осуществить такой подход.
 

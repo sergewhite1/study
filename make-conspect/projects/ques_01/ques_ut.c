@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "ut.h"
-#include "qes.h"
+#include "ques.h"
 
 #define CHECK_QES_SAME_VALUE(actual, expected)                \
   ut_increment_assert_count();                                \

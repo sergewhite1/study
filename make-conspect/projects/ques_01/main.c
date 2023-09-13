@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "qes.h"
+#include "ques.h"
 
 static int get_input_d(const char* str, double* p)
 {
