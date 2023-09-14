@@ -31,20 +31,20 @@ int main()
   get_input_d("b=", &b);
   get_input_d("c=", &c);
 
-  qes_d_state_t ds = qes_solve(a, b, c, &D, &x1, &x2);
+  ques_d_state_t ds = ques_solve(a, b, c, &D, &x1, &x2);
 
   switch(ds)
   {
-    case QES_DS_LESS_ZERO:
+    case QUES_DS_LESS_ZERO:
       printf("D=%lf < 0 - no roots in real domain.\n", D);
       break;
 
-    case QES_DS_ZERO:
+    case QUES_DS_ZERO:
       printf("D=0\n");
       printf("x1=x2=%lf\n", x1);
       break;
 
-    case QES_DS_GTR_ZERO:
+    case QUES_DS_GTR_ZERO:
       printf("D=%lf\n", D);
       printf("x1=%lf\n", x1);
       printf("x2=%lf\n", x2);

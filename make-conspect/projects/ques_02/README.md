@@ -12,3 +12,17 @@ $ ./clean.sh
 
 ===============================================================================
 
+Project: QUES_02
+Quadratic Equation Solver (Version: 02)
+
+Simple C project with make demo.
+To build project run:
+
+$ make
+$ /ques_exe
+
+To clean project run:
+$ ./clean.sh
+
+===============================================================================
+
