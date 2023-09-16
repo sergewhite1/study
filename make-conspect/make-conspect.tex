@@ -101,7 +101,7 @@ int main()
 Следующая команда позволяет получить выход препроцессора:
 
 \begin{lstlisting}[language=csh]
-gcc -E main.cpp > main.cpp.i
+$ gcc -E main.cpp > main.cpp.i
 \end{lstlisting}
 
 В результате получаем большой файл. Вот его последние строки:
@@ -123,13 +123,13 @@ int main()
 Компиляция исходного файла в объектный происходит следующей командой:
 
 \begin{lstlisting}[language=csh]
-gcc -c main.cpp
+$ gcc -c main.cpp
 \end{lstlisting}
 
 В результате получится файл main.o Имя выходного файлы можно задавать явно:
 
 \begin{lstlisting}[language=csh]
-gcc -c main.cpp -o main.o
+$ gcc -c main.cpp -o main.o
 \end{lstlisting}
 
 Для просмотра таблицы символов в объектом файле можно использовать утилиты \textbf{nm} или \textbf{readelf}:
@@ -228,6 +228,43 @@ std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_tr
 
 \textbf{Шаг 2. make - основы}
 
+Рассмотрим такую команду: \\
+
+\begin{lstlisting}[language=csh]
+$ make
+\end{lstlisting}
+
+Она ищет в текущем каталоге makefile c в такой последовательности: \textbf{GNUmakefile}, \textbf{makefile} и \textbf{Makefile}. В качестве имени makefile'а рекомендуется использовать Makefile потому что он будет выводится в начала каталога рядом с README. Так же можно запустить на исполнение makefile с произвольным именем:
+
+\begin{lstlisting}[language=csh]
+-f FILE, --file=FILE, --makefile=FILE
+\end{lstlisting}
+
+По сути в makefile'е закодирован граф целей и зависимостей. На подобии рисунка перед Листингом 1. \\
+Makefile состоит из правил (rules). \\
+\textbf{Правило (rule) - это три компонента: цель (target), зависимости (prerequisites), и команды (commands).}\\
+Причем зависимости являются необязательным компонентом. Если их нет, тогда команды для этой цели будут выполняться всегда. Вот как описывается цель в makefile:
+
+\begin{lstlisting}[language=make]
+<target>: [prerequisite_1] [prerequisite_2] ...
+	command_1
+	[command_2]
+	...
+\end{lstlisting}
+
+\textbf{Перед командой обязательно стоит символ табуляции!}
+
+Напишем так называемый "Hello, World!" на make:
+\lstinputlisting[caption={makefiles/hello\_world\_1}]{makefiles/hello_world_1}
+
+Результат выполнения следующий:
+
+\begin{lstlisting}[language=csh]
+$ make -f hello_world_1
+echo Hello, World!
+Hello, World!
+\end{lstlisting}
+
 \clearpage
 
 \textbf{Шпаргалка}
@@ -236,6 +273,8 @@ std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_tr
 \texttt{make -pn} > db.txt \\
 \texttt{-p} - print-data-base \\
 \texttt{-n} - just-print, dry-run, recon
+
+\texttt{\setstretch{0}\verbatiminput{target_types.txt}}
 
 \clearpage
 
@@ -352,6 +391,11 @@ $ x_2 = \dfrac{-b + \sqrt{D}}{2a} $ \\
 \textbf{Источники}
 
 EN
+
+\begin{lstlisting}[language=csh]
+$ make --help
+$ man make
+\end{lstlisting}
 
 1. \href{https://www.gnu.org/software/make/}{https://www.gnu.org/software/make/}  \\
 2. Robert Mecklenburg. Managing Projects with GNU Make
