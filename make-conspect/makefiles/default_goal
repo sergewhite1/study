@@ -1,0 +1,7 @@
+.DEFAULT_GOAL := help
+
+test:
+	@echo test
+
+help:
+	@echo help

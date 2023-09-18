@@ -265,6 +265,39 @@ echo Hello, World!
 Hello, World!
 \end{lstlisting}
 
+---------------------- \\
+
+\lstinputlisting[caption={makefiles/hello\_world\_2}]{makefiles/hello_world_2}
+
+Результат выполнения следующий:
+
+\begin{lstlisting}[language=csh]
+	$ make -f hello_world_2
+	Hello, World!
+\end{lstlisting}
+
+Здесь \textbf{test} - это имя цели.
+
+\textbf{Цель по умолчанию - это цель, которая будет выполнена если при запуске утилиты make цель явно не указана.} \\
+
+Алгоритм определение цели по умолчанию: \\
+
+\noindent 1) Если в makefile есть переменная \textbf{.DEFAULT\_GOAL}, то берется её значение; \\
+\noindent 2) Иначе это первая цель \\
+
+Вот пример:
+
+\lstinputlisting[caption={makefiles/default\_goal}]{makefiles/default\_goal}
+
+\begin{lstlisting}[language=csh]
+$ make -f default_goal
+help
+$ make -f default_goal help
+help
+$ make -f default_goal test
+test
+\end{lstlisting}
+
 \clearpage
 
 \textbf{Шпаргалка}
