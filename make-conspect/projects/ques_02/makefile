@@ -7,3 +7,5 @@ main.o: main.c ques.h
 ques.o: ques.c ques.h
 	gcc -c ques.c -o ques.o
 
+clean:
+	rm -fv ques_exe *.o

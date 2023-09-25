@@ -298,6 +298,47 @@ $ make -f default_goal test
 test
 \end{lstlisting}
 
+Вернёмся к проекту ques. Сделаем вторую версию, но уже с простейшим makefile'ом
+
+\lstinputlisting[caption={projects/ques\_02/makefile}]{projects/ques_02/makefile}
+
+И поэкспериментируем:
+
+\begin{lstlisting}[language=csh]
+$ cd projects/ques_02/
+$ make
+gcc -c main.c -o main.o
+gcc -c ques.c -o ques.o
+gcc main.o ques.o -lm -o ques_exe
+$ # Вызываем 'make' ещё раз
+$ make
+make: 'ques_exe' is up to date.
+$ # Как видим ничего не произошло
+$ # Обновим время для файла main.c
+$ touch main.c
+$ make
+gcc -c main.c -o main.o
+gcc main.o ques.o -lm -o ques_exe
+$ # Как видими перекомпилировался только файл main.c
+$ # И программа ques_exe была перекомпанова уже со свежим файлом main.o
+$ # Теперь обновим время для файла ques.h
+$ touch ques.h
+$ make
+gcc -c main.c -o main.o
+gcc -c ques.c -o ques.o
+gcc main.o ques.o -lm -o ques_exe
+$ # Как видим в данном случае был пересобран полностью проект
+$ # И наконец почистим папку с проектом
+$ make clean
+rm -fv ques_exe *.o
+removed 'ques_exe'
+removed 'main.o'
+removed 'ques.o'
+$ make clean
+rm -fv ques_exe *.o
+$
+\end{lstlisting}
+
 \clearpage
 
 \textbf{Шпаргалка}
@@ -440,6 +481,11 @@ RU
 \href{http://linux.yaroslavl.ru/docs/prog/gnu_make_3-79_russian_manual.html}{http://linux.yaroslavl.ru/docs/prog/gnu\_make\_3-79\_russian\_manual.html}
 
 \clearpage
+
+\textbf{TODO:}
+
+\noindent 1. О библиотеках в C/C++ \\
+\noindent 2. Многопоточность в make (make -j ) \\
 
 Далее идут черновики по latex'у :)
 
