@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+  [
+    auto,
+    block/.style = { 
+                     align      = flush center,
+                     draw       = blue,
+                     fill       = blue!20,
+                     rectangle,
+                     inner sep  = 1pt,
+                     text width = 4.5em,
+                     thick
+    },
+    line/.style  = {
+                     -latex',
+                     draw,
+                     thick,
+                     shorten >= 2pt
+                   }
+  ]
+
+  \matrix[column sep=5mm, row sep=7mm]
+  {
+      % row 1
+      \node [block] (expert) {expert};           &
+      \node [block] (init)   {initialize model}; &
+      \node [block] (system) {system};           \\
+  };
+
+  \begin{scope} [every path/.style=line]
+      \path (expert) -- (init);
+  \end{scope}
+
+\end{tikzpicture}

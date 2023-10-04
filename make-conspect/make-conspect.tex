@@ -535,55 +535,10 @@ We are working on
 
 Простая блок-схема
 
-% попытаться сделать сортировку в алфавитном порядке
-
-\begin{tikzpicture}
-  [
-    auto,
-    block/.style = {rectangle, draw=blue, thick, fill=blue!20, text width = 4.5em,
-                    align = flush center, inner sep = 1pt},
-    line/.style  = {draw, thick, -latex', shorten >= 2pt}
-  ]
-
-  \matrix[column sep=5mm, row sep=7mm]
-  {
-    % row 1
-    \node [block] (expert) {expert}; &
-    \node [block] (init)   {initialize model}; &
-    \node [block] (system) {system}; \\
-  };
-
-  \begin{scope} [every path/.style=line]
-    \path (expert) -- (init);
-  \end{scope}
-
-\end{tikzpicture}
+\input{experiment_flowchart.tex}
 
 Блок-схема №2
 
-\begin{tikzpicture}
-  [
-    auto,
-    block/.style = {rectangle, draw=blue, thick, fill=blue!20,
-                    text width = 4.5em, align = flush center, inner sep = 1pt},
-    cloud/.style = {ellipse, draw=blue, thick, fill=blue!20,
-                    minimum height = 2em},
-    line/.style  = {draw, thick, -latex', shorten >= 2pt}
-  ]
-
-  \matrix[column sep=5mm, row sep=7mm]
-  {
-    % row 1
-    \node [cloud] (begin) {begin}; \\
-
-    % row 2
-    \node [block] (input_1) {input a, b, c}; \\
-  };
-
-  \begin{scope} [every path/.style=line]
-
-  \end{scope}
-
-\end{tikzpicture}
+\input{experiment_flowchart2.tex}
 
 \end{document}}

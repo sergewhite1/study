@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+  [
+    auto,
+    block/.style = {
+                     rectangle,
+                     draw=blue,
+                     thick,
+                     fill=blue!20,
+                     text width = 4.5em,
+                     align = flush center,
+                     inner sep = 1pt
+                   },
+    cloud/.style = {
+                     ellipse,
+                     draw=blue,
+                     thick,
+                     fill=blue!20,
+                     minimum height = 2em
+                   },
+    line/.style  = {
+                     -latex',
+                     draw,
+                     thick,
+                     shorten >= 2pt
+                   }
+  ]
+
+  \matrix[column sep=5mm, row sep=7mm]
+  {
+    % row 1
+    \node [cloud] (begin) {begin};               \\
+
+    % row 2
+    \node [block] (input_1) {input a, b, c};     \\
+
+    %row 3
+    \node [block] (b1) {DDD};                    \\
+  };
+
+  \begin{scope} [every path/.style=line]
+
+  \end{scope}
+
+\end{tikzpicture}
