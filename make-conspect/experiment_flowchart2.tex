@@ -1,28 +1,33 @@
 \begin{tikzpicture}
   [
     auto,
-    block/.style = {
-                     rectangle,
-                     draw=blue,
-                     thick,
-                     fill=blue!20,
-                     text width = 4.5em,
-                     align = flush center,
-                     inner sep = 1pt
-                   },
-    cloud/.style = {
-                     ellipse,
-                     draw=blue,
-                     thick,
-                     fill=blue!20,
-                     minimum height = 2em
-                   },
-    line/.style  = {
-                     -latex',
-                     draw,
-                     thick,
-                     shorten >= 2pt
-                   }
+    block/.style    = {
+                        align      = flush center,
+                        draw       = blue,
+                        fill       = blue!20,
+                        inner sep  = 1pt,
+                        rectangle,
+                        text width = 14em,
+                        thick
+                      },
+    cloud/.style    = {
+                        draw = blue,
+                        ellipse,
+                        fill = blue!20,
+                        minimum height = 2em,
+                        thick
+                      },
+    decision/.style = {
+                        diamond,
+                        draw = blue,
+                        thick
+                      },
+    line/.style     = {
+                        -latex',
+                        draw,
+                        shorten >= 2pt,
+                        thick
+                      }
   ]
 
   \matrix[column sep=5mm, row sep=7mm]
@@ -34,11 +39,27 @@
     \node [block] (input_1) {input a, b, c};     \\
 
     %row 3
-    \node [block] (b1) {DDD};                    \\
+    \node [block] (b1) {D := b * b - 4 * a *c};  \\
+
+    % row 4
+    \node [decision] (d1) {D <= 0};              \\
+
+    % row 5
+    \node [block] (b2) {x\_1 := (-b - sqrt(D)) / (2*a) \\ x\_2 := -b + sqrt(D)) / (2*a)}; &
+    \node [block] (no_root) {no root};           \\
+
+    % row 6
+    \node [cloud] (end) {end};                   \\
   };
 
   \begin{scope} [every path/.style=line]
-
+      \path (begin)   -- (input_1);
+      \path (input_1) -- (b1);
+      \path (b1)      -- (d1);
+      \path (d1)      -- node [near start] {true} (b2);
+      \path (d1)      -| node [near start] {false} (no_root);
+      \path (b2)      -- (end);
+      \path (no_root) |- (end);
   \end{scope}
 
 \end{tikzpicture}
