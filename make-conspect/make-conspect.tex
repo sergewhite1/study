@@ -280,7 +280,7 @@ Hello, World!
 
 \textbf{Цель по умолчанию - это цель, которая будет выполнена если при запуске утилиты make цель явно не указана.} \\
 
-Алгоритм определение цели по умолчанию: \\
+Алгоритм определения цели по умолчанию: \\
 
 \noindent 1) Если в makefile есть переменная \textbf{.DEFAULT\_GOAL}, то берется её значение; \\
 \noindent 2) Иначе это первая цель \\
@@ -343,7 +343,39 @@ $
 
 \texttt{\setstretch{0}\verbatiminput{hierarchy_ques_02.txt}}
 
-При работе с любой системой команды можно разделить на два класса: \textbf{команды просмотра} и \textbf{команды выполнения}.
+При работе с любой системой команды можно разделить на два класса: \textbf{команды просмотра} и \textbf{команды выполнения}. Например:
+
+{\ttfamily
+\begin{tabular}{|l|l|l|l|}
+  \hline
+  \textbf{Класс команды} & \textbf{Linux Shell} & \textbf{git} & \textbf{docker} \\
+  \hline
+  Просмотр  & pwd   & git status  & docker ps                \\
+            & ls    & git log     & docker container ls      \\
+            & cd    &             & docker image ls          \\
+            & cat   &             & docker container logs    \\
+            & less  &             & docker container inspect \\
+  \hline
+  Выполнение & mkdir & git fetch   & docker container exec   \\
+             & rm    & git pull    &                         \\
+             &       & git add     &                         \\
+             &       & git commit  &                         \\
+             &       & git push    &                         \\
+  \hline
+\end{tabular}
+} % ttfamily
+
+\vspace{20pt}
+
+Для make основной командой просмотра пожалуй является
+
+\begin{lstlisting}[language=csh]
+make -pn > db.txt
+\end{lstlisting}
+
+Её следует выполнять в чистой проектной папке. Т.е. в такой проектной папке, которая не содержит артефактов сборки. \\
+\texttt{-p} - print-data-base \\
+\texttt{-n} - just-print, dry-run, recon (т.е. только напечатать какие команды будут выполнены, а сами команды не выполнять) \\
 
 \clearpage
 
