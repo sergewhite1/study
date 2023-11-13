@@ -216,7 +216,7 @@ std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_tr
 
 \textbf{Шаг 1. Сборка обычным bash скриптом}
 
-Артефакты сборки будут находится в одном каталоге с исходными файлами.
+Артефакты сборки будут находиться в одном каталоге с исходными файлами.
 
 \lstinputlisting[caption={build.sh}, language=sh]{projects/ques_01/build.sh}
 
@@ -234,7 +234,7 @@ std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_tr
 $ make
 \end{lstlisting}
 
-Она ищет в текущем каталоге makefile c в такой последовательности: \textbf{GNUmakefile}, \textbf{makefile} и \textbf{Makefile}. В качестве имени makefile'а рекомендуется использовать Makefile потому что он будет выводится в начала каталога рядом с README. Так же можно запустить на исполнение makefile с произвольным именем:
+Она ищет в текущем каталоге makefile в такой последовательности: \textbf{GNUmakefile}, \textbf{makefile} и \textbf{Makefile}. В качестве имени makefile'а рекомендуется использовать Makefile потому что он будет выводится в начала каталога рядом с README. Так же можно запустить на исполнение makefile с произвольным именем:
 
 \begin{lstlisting}[language=csh]
 -f FILE, --file=FILE, --makefile=FILE
@@ -342,6 +342,8 @@ $
 Мы можем заметить иерархическую структуру. Еще с рисунка перед листингом 1. Просто повернем тот рисунок на 90 градусов против часов стрелки. Применительно к данному мейкфайлу получается следующая иерархия:
 
 \texttt{\setstretch{0}\verbatiminput{hierarchy_ques_02.txt}}
+
+При работе с любой системой команды можно разделить на два класса: \textbf{команды просмотра} и \textbf{команды выполнения}.
 
 \clearpage
 
