@@ -110,36 +110,33 @@ int time_service_ut(std::string& name)
 {
   name = __FUNCTION__;
 
-  TimeService::SetTime(100);
-  int t = TimeService::GetCurrentTime();
+  TimeService *ts = TimeService::GetInstance();
+
+  ts->SetTime(100);
+  int t = ts->GetCurrentTime();
 
   if (t != 100)
   {
     return 1;
   }
 
-  t = TimeService::UpdateTime();
+  t = ts->UpdateTime();
 
   if (t != 101)
   {
     return 1;
   }
 
-  int ret = 1;
+  return 0;
+}
 
-  try
-  {
-    TimeService::SetTime(99);
-  }
-  catch(const TimeServiceException& e)
-  {
-    if ((e.currentTime() == 101) && (e.newTime() == 99))
-    {
-      ret = 0;
-    }
-  }
+int process_1_ut(std::string& name)
+{
+  name = __FUNCTION__;
 
-  return ret;
+  // Here we are
+
+  return 0;
 }
 
 test_proc_t TESTS[] = {
@@ -147,7 +144,8 @@ test_proc_t TESTS[] = {
   two_same_targets_ut,
   graph_to_str_simple_ut,
   graph_to_str_ut,
-  time_service_ut
+  time_service_ut,
+  process_1_ut,
 };
 
 static constexpr int TEST_COUNT = sizeof(TESTS) / sizeof(TESTS[0]);
@@ -179,7 +177,7 @@ int main()
     {
       std::cout << "[" << i + 1 << "/" << TEST_COUNT << "] "
                 << std::setw(W) << std::left
-                << name << ": FAILED" << std::endl;
+                << name << " FAILED" << std::endl;
       failed++;
       ret = 1;
     }

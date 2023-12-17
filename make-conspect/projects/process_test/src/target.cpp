@@ -65,7 +65,7 @@ void Target::process()
       if (!is_phony())
       {
         exists_ = true;
-        ttime_  = TimeService::UpdateTime();
+        ttime_  = TimeService::GetInstance()->UpdateTime();
       }
     }
     else

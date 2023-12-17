@@ -1,13 +1,13 @@
 #include "interface/time_service.h"
 
-int TimeService::CURRENT_TIME = 0;
+TimeService* TimeService::instance_ = nullptr;
 
-void TimeService::SetTime(int value)
+TimeService* TimeService::GetInstance()
 {
-  if (!(TimeService::GetCurrentTime() < value))
+  if (instance_ == nullptr)
   {
-    throw TimeServiceException(TimeService::GetCurrentTime(), value);
+    instance_ = new TimeService();
   }
 
-  TimeService::CURRENT_TIME = value;
+  return instance_;
 }
