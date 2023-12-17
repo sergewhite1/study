@@ -154,6 +154,8 @@ static constexpr int TEST_COUNT = sizeof(TESTS) / sizeof(TESTS[0]);
 
 int main()
 {
+  constexpr int W = 30;
+
   int count  = 0;
   int passed = 0;
   int failed = 0;
@@ -169,12 +171,15 @@ int main()
     if (err_code == 0)
     {
       std::cout << "[" << i + 1 << "/" << TEST_COUNT << "] "
-                << std::setw(30) << name << " PASSED" << std::endl;
+                << std::setw(W) << std::left
+                << name << " PASSED" << std::endl;
       passed++;
     }
     else
     {
-      std::cout << "[" << i + 1 << "/" << TEST_COUNT << "] " << name << ": FAILED" << std::endl;
+      std::cout << "[" << i + 1 << "/" << TEST_COUNT << "] "
+                << std::setw(W) << std::left
+                << name << ": FAILED" << std::endl;
       failed++;
       ret = 1;
     }
