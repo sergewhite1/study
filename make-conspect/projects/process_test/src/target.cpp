@@ -3,8 +3,10 @@
 
 std::set<std::string> Target::NAMES;
 
-Target::Target(bool is_phony)
-  : is_phony_(is_phony)
+Target::Target(bool is_phony,
+               std::ostream* stream)
+  : isPhony_(is_phony),
+    stream_(stream)
 {}
 
 Target::~Target()
@@ -15,7 +17,7 @@ Target::~Target()
   }
 }
 
-void Target::set_name(const std::string name)
+void Target::SetName(const std::string name)
 {
   if (Target::NAMES.find(name) != Target::NAMES.end())
   {
@@ -26,32 +28,32 @@ void Target::set_name(const std::string name)
   name_ = name;
 }
 
-void Target::add_prerequisite(Target* target)
+void Target::AddPrerequisite(Target* target)
 {
   prerequisites_.push_back(target);
 }
 
-void Target::process()
+void Target::Process()
 {
   bool need_build = true;
 
-  if (!is_phony() && exists())
+  if (!IsPhony() && Exists())
   {
     need_build = false;
   }
 
   for (auto* prereq : prerequisites_)
   {
-    prereq->process();
+    prereq->Process();
 
-    if (prereq->is_phony())
+    if (prereq->IsPhony())
     {
       need_build = true;
     }
-    else if (!is_phony())
+    else if (!IsPhony())
     {
       // Here we are
-      if (!(ttime() > prereq->ttime()))
+      if (!(Ttime() > prereq->Ttime()))
       {
         need_build = true;
       }
@@ -60,9 +62,9 @@ void Target::process()
 
   if (need_build)
   {
-    if (run_commands())
+    if (RunCommands())
     {
-      if (!is_phony())
+      if (!IsPhony())
       {
         exists_ = true;
         ttime_  = TimeService::GetInstance()->UpdateTime();
@@ -70,14 +72,21 @@ void Target::process()
     }
     else
     {
-      std::cout << "Error in target: " << name() << std::endl;
-      std::cout << "Stop processing";
-      throw TargetStopProcessing(name());
+      if (stream_)
+      {
+        *stream_ << "Error in target: " << Name() << std::endl;
+        *stream_ << "Stop processing";
+      }
+
+      throw TargetStopProcessing(Name());
     }
   }
   else
   {
-    std::cout << "Target " << name() << " is up to date." << std::endl;
+    if (stream_)
+    {
+      *stream_ << "Target " << Name() << " is up to date." << std::endl;
+    }
   }
 }
 
@@ -100,18 +109,34 @@ void Target::process()
  * See in Unit Test
 */
 
-std::string Target::graph_to_str() const
+std::string Target::GraphToStr() const
 {
   std::stringstream ss;
-  graph_to_str(ss);
+  GraphToStr(ss);
   return ss.str();
 }
 
-void Target::graph_to_str(std::stringstream& ss) const
+void Target::GraphToStr(std::stringstream& ss) const
 {
   for (const auto * prereq : prerequisites_)
   {
-    prereq->graph_to_str(ss);
-    ss << name() << " -> " << prereq->name() << std::endl;
+    prereq->GraphToStr(ss);
+    ss << Name() << " -> " << prereq->Name() << std::endl;
   }
+}
+
+bool Target::RunCommands()
+{
+  if (stream_)
+  {
+    *stream_ << "Make target: " << Name() << std::endl;
+  }
+
+  return true;
+}
+
+int Target::Touch()
+{
+  ttime_ = TimeService::GetInstance()->UpdateTime();
+  return ttime_;
 }

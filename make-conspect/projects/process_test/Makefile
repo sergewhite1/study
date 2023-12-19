@@ -18,6 +18,10 @@ out/src/main.o: src/main.cpp             \
                 interface/time_service.h
 	g++ $(ARGS) -o $@ $<
 
+out/src/null_stream.o: src/null_stream.cpp \
+                       interface/null_stream.h
+	g++ $(ARGS) -o $@ $<
+
 out/src/target.o: src/target.cpp     \
                   interface/target.h \
 				  interface/time_service.h
@@ -27,8 +31,9 @@ out/src/time_service.o: src/time_service.cpp \
                         interface/time_service.h
 	g++ $(ARGS) -o $@ $<
 
-out/ut: out/ut.o         \
-        out/src/target.o \
+out/ut: out/ut.o              \
+        out/src/null_stream.o \
+        out/src/target.o      \
 		out/src/time_service.o
 	g++ -o $@ $^
 	$@

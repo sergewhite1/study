@@ -5,6 +5,7 @@ class TimeService
 {
   public:
     static TimeService* GetInstance();
+    static void Release();
 
     int  GetCurrentTime() { return currentTime_; }
     int UpdateTime() { return ++currentTime_; }

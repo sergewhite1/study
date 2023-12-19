@@ -2,17 +2,25 @@
 #include <iomanip>
 #include <iostream>
 
+#include "interface/null_stream.h"
 #include "interface/target.h"
 #include "interface/time_service.h"
 
 typedef int (*test_proc_t)(std::string& name);
 
+static Target CreateTarget(const char* name)
+{
+  Target ret(false, nullptr);
+  ret.SetName(name);
+  return ret;
+}
+
 int two_diff_targets_ut(std::string& name)
 {
   name = __FUNCTION__;
 
-  Target tA(false); tA.set_name("A");
-  Target tB(false); tB.set_name("B");
+  Target tA = CreateTarget("A");
+  Target tB = CreateTarget("B");
 
   return 0;
 }
@@ -24,8 +32,8 @@ int two_same_targets_ut(std::string& name)
 
   try
   {
-    Target tA(false); tA.set_name("A");
-    Target tB(false); tB.set_name("A");
+    Target tA(false); tA.SetName("A");
+    Target tB(false); tB.SetName("A");
   }
   catch(const BadTargetName& e)
   {
@@ -44,16 +52,16 @@ int graph_to_str_simple_ut(std::string& name)
 
   int ret = 1;
 
-  Target tA(false); tA.set_name("A");
-  Target tB(false); tB.set_name("B");
+  Target tA = CreateTarget("A");
+  Target tB = CreateTarget("B");
 
-  tA.add_prerequisite(&tB);
+  tA.AddPrerequisite(&tB);
 
   std::stringstream ss;
   ss << "A -> B" << std::endl;
 
   std::string expected = ss.str();
-  std::string actual = tA.graph_to_str();
+  std::string actual = tA.GraphToStr();
 
   if (actual == expected)
   {
@@ -69,22 +77,22 @@ int graph_to_str_ut(std::string& name)
 
   int ret = 1;
 
-  Target tA(false); tA.set_name("A");
-  Target tB(false); tB.set_name("B");
-  Target tC(false); tC.set_name("C");
-  Target tD(false); tD.set_name("D");
-  Target tF(false); tF.set_name("F");
-  Target tX(false); tX.set_name("X");
-  Target tY(false); tY.set_name("Y");
-  Target tG(false); tG.set_name("G");
+  Target tA = CreateTarget("A");
+  Target tB = CreateTarget("B");
+  Target tC = CreateTarget("C");
+  Target tD = CreateTarget("D");
+  Target tF = CreateTarget("F");
+  Target tX = CreateTarget("X");
+  Target tY = CreateTarget("Y");
+  Target tG = CreateTarget("G");
 
-  tA.add_prerequisite(&tB);
-  tB.add_prerequisite(&tC);
-  tC.add_prerequisite(&tD);
-  tB.add_prerequisite(&tF);
-  tF.add_prerequisite(&tX);
-  tF.add_prerequisite(&tY);
-  tB.add_prerequisite(&tG);
+  tA.AddPrerequisite(&tB);
+  tB.AddPrerequisite(&tC);
+  tC.AddPrerequisite(&tD);
+  tB.AddPrerequisite(&tF);
+  tF.AddPrerequisite(&tX);
+  tF.AddPrerequisite(&tY);
+  tB.AddPrerequisite(&tG);
 
   std::stringstream ss;
   ss << "C -> D" << std::endl;
@@ -96,7 +104,7 @@ int graph_to_str_ut(std::string& name)
   ss << "A -> B" << std::endl;
 
   std::string expected = ss.str();
-  std::string actual = tA.graph_to_str();
+  std::string actual = tA.GraphToStr();
 
   if (actual == expected)
   {
@@ -134,7 +142,17 @@ int process_1_ut(std::string& name)
 {
   name = __FUNCTION__;
 
-  // Here we are
+  TimeService* ts = TimeService::GetInstance();
+  ts->SetTime(0);
+
+  Target tA = CreateTarget("A");
+  Target tB = CreateTarget("B");
+
+  tA.AddPrerequisite(&tB);
+
+  tA.Process();
+  tB.Touch();
+  tA.Process();
 
   return 0;
 }
@@ -195,6 +213,8 @@ int main()
   {
     std::cout << "FAILED" << std::endl;
   }
+
+  TimeService::Release();
 
   return ret;
 }

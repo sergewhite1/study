@@ -19,24 +19,26 @@ int main(int argc, char* argv[])
     std::cout << "argv[" << i << "]=" << argv[i] << std::endl;
   }
 
-  Target tA(false); tA.set_name("A");
-  Target tB(false); tB.set_name("B");
-  Target tC(false); tC.set_name("C");
-  Target tD(true); tD.set_name("D");
-  Target tE(false); tE.set_name("E");
+  Target tA(false); tA.SetName("A");
+  Target tB(false); tB.SetName("B");
+  Target tC(false); tC.SetName("C");
+  Target tD(true); tD.SetName("D");
+  Target tE(false); tE.SetName("E");
 
-  tA.add_prerequisite(&tB);
-  tB.add_prerequisite(&tC);
-  tC.add_prerequisite(&tD);
-  tD.add_prerequisite(&tE);
+  tA.AddPrerequisite(&tB);
+  tB.AddPrerequisite(&tC);
+  tC.AddPrerequisite(&tD);
+  tD.AddPrerequisite(&tE);
 
-  std::cout << tA.graph_to_str() << std::endl;
+  std::cout << tA.GraphToStr() << std::endl;
 
-  tA.process();
+  tA.Process();
 
   std::cout << "Process again..." << std::endl;
 
-  tA.process();
+  tA.Process();
+
+  TimeService::Release();
 
   return 0;
 }

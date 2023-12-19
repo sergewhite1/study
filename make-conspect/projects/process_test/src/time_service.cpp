@@ -11,3 +11,9 @@ TimeService* TimeService::GetInstance()
 
   return instance_;
 }
+
+void TimeService::Release()
+{
+  delete instance_;
+  instance_ = nullptr;
+}

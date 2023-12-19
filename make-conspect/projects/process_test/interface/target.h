@@ -59,34 +59,37 @@ class TargetStopProcessing : public std::runtime_error
 class Target
 {
   public:
-    Target(bool is_phony);
+    Target(bool is_phony,
+           std::ostream* stream = &std::cout);
     ~Target();
 
-    std::string name() const { return name_; }
-    void set_name(const std::string name);
+    std::string Name() const { return name_; }
+    void SetName(const std::string name);
+    void SetStream(std::ostream* stream) { stream_ = stream; }
 
-    void add_prerequisite(Target* target);
-    void process();
+    void AddPrerequisite(Target* target);
+    void Process();
 
-    std::string graph_to_str() const;
-    bool is_phony() const { return is_phony_; }
+    std::string GraphToStr() const;
+    bool IsPhony() const { return isPhony_; }
 
-    bool exists() const { return exists_; }
-    int ttime() const { return ttime_; }
-    bool run_commands()
-    {
-      std::cout << "Make target: " << name() << std::endl;
-      return true;
-    }
+    bool Exists() const { return exists_; }
+    int Ttime() const { return ttime_; }
+
+    bool RunCommands();
+    int Touch();
 
   private:
     static std::set<std::string> NAMES;
 
     std::string name_;
     std::vector<Target*> prerequisites_;
-    bool is_phony_ = false;
+
+    bool isPhony_  = false;
     bool exists_   = false;
     int ttime_     = 0;
 
-    void graph_to_str(std::stringstream& ss) const;
+    std::ostream* stream_;
+
+    void GraphToStr(std::stringstream& ss) const;
 };
