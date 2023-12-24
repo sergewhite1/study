@@ -50,10 +50,14 @@ void Target::Process()
     {
       need_build = true;
     }
-    else if (!IsPhony())
+    else
     {
       // Here we are
-      if (!(Ttime() > prereq->Ttime()))
+      if (!Exists())
+      {
+        need_build = true;
+      }
+      else if (!(Ttime() > prereq->Ttime()))
       {
         need_build = true;
       }
@@ -62,15 +66,7 @@ void Target::Process()
 
   if (need_build)
   {
-    if (RunCommands())
-    {
-      if (!IsPhony())
-      {
-        exists_ = true;
-        ttime_  = TimeService::GetInstance()->UpdateTime();
-      }
-    }
-    else
+    if (!RunCommands())
     {
       if (stream_)
       {
@@ -78,7 +74,7 @@ void Target::Process()
         *stream_ << "Stop processing";
       }
 
-      throw TargetStopProcessing(Name());
+      throw TargetStopProcessing(Name().c_str());
     }
   }
   else
@@ -116,6 +112,16 @@ std::string Target::GraphToStr() const
   return ss.str();
 }
 
+int Target::Ttime() const
+{
+  if (Exists() || IsPhony())
+  {
+    return ttime_;
+  }
+
+  throw TimeTargetException(Name().c_str());
+}
+
 void Target::GraphToStr(std::stringstream& ss) const
 {
   for (const auto * prereq : prerequisites_)
@@ -132,11 +138,24 @@ bool Target::RunCommands()
     *stream_ << "Make target: " << Name() << std::endl;
   }
 
+  if (runCommandsCallBack_)
+  {
+    runCommandsCallBack_();
+  }
+
+  if (!IsPhony())
+  {
+    exists_ = true;
+    ttime_  = TimeService::GetInstance()->UpdateTime();
+  }
+
   return true;
 }
 
 int Target::Touch()
 {
-  ttime_ = TimeService::GetInstance()->UpdateTime();
+  exists_ = true;
+  ttime_  = TimeService::GetInstance()->UpdateTime();
+
   return ttime_;
 }

@@ -8,9 +8,16 @@
 
 typedef int (*test_proc_t)(std::string& name);
 
-static Target CreateTarget(const char* name)
+static Target CreatePhTarget(const char* name)
 {
   Target ret(false, nullptr);
+  ret.SetName(name);
+  return ret;
+}
+
+static Target CreateNPhTarget(const char* name)
+{
+  Target ret(true, nullptr);
   ret.SetName(name);
   return ret;
 }
@@ -19,8 +26,8 @@ int two_diff_targets_ut(std::string& name)
 {
   name = __FUNCTION__;
 
-  Target tA = CreateTarget("A");
-  Target tB = CreateTarget("B");
+  Target tA = CreatePhTarget("A");
+  Target tB = CreatePhTarget("B");
 
   return 0;
 }
@@ -37,7 +44,7 @@ int two_same_targets_ut(std::string& name)
   }
   catch(const BadTargetName& e)
   {
-    if (std::strcmp(e.name(), "A") == 0)
+    if (std::strcmp(e.TargetName().c_str(), "A") == 0)
     {
       ret = 0;
     }
@@ -52,8 +59,8 @@ int graph_to_str_simple_ut(std::string& name)
 
   int ret = 1;
 
-  Target tA = CreateTarget("A");
-  Target tB = CreateTarget("B");
+  Target tA = CreatePhTarget("A");
+  Target tB = CreatePhTarget("B");
 
   tA.AddPrerequisite(&tB);
 
@@ -77,14 +84,14 @@ int graph_to_str_ut(std::string& name)
 
   int ret = 1;
 
-  Target tA = CreateTarget("A");
-  Target tB = CreateTarget("B");
-  Target tC = CreateTarget("C");
-  Target tD = CreateTarget("D");
-  Target tF = CreateTarget("F");
-  Target tX = CreateTarget("X");
-  Target tY = CreateTarget("Y");
-  Target tG = CreateTarget("G");
+  Target tA = CreatePhTarget("A");
+  Target tB = CreatePhTarget("B");
+  Target tC = CreatePhTarget("C");
+  Target tD = CreatePhTarget("D");
+  Target tF = CreatePhTarget("F");
+  Target tX = CreatePhTarget("X");
+  Target tY = CreatePhTarget("Y");
+  Target tG = CreatePhTarget("G");
 
   tA.AddPrerequisite(&tB);
   tB.AddPrerequisite(&tC);
@@ -138,6 +145,69 @@ int time_service_ut(std::string& name)
   return 0;
 }
 
+int nph_npf_nnf_from_nph_ut(std::string& name)
+{
+  // case 00
+  name =  __FUNCTION__;
+
+  // RunCommands Flags
+  bool tA_RC = false;
+  bool tB_RC = false;
+
+  // Callbacks
+  auto tA_RC_CB = [&tA_RC] () { tA_RC = true; };
+  auto tB_RC_CB = [&tB_RC] () { tB_RC = true; };
+
+  Target tA = CreateNPhTarget("A");
+  tA.SetRunCommandsCallBack(tA_RC_CB);
+
+  Target tB = CreateNPhTarget("B");
+  tB.SetRunCommandsCallBack(tB_RC_CB);
+
+  tA.AddPrerequisite(&tB);
+
+  tA.Process();
+
+  if (tB_RC == false)
+  {
+    return 1;
+  }
+
+  if (tB.Exists())
+  {
+    return 1;
+  }
+
+  if (tB.Ttime() != Target::INVALID_TIME)
+  {
+    return 1;
+  }
+
+  if (tA_RC == false)
+  {
+    return 1;
+  }
+
+  // process again
+
+  tA_RC = false;
+  tB_RC = false;
+
+  tA.Process();
+
+  if (tB_RC == false)
+  {
+    return 1;
+  }
+
+  if (tA_RC == false)
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
 int process_1_ut(std::string& name)
 {
   name = __FUNCTION__;
@@ -145,17 +215,47 @@ int process_1_ut(std::string& name)
   TimeService* ts = TimeService::GetInstance();
   ts->SetTime(0);
 
-  Target tA = CreateTarget("A");
-  Target tB = CreateTarget("B");
+  Target tA = CreatePhTarget("A");
+  Target tB = CreatePhTarget("B");
 
   tA.AddPrerequisite(&tB);
 
-  tA.Process();
   tB.Touch();
   tA.Process();
+  //std::cout << "tB.Exists()=" << tB.Exists() << std::endl;
+  //std::cout << "tB.Ttime()="  << tB.Ttime()  << std::endl;
+  //std::cout << "tA.Exists()=" << tA.Exists() << std::endl;
 
+  //tA.Process();
   return 0;
 }
+
+/* Take a look at sumple graph A -> B
+ * prod. file - produce file as result of RunCommands
+ * n.    file - need file in RunCommands
+ *-------------------------------------|----------|------------------------|
+ *    | Target A                       | Target B |                        |
+ *    |--------------------------------|----------|------------------------|
+ * No.|is_phony | prod. file | n. file | is_phony | comment (ut name)      |
+ * ---|---------|------------|---------|----------|------------------------|
+ * 00 |   false |      false |   false |    false | nph_npf_nnf_from_nph   |
+ * 01 |   false |      false |   false |     true | nph_npf_nnf_from_ph    |
+ * 02 |   false |      false |    true |    false | nph_npf_nf_from_nph    |
+ * 03 |   false |      false |    true |     true | nph_npf_nf_from_ph     |
+ * 04 |   false |       true |   false |    false | nph_pf_nnf_from_nph    |
+ * 05 |   false |       true |   false |     true | nph_pf_nnf_from_ph     |
+ * 06 |   false |       true |    true |    false | nph_pf_nf_from_nph     |
+ * 07 |   false |       true |    true |     true | already tested in 03   |
+ * 08 |    true |      false |   false |    false | ph_npf_nnf_form_nph    |
+ * 09 |    true |      false |   false |     true | ph_npf_nnf_from_ph     |
+ * 10 |    true |      false |    true |    false | ph_npf_nf_from_ph      |
+ * 11 |    true |      false |    true |     true | already tested in 03   |
+ * 12 |    true |       true |   false |    false | ph_pf_nnf_from_nph     |
+ * 13 |    true |       true |   false |     true | ph_pf_nnf_from_ph      |
+ * 14 |    true |       true |    true |    false | ph_pf_nf_from_nph      |
+ * 15 |    true |       true |    true |     true | already tested in 03   |
+ * ---|---------|------------|---------|----------|------------------------|
+*/
 
 test_proc_t TESTS[] = {
   two_diff_targets_ut,
@@ -163,6 +263,7 @@ test_proc_t TESTS[] = {
   graph_to_str_simple_ut,
   graph_to_str_ut,
   time_service_ut,
+  nph_npf_nnf_from_nph_ut, // case 00
   process_1_ut,
 };
 
