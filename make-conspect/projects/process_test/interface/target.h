@@ -87,10 +87,13 @@ class Target
     }
 
     void AddPrerequisite(Target* target);
+    void AddNeedFile(const Target* target);
     void Process();
 
     std::string GraphToStr() const;
     bool IsPhony() const { return isPhony_; }
+    bool NeedProduceFile() const { return needProduceFile_; }
+    void SetNeedProduceFile(bool value) { needProduceFile_ = value; }
 
     bool Exists() const { return exists_; }
     int Ttime() const;
@@ -102,11 +105,13 @@ class Target
     static std::set<std::string> NAMES;
 
     std::string name_;
-    std::vector<Target*> prerequisites_;
+    std::vector<Target*>    prerequisites_;
+    std::set<const Target*> needFiles_;
 
-    bool isPhony_  = false;
-    bool exists_   = false;
-    int ttime_     = Target::INVALID_TIME;
+    bool isPhony_         = false;
+    bool exists_          = false;
+    bool needProduceFile_ = false;
+    int ttime_            = Target::INVALID_TIME;
 
     std::ostream* stream_;
 

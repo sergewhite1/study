@@ -33,6 +33,16 @@ void Target::AddPrerequisite(Target* target)
   prerequisites_.push_back(target);
 }
 
+void Target::AddNeedFile(const Target* target)
+{
+  if (target->IsPhony())
+  {
+    throw TargetExeption(target->Name().c_str());
+  }
+
+  needFiles_.insert(target);
+}
+
 void Target::Process()
 {
   bool need_build = true;
@@ -52,6 +62,21 @@ void Target::Process()
     }
     else
     {
+      // Check Prereq Exists
+      auto iter = needFiles_.find(prereq);
+      if (iter != needFiles_.end())
+      {
+        if (!prereq->Exists())
+        {
+          if (stream_)
+          {
+            *stream_ << "File " << prereq->Name() << " does not existing." << std::endl;
+            *stream_ << "Stop processing.";
+          }
+          throw TargetStopProcessing(Name().c_str());
+        }
+      }
+
       // Here we are
       if (!Exists())
       {
@@ -143,10 +168,9 @@ bool Target::RunCommands()
     runCommandsCallBack_();
   }
 
-  if (!IsPhony())
+  if (!IsPhony() && NeedProduceFile())
   {
-    exists_ = true;
-    ttime_  = TimeService::GetInstance()->UpdateTime();
+    Touch();
   }
 
   return true;
@@ -154,6 +178,11 @@ bool Target::RunCommands()
 
 int Target::Touch()
 {
+  if (IsPhony())
+  {
+    throw TimeTargetException(Name().c_str());
+  }
+
   exists_ = true;
   ttime_  = TimeService::GetInstance()->UpdateTime();
 

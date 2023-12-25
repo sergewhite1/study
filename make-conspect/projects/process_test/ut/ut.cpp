@@ -10,14 +10,14 @@ typedef int (*test_proc_t)(std::string& name);
 
 static Target CreatePhTarget(const char* name)
 {
-  Target ret(false, nullptr);
+  Target ret(true, nullptr);
   ret.SetName(name);
   return ret;
 }
 
 static Target CreateNPhTarget(const char* name)
 {
-  Target ret(true, nullptr);
+  Target ret(false, nullptr);
   ret.SetName(name);
   return ret;
 }
@@ -148,6 +148,7 @@ int time_service_ut(std::string& name)
 int nph_npf_nnf_from_nph_ut(std::string& name)
 {
   // case 00
+
   name =  __FUNCTION__;
 
   // RunCommands Flags
@@ -178,11 +179,6 @@ int nph_npf_nnf_from_nph_ut(std::string& name)
     return 1;
   }
 
-  if (tB.Ttime() != Target::INVALID_TIME)
-  {
-    return 1;
-  }
-
   if (tA_RC == false)
   {
     return 1;
@@ -208,6 +204,163 @@ int nph_npf_nnf_from_nph_ut(std::string& name)
   return 0;
 }
 
+int nph_npf_nnf_from_ph_ut(std::string& name)
+{
+  // case 01
+
+  name = __FUNCTION__;
+
+  Target tA = CreateNPhTarget("A");
+  Target tB = CreatePhTarget("B");
+
+  tA.AddPrerequisite(&tB);
+
+  // RunCommands Flags
+  bool tA_RC = false;
+  bool tB_RC = false;
+
+  // Callbacks
+  auto tA_RC_CB = [&tA_RC] () { tA_RC = true; };
+  auto tB_RC_CB = [&tB_RC] () { tB_RC = true; };
+
+  tA.SetRunCommandsCallBack(tA_RC_CB);
+  tB.SetRunCommandsCallBack(tB_RC_CB);
+
+  tA.Process();
+
+  if (tB_RC == false)
+  {
+    return 1;
+  }
+
+  if (tB_RC == false)
+  {
+    return 1;
+  }
+
+  if (tB.Exists() == true)
+  {
+    return 1;
+  }
+
+  if (tA.Exists() == true)
+  {
+    return 1;
+  }
+
+  // run process again
+
+  tA_RC = false;
+  tB_RC = false;
+
+  tA.Process();
+
+  if (tB_RC == false)
+  {
+    return 1;
+  }
+
+  if (tB_RC == false)
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
+int nph_npf_nf_from_nph_ut(std::string& name)
+{
+  // case 02
+
+  name = __FUNCTION__;
+
+  Target tA = CreateNPhTarget("A");
+  Target tB = CreateNPhTarget("B");
+
+  tA.AddPrerequisite(&tB);
+  tA.AddNeedFile(&tB);
+
+  TimeService::GetInstance()->SetTime(0);
+
+  if (tA.Exists())
+  {
+    return 1;
+  }
+
+  tB.Touch();
+
+  tA.Process();
+
+  if (!(tB.Ttime() == 1))
+  {
+    return 1;
+  }
+
+  if (tA.Exists())
+  {
+    return 1;
+  }
+
+  // process again
+
+  tA.Process();
+
+  if (!(tB.Ttime() == 1))
+  {
+    return 1;
+  }
+
+  if (tA.Exists())
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
+int nph_pf_nnf_from_nph_ut(std::string& name)
+{
+  // case 04
+
+  name = __FUNCTION__;
+
+  Target tA = CreateNPhTarget("A");
+  Target tB = CreateNPhTarget("B");
+
+  tA.SetNeedProduceFile(true);
+  tA.AddPrerequisite(&tB);
+
+  TimeService::GetInstance()->SetTime(0);
+
+  tA.Process();
+
+  if (!tA.Exists())
+  {
+    return 1;
+  }
+
+  if (!(tA.Ttime() == 1))
+  {
+    return 1;
+  }
+
+  // process again
+
+  //tA.Process();
+
+  //if (!tA.Exists())
+  //{
+  //  return 1;
+  //}
+
+  //if (!(tA.Ttime() == 2))
+  //{
+  //  return 1;
+  //}
+
+  return 0;
+}
+
 int process_1_ut(std::string& name)
 {
   name = __FUNCTION__;
@@ -220,8 +373,8 @@ int process_1_ut(std::string& name)
 
   tA.AddPrerequisite(&tB);
 
-  tB.Touch();
-  tA.Process();
+  //tB.Touch();
+  //tA.Process();
   //std::cout << "tB.Exists()=" << tB.Exists() << std::endl;
   //std::cout << "tB.Ttime()="  << tB.Ttime()  << std::endl;
   //std::cout << "tA.Exists()=" << tA.Exists() << std::endl;
@@ -241,19 +394,19 @@ int process_1_ut(std::string& name)
  * 00 |   false |      false |   false |    false | nph_npf_nnf_from_nph   |
  * 01 |   false |      false |   false |     true | nph_npf_nnf_from_ph    |
  * 02 |   false |      false |    true |    false | nph_npf_nf_from_nph    |
- * 03 |   false |      false |    true |     true | nph_npf_nf_from_ph     |
+ * 03 |   false |      false |    true |     true | does not have sense    |
  * 04 |   false |       true |   false |    false | nph_pf_nnf_from_nph    |
  * 05 |   false |       true |   false |     true | nph_pf_nnf_from_ph     |
  * 06 |   false |       true |    true |    false | nph_pf_nf_from_nph     |
- * 07 |   false |       true |    true |     true | already tested in 03   |
+ * 07 |   false |       true |    true |     true | does not have sense    |
  * 08 |    true |      false |   false |    false | ph_npf_nnf_form_nph    |
  * 09 |    true |      false |   false |     true | ph_npf_nnf_from_ph     |
  * 10 |    true |      false |    true |    false | ph_npf_nf_from_ph      |
- * 11 |    true |      false |    true |     true | already tested in 03   |
+ * 11 |    true |      false |    true |     true | does not have sense    |
  * 12 |    true |       true |   false |    false | ph_pf_nnf_from_nph     |
  * 13 |    true |       true |   false |     true | ph_pf_nnf_from_ph      |
  * 14 |    true |       true |    true |    false | ph_pf_nf_from_nph      |
- * 15 |    true |       true |    true |     true | already tested in 03   |
+ * 15 |    true |       true |    true |     true | does not have sense    |
  * ---|---------|------------|---------|----------|------------------------|
 */
 
@@ -264,6 +417,9 @@ test_proc_t TESTS[] = {
   graph_to_str_ut,
   time_service_ut,
   nph_npf_nnf_from_nph_ut, // case 00
+  nph_npf_nnf_from_ph_ut,  // case 01
+  nph_npf_nf_from_nph_ut,  // case 02
+  nph_pf_nnf_from_nph_ut,  // case 04
   process_1_ut,
 };
 
