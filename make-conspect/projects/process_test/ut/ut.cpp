@@ -526,6 +526,162 @@ int ph_npf_from_nph_ut(std::string& name)
   return 0;
 }
 
+int ph_npf_from_ph_ut(std::string& name)
+{
+  // case 05
+
+  name = __FUNCTION__;
+
+  Target tA = CreatePhTarget("A");
+  Target tB = CreatePhTarget("B");
+
+  tA.AddPrerequisite(&tB);
+
+  // RunCommands Flags
+  bool tA_RC = false;
+  bool tB_RC = false;
+
+  // Callbacks
+  auto tA_RC_CB = [&tA_RC] () { tA_RC = true; };
+  auto tB_RC_CB = [&tB_RC] () { tB_RC = true; };
+
+  tA.SetRunCommandsCallBack(tA_RC_CB);
+  tB.SetRunCommandsCallBack(tB_RC_CB);
+
+  tA.Process();
+
+  if (!(tB.Exists() == false))
+  {
+    return 1;
+  }
+
+  if (!(tB_RC == true))
+  {
+    return 1;
+  }
+
+  if (!(tA.Exists() == false))
+  {
+    return 1;
+  }
+
+  if (!(tA_RC == true))
+  {
+    return 1;
+  }
+
+  tA_RC = false;
+  tB_RC = false;
+
+  // process again
+
+  tA.Process();
+
+  if (!(tB.Exists() == false))
+  {
+    return 1;
+  }
+
+  if (!(tB_RC == true))
+  {
+    return 1;
+  }
+
+  if (!(tA.Exists() == false))
+  {
+    return 1;
+  }
+
+  if (!(tA_RC == true))
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
+int research_1_ut(std::string& name)
+{
+  name = __FUNCTION__;
+
+  /* Test Graph
+   * A -> B -> C -> D -> E
+   * File Targets (not Phony): A, B, C, E
+   * Phony Target: E
+  */
+
+  Target tA = CreateNPhTarget("A", true);
+  Target tB = CreateNPhTarget("B", true);
+  Target tC = CreateNPhTarget("C", true);
+  Target tD = CreatePhTarget("D");
+  Target tE = CreateNPhTarget("E", false);
+
+  tA.AddPrerequisite(&tB);
+  tB.AddPrerequisite(&tC);
+  tC.AddPrerequisite(&tD);
+  tD.AddPrerequisite(&tE);
+
+  TimeService::GetInstance()->SetTime(0);
+
+  tE.Touch();
+
+  //std::cout << tA.GraphToStr() << std::endl;
+
+  tA.Process();
+
+  if (!tE.Exists())
+  {
+    return 1;
+  }
+
+  if (!(tE.Ttime() == 1))
+  {
+    return 1;
+  }
+
+  if (!(tD.Exists() == false))
+  {
+    return 1;
+  }
+
+  if (!(tC.Exists() == true))
+  {
+    return 1;
+  }
+
+  if (!(tC.Ttime() == 2))
+  {
+    return 1;
+  }
+
+  if (!(tB.Exists() == true))
+  {
+    return 1;
+  }
+
+  if (!(tB.Ttime() == 3))
+  {
+    return 1;
+  }
+
+  if (!(tA.Exists() == true))
+  {
+    return 1;
+  }
+
+  if (!(tA.Ttime() == 4))
+  {
+    return 1;
+  }
+
+  tA.Process();
+
+  // process again
+
+  tA.Process();
+
+  return 0;
+}
 
 /* Take a look at sumple graph A -> B
  * prod. file - produce file as result of RunCommands
@@ -556,9 +712,9 @@ test_proc_t TESTS[] = {
   nph_npf_from_ph_ut,  // case 01
   nph_pf_from_nph_ut,  // case 02
   nph_pf_from_ph_ut,   // case 03
-  ph_npf_from_nph_ut   // case 04
-
-  //process_1_ut,
+  ph_npf_from_nph_ut,  // case 04
+  ph_npf_from_ph_ut,   // case 05
+  research_1_ut
 };
 
 static constexpr int TEST_COUNT = sizeof(TESTS) / sizeof(TESTS[0]);
