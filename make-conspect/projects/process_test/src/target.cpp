@@ -33,16 +33,6 @@ void Target::AddPrerequisite(Target* target)
   prerequisites_.push_back(target);
 }
 
-void Target::AddNeedFile(const Target* target)
-{
-  if (target->IsPhony())
-  {
-    throw TargetExeption(target->Name().c_str());
-  }
-
-  needFiles_.insert(target);
-}
-
 void Target::Process()
 {
   bool need_build = true;
@@ -63,18 +53,14 @@ void Target::Process()
     else
     {
       // Check Prereq Exists
-      auto iter = needFiles_.find(prereq);
-      if (iter != needFiles_.end())
+      if (!prereq->Exists())
       {
-        if (!prereq->Exists())
+        if (stream_)
         {
-          if (stream_)
-          {
-            *stream_ << "File " << prereq->Name() << " does not existing." << std::endl;
-            *stream_ << "Stop processing.";
-          }
-          throw TargetStopProcessing(Name().c_str());
+          *stream_ << "File " << prereq->Name() << " does not existing." << std::endl;
+          *stream_ << "Stop processing.";
         }
+        throw TargetStopProcessing(Name().c_str());
       }
 
       // Here we are

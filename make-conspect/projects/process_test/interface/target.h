@@ -87,7 +87,6 @@ class Target
     }
 
     void AddPrerequisite(Target* target);
-    void AddNeedFile(const Target* target);
     void Process();
 
     std::string GraphToStr() const;
@@ -106,7 +105,6 @@ class Target
 
     std::string name_;
     std::vector<Target*>    prerequisites_;
-    std::set<const Target*> needFiles_;
 
     bool isPhony_         = false;
     bool exists_          = false;
