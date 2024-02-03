@@ -52,6 +52,17 @@ void Target::Process()
     }
     else
     {
+      // Check Prereq Exists
+      if (!prereq->Exists())
+      {
+        if (stream_)
+        {
+          *stream_ << "File " << prereq->Name() << " does not existing." << std::endl;
+          *stream_ << "Stop processing.";
+        }
+        throw TargetStopProcessing(Name().c_str());
+      }
+
       // Here we are
       if (!Exists())
       {
@@ -143,10 +154,9 @@ bool Target::RunCommands()
     runCommandsCallBack_();
   }
 
-  if (!IsPhony())
+  if (!IsPhony() && NeedProduceFile())
   {
-    exists_ = true;
-    ttime_  = TimeService::GetInstance()->UpdateTime();
+    Touch();
   }
 
   return true;
@@ -154,6 +164,11 @@ bool Target::RunCommands()
 
 int Target::Touch()
 {
+  if (IsPhony())
+  {
+    throw TimeTargetException(Name().c_str());
+  }
+
   exists_ = true;
   ttime_  = TimeService::GetInstance()->UpdateTime();
 
