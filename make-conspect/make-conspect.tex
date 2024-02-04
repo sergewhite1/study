@@ -396,8 +396,46 @@ $t(T)$ - время последнего изменения файла цели 
 $t(P_i)$ - время последнего изменения $P_i$ \\
 $b$ - команды НЕ выполнять
 
+Графически выполнение условия $b$ можно представить таким рисунком:
+
+\vspace{0.2cm}
+
+\begin{tikzpicture}
+    \draw[->] (0, 0) -- (10, 0) node[anchor=north] {t};
+    \draw [fill=black] (5, 0) circle (0.1) node[anchor=north] {$P_1$};
+    \draw [fill=black] (6, 0) circle (0.1) node[anchor=north] {$P_2$};
+    \draw [fill=black] (7, 0) circle (0.1) node[anchor=north] {$P_2$};
+    \draw [fill=black] (9, 0) circle (0.1) node[anchor=north] {$T$};
+\end{tikzpicture}
+
+Время неумолимо течет
+
+Алгебраически это можно записать следующи выражением:
 $$ b = \exists T \;\; \& \;\; \forall p \in P : t(p) < t(T) $$
 
+Ещё раз рассмотрим граф зависимостей для цели ques\_exe:
+
+\begin{tikzpicture}
+    % определение стиля узла ns (node style)
+    [ns/.style={circle, draw=blue}]
+    \node (ques_exe) at (0,  0) [ns] {ques\_exe};
+    \node (main_o)   at (2,  2) [ns] {main.o};
+    \node (main_c)   at (2,  5) [ns] {main.c};
+    \node (ques_o)   at (2, -3) [ns] {ques.o};
+    \node (ques_c)   at (2,  0) [ns] {ques.c};
+    \node (ques_h)   at (5, -3) [ns] {ques.h};
+
+
+    \draw [->] (ques_exe) -- (main_o);
+    \draw [->] (main_o)   -- (main_c);
+    \draw [->] (ques_exe) -- (ques_o);
+    \draw [->] (ques_o)   -- (ques_c);
+    \draw [->] (ques_o)   -- (ques_h);
+    \draw [->] (main_o)   -- (ques_h);
+\end{tikzpicture}
+
+Обход происходит рекурсивно. Т.е. вначале мы идём в глубину, и постепенно пробираемся к вершине. И потом опять в глубину. Рекурсия, короче. Нарисуем блок-схему алгоритма. Пусть $a$ - это флаг необходимости выполнение команд. Очевидно, что:
+$$a=!b$$
 
 \clearpage
 
