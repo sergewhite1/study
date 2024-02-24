@@ -1,0 +1,65 @@
+\begin{tikzpicture}
+  [
+    auto,
+    block/.style    = {
+                        align      = flush center,
+                        draw       = black,
+                        %fill       = blue!20,
+                        inner sep  = 1pt,
+                        rectangle,
+                        %text width = 14em,
+                        thick
+                      },
+    cloud/.style    = {
+                        draw = black,
+                        ellipse,
+                        %fill = blue!20,
+                        minimum height = 2em,
+                        thick
+                      },
+    decision/.style = {
+                        diamond,
+                        draw = black,
+                        %fill = blue!20,
+                        thick
+                      },
+    line/.style     = {
+                        -latex',
+                        draw,
+                        shorten >= 2pt,
+                        thick
+                      }
+    point/.style    = {
+                        circle,
+                        size=1
+                      }
+  ]
+
+  \matrix[column sep=5mm, row sep=7mm]
+  {
+    % row 1
+    \node [cloud] (begin) {begin};               \\
+
+    % row 2
+    \node [block] (b_1) {b := true};             \\
+
+    % row 3
+    \node [decision] (exists_target) {$\exists T$}; &
+    \node [block] (b_2) {b := false}; \\
+
+    % row 4
+    %\node [point] (p_1) {1}; \\
+
+    % row 5
+    \node [block] (b_3) {i := 0}; \\
+  };
+
+  \begin{scope} [every path/.style=line]
+      \path (begin)   -- (b_1);
+      \path (b_1) -- (exists_target);
+      \path (exists_target) -- node [near start] {true} (b_3);
+      \path (exists_target) -- node [near start] {false} (b_2);
+
+  \end{scope}
+
+\end{tikzpicture}
