@@ -1,0 +1,792 @@
+\input{preamble.tex}
+
+\begin{document}
+
+\noindent
+Привет!
+
+\bigskip
+\noindent
+Список специальных символов:
+\\
+\~             \ \
+\#             \ \
+\$             \ \
+\%             \ \
+\^             \ \
+\&             \ \
+\_             \ \
+\{             \ \
+\}             \ \
+\textbackslash \ \
+\" \
+
+
+\noindent
+\textbackslash \ \ (обратная косая черта) --- команда LATEX \\
+\% --- начало комментария \\
+\~ \ --- "<неразрывный пробел"> (т.е. такой пробельный символ, который недопустимо растягивать, сжимать и разрывать концом строки) \\
+\textbackslash, --- неразрывный пробел уменьшенного размера
+
+\noindent
+{\bf жирный текст} {\it курсивный текст}
+
+\noindent
+Некоторые обозначение для спецсимволов:
+
+\noindent
+\textasciitilde \ \
+\dq             \ \
+\textasciicircum
+
+\noindent
+Кавычки  \" \ в пакете {\it babel} являются спецсимволом: \\
+"< --- левая  елочка                                      \\
+"> --- правая елочка                                      \\
+"` --- открывающая лапка (обратный апостроф)              \\
+"' --- закрывающая лапка (прямой апостроф)
+
+\noindent
+"<Прочитай свежие "`Ведомости"'">~--- сказал папа
+
+\noindent
+\S
+
+\noindent
+Набор диакритических знаков:
+\"a   \ \
+\~a   \ \
+\^a   \ \
+\'a   \ \
+\u{a} \ \
+\r{a} \ \
+\d{a} \ \
+\v{a} \ \
+\b{a} \ \
+\c{a} \ \
+\H{a}
+
+\noindent
+Дефисы и тире:                                                  \\
+1) дефис: кусочно-непрерывный                                   \\
+2) короткое тире: от--до, дорога отнимает тридцать--сорок минут \\
+3) длинное тире --- знак препинания
+
+В кофе можно добавить десять-пятнадцать мл. виски и сливки~--- это называется "<кофе по-ирландски">
+
+\noindent
+{\bfseries О командах.} Они могут принимать на вход параметры. Обязательные параметры заключаются в фигурные скобки, а необязательные - в квадратные.  Пример команды: \\
+\"{a} \\
+В некоторых случаях (например, если параметр состоит из одного символа) без фигурных скобок можно обойтись: \\
+\"a \\
+При использовании команд, имена которых состоят из букв, LATEX воспринимает в качестве имени команды все буквы, стоящие после обратной косой черты до первого небуквенного символа. \\
+\noindent
+\S 6 и \S \ 6 тоже \S{} 6
+\medskip
+
+\noindent
+\{ это группа \}\\
+Глобальные команды --- это команды, которые сохраняют свое действие за пределами группы, в которой они были употреблены. Обычно это особые команды.
+\medskip
+
+\noindent
+{\bfseries Окружение} --- это фрагмент текста, заключенный между командами {\bfseries \textbackslash begin\{\}} и {\bfseries \textbackslash end\{\}}\\
+Обе команды в качестве параметра принимают {\it имя окружения}. Окружение позволяет распространить то или иное свойство на весь заключенный в окружении текст. \\
+Часть файла, находящаяся внутри окружения, образует группу.\\
+Пример:\\
+\begin{large}
+    Large environment
+\end{large}
+\medskip
+
+\noindent
+{\bfseries Об абзацах} \\
+\textbackslash noindent --- отмена отступа (красной строки) для абзаца. Команда вставляется непосредственно перед абзацем
+\textbackslash \textbackslash --- принудительное завершение строки, но не абзаца \\
+Пустая строка или команда \textbackslash par --- отделение одного абзаца от другого\\
+\textbackslash bigskip \
+\textbackslash medskip \
+\textbackslash smallskip --- вставка между абзацами вертикального интервала
+\pagebreak
+
+\bigskip
+\noindent
+{\large Декларирующие команды:}
+\medskip
+
+\noindent
+Font Family (гарнитуры):                                                   \\
+\textbackslash rmfamily --- {\rmfamily Roman (обычная гарнитура)}          \\
+\textbackslash sffamily --- {\sffamily Sans Serif (гарнитура без засечек)} \\
+\textbackslash ttfamily --- {\ttfamily Typewriter (моноширинная гарнитура)}
+\medskip
+
+\noindent
+Series (жирность):\\
+\textbackslash bfseries --- {\bfseries bold face (включение ожирнения)}  \\
+\textbackslash mdseries --- {\mdseries medium density (отмена ожирнения)}
+\medskip
+
+\noindent
+Форма (shape):                                                    \\
+\textbackslash itshape --- {\itshape italics (курсив)}            \\
+\textbackslash slshape --- {\slshape slanted (наклонный шрифт)}   \\
+\textbackslash scshape --- {\scshape small caps (капитель)}       \\
+\textbackslash upshape --- {\upshape upright (обычное начертание)}\\
+\textbackslash normalfont --- {\normalfont основной шрифт документа (устанавливает обычную гарнитуру, обычное начертание и выключает ожирнение)}\\
+Область действия декларирующих команд не может распространяться дальше "<блока">, в котором они появились; в качестве такого блока, например, может выступать текст, заключенный в фигурные скобки.
+\medskip
+
+\noindent
+Команды с параметром. Общий вид {\ttfamily \textbackslash textXXX\{<текст>\}} :\\
+\textrm{\textbackslash textrm\{\} --- \textbackslash rmfamily}\\
+\textsf{\textbackslash textsf\{\} --- \textbackslash sffamily}\\
+\texttt{\textbackslash texttt\{\} --- \textbackslash ttfamily}
+\medskip
+
+\noindent
+\textbf{\textbackslash textbf\{\} --- \textbackslash bfseries}\\
+\textmd{\textbackslash textmd\{\} --- \textbackslash mdseries}
+\medskip
+
+\noindent
+\textit{\textbackslash textit\{\} --- \textbackslash itshape}\\
+\textsl{\textbackslash textsl\{\} --- \textbackslash slshape}\\
+\textsc{\textbackslash textsc\{\} --- \textbackslash scshape}\\
+\textup{\textbackslash textup\{\} --- \textbackslash upshape}
+\medskip
+
+\noindent
+\textnormal{\textbackslash textnormal\{\} --- \textbackslash normalfont} \\
+\emph{\textbackslash emph --- (emphasis -- выделение) переключение между обычным шрифтом и курсивом. Декларирующей формы у этой команды нет.}
+\medskip
+
+\noindent
+Команды в форме окружения:
+
+\begin{bfseries}
+    \begin{scshape}
+        \noindent
+        Жирный капитель.
+    \end{scshape}
+\end{bfseries}
+\medskip
+
+\noindent
+Устаревшая форма декларирующих команд:\\
+\textbackslash rm \
+\textbackslash sf \
+\textbackslash tt \ \ \ \
+\textbackslash bf \ \ \ \
+\textbackslash it \
+\textbackslash sl \
+\textbackslash sc
+\medskip
+
+\noindent
+Команды, задающие размер шрифта:
+
+\noindent
+{\tiny \textbackslash tiny --- самый мелкий возможный размер, обычно совершенно нечитаемый}
+\medskip
+
+\noindent
+{\scriptsize \textbackslash scriptsize --- чуть больше, но все равно очень мелкий}
+\medskip
+
+\noindent
+{\footnotesize \textbackslash footnotesize --- размер, которым набираются сноски}
+\medskip
+
+\noindent
+{\small \textbackslash small --- шрифт чуть меньше обычного}
+\medskip
+
+\noindent
+{\normalsize \textbackslash normalsize --- обычный размер шрифта (тот, что задан в преамбуле)}
+\medskip
+
+\noindent
+{\large \textbackslash large --- слегка укрупненный}
+\medskip
+
+\noindent
+{\Large \textbackslash Large --- ещё крупнее}
+\medskip
+
+\noindent
+{\LARGE \textbackslash LARGE --- совсем купный}
+\medskip
+
+\noindent
+{\huge \textbackslash huge --- гигантский}
+\medskip
+
+\noindent
+{\Huge \textbackslash Huge --- супергигантский}
+\medskip
+
+\noindent
+\textbf{Интерлиньяж - это расстояние между базовыми линиями строк.}
+\medskip
+
+\noindent
+Интерлиньяж определяется в тот момент, когда очередная строка завершается. Либо по принудительной команде либо по окончании верстки целого абзаца.
+\medskip
+
+\noindent
+\textbf{Всегда набирайте абзац шрифтом одного размера и всегда оставляйте пустую строку перед командой смены шрифта}
+
+\clearpage
+
+\noindent
+\textbf{
+Рубрикация --- это разбивка документа на части, главы, параграфы и т.п.}
+\medskip
+
+\noindent
+Возможные разделы:\\
+\textbackslash part --- часть\\
+\textbackslash chapter --- глава (для класса документа \textit{article} не работает)\\
+\textbackslash section --- секция (типа параграф, но это слово в командах будет дальше)\\
+\textbackslash subsection --- подсекция\\
+\textbackslash subsubsection --- подподсекция\\
+\textbackslash paragraph --- пункт (типа абзац)\\
+\textbackslash subparagraph --- подпункт\\
+Все эти команды имею один параметр -- заголовок соответствующего раздела.
+\medskip
+
+\noindent
+\textbackslash tableofcontents --- формирование оглавления\\
+\textbf{Внимание!} Учтите, что теперь вам может понадобиться каждый раз прогонять программу \texttt{latex} дважды. Дело в том, что для формирование оглавления LATEX использует дополнительный файл (с расширением \texttt{.toc}), в который во время трансляции вашего исходного текста заносится информация для включения в оглавление (особенно если оглавление вставляется в начало документа), поскольку файл \texttt{.toc} может отсутствовать или содержать устаревшую информацию. Вот пример:
+\medskip
+
+\tableofcontents
+
+\part{Part}
+Здесь текст части.
+%\chapter{Глава}
+\section{Section}
+Здесь текст секции.
+\subsection{Subsection}
+Здесь текст подсекции.
+\subsubsection{Subsubsection}
+Здесь текст подподсекции.
+\paragraph{Paragraph}
+Здесь текст пункта.
+\subparagraph{Subparagraph}
+Здесь текст подпункта.
+\medskip
+
+\noindent
+Перекрестные ссылки:\\
+\textbackslash label\{<метка>\} --- установить метку. В качестве имени метки можно использовать любую последовательность латинских букв, цифр и некоторых знаков препинания (особенно часто используется двоеточие, подчеркивание и тире), например: \textbackslash label \{main:theorem:prove\}
+\medskip
+
+\noindent
+\textbackslash ref \{<метка>\} --- ссылка на метку\\
+Пример: \texttt{
+Доказательство см.~в~\textbackslash S \textbackslash ,\textbackslash ref\{main:theorem:prove\}}
+\medskip
+
+\noindent
+\textbackslash pagerf\{<метка>\} --- ссылка на страницу\\
+Пример: \texttt{
+приведено на стр.\textbackslash ,\textbackslash pageref\{main:theorem:prove\}}
+\medskip
+
+\noindent
+Приложения:\\
+\textbackslash appendix --- команда отделения текста всех приложений от основного текста документа. Дается только один раз. Экспериментально установлено, что для класса документа \textit{article} каждое приложение оформляется командой \textbackslash section и последующими. Приложения так же будут включены в оглавление.\\
+\medskip
+
+\noindent
+Низкоуровневое управление\\
+"<звёздочные версии команд"> --- это команды со звёздочками: \textbackslash part*, \textbackslash section*, \textbackslash subsection*... Они производят вставку сущности без номера и не влияющую на дальнейшую нумерацию.\\
+\medskip
+
+\noindent
+\textbackslash addcontentsline \{toc\}\{part\}\{<имя в оглавлении>\} --- принудительное добавление ненумерованной сущности в оглавление. Например,\\
+\medskip
+
+\noindent
+\texttt{
+\textbackslash section* \{Литерура\}\\
+\textbackslash addcontentsline\{toc\}\{part\}\{Литература\}}\\
+\medskip
+
+\noindent
+\section*{Литература}
+\addcontentsline{toc}{part}{Литература}
+
+\clearpage
+
+\noindent
+Окружение:\\
+\medskip
+
+\noindent
+\texttt{
+\textbackslash begin(thebibliography)\{00\}\\
+\textbackslash bibitem[<номер>]\{<метка>\}\\
+\textbackslash end(thebibliography)\\
+}
+\medskip
+
+\noindent
+<номер> --- необязательный параметр\\
+\textbackslash \{00\} --- используется для указания максимальной ширины номера ссылки и используется LATEX'ом для горизонтального выравнивания элементов списка. Если ваш список литературы состоит не более чем из девяти пунктов, можно вместо \texttt{00} указать просто \texttt{0}, если же число источников составляет сто и больше, стоит указать \texttt{000}.\\
+\textbackslash cite --- по этой команде ссылаемся на источник из списка литературы.
+
+\begin{thebibliography}{00}
+
+\bibitem{knut:tex} Дональд Е.~Кнут.
+\emph{Всё про \TeX}. Изд-во AO RDTeX,
+Протвино, 1993.
+
+\bibitem{kuhn:revolutions} T.~S.~Kuhn.
+\emph{The structure of scientific revolutions}.
+University of Chicago Press,
+Chicagom second, enlarged edition, 1970.
+
+\bibitem{stolyarov:oorefal} А.~В.~Столяров.
+\emph{Расширенный функциональный аналог языка Рефал для мультипарадигмального программирования.}
+//Л.~Н.~Королев, ред., \emph{Программные системы и инструменты}. Тематический сборник, том~2, стр.~184--195. Издательский отдел ВМиК МГУ, Москва, 2001.
+
+\end{thebibliography}
+
+\clearpage
+
+\noindent
+Новая команда:\\
+\texttt{
+\textbackslash newcommand\{<имя>\}[<арг>][<умолч>]{<содержание>}}\\
+Здесь имя команды берется в фигурные скобки в отличие от книги. Наверное фигурные скобки -- это по-новому. Хотя без них тоже работает. Пример:\\
+\texttt{
+\textbackslash newcommand\textbackslash notion[1]\{textit\{\#1\}\}}
+\medskip
+
+\newcommand{\notion}[1]{\textit{#1}}
+
+\noindent
+А вот и \notion{пример!}.\\
+Еще один пример:\\
+\newcommand{\Brief}[1][*]{
+    \bigskip
+    \centerline{#1~~#1~~#1~~#1~~#1}
+    \bigskip
+}
+\Brief\\
+\Brief[+]
+\medskip
+
+\noindent
+Новое окружение:\\
+\texttt{
+\textbackslash newenvironment\{<имя>\}[<арг>][<умолч>]\{<нач>\}\{<кон>\}}\\
+Пример:\\
+\texttt{
+\textbackslash newenvironment\{remarks\}\{\\
+    \textbackslash begin\{sffamily\}\\
+    \textbackslash small\\
+\}\{\\
+    \textbackslash par\\
+    \textbackslash normalsize\\
+    \textbackslash end\{sffamily\}
+\}
+}
+
+\newenvironment{remarks}{
+    \begin{sffamily}
+    \small
+}{
+    \par
+    \normalsize
+    \end{sffamily}
+}
+
+\begin{remarks}
+    Remarks environment in action.
+\end{remarks}
+
+\clearpage
+
+\noindent
+Ненумерованное перечисление:\\
+\texttt{
+\textbackslash begin\{itemize\}...\textbackslash end\{itemize\}}
+Внутри окружения используется команда \texttt{\textbackslash item} (обязательно хотя бы одна). Пример:\\
+\texttt{
+\textbackslash begin\{itemize\}\\
+\phantom{~~~~} \textbackslash item логику изложения;\\
+\phantom{~~~~} \textbackslash item полноту охвата материала;\\
+\phantom{~~~~} \textbackslash item адекватность используемых терминов;\\
+\phantom{~~~~} \textbackslash item орфографическую грамотность текста.\\
+\textbackslash end\{itemize\}}\\
+\medskip
+
+\noindent
+необходимо обращать внимание на:
+\begin{itemize}
+    \item логику изложения;
+    \item полноту охвата материала;
+    \item адекватность используемых терминов;
+    \item орфографическую грамотность текста.
+\end{itemize}
+
+\noindent
+Допускаются вложенности:
+\begin{itemize}
+    \item растения, в том числе
+    \begin{itemize}
+        \item одноклеточные растения,
+        \item травы,
+        \item деревья, среди которых можно назвать
+        \begin{itemize}
+            \item сосны,
+            \item березы,
+            \item клены и т.п.,
+        \end{itemize}
+        \item кустарники;
+    \end{itemize}
+    \item животные, включая
+    \begin{itemize}
+        \item простейших,
+        \item рыб,
+        \item земноводных,
+        \item птиц,
+        \item млекопитающих;
+    \end{itemize}
+    \item грибы, которые не относятся ни к растениям, ни к животным
+\end{itemize}
+
+
+\noindent
+Нумерованное перечисление:\\
+\texttt{
+\textbackslash begin\{enumerate\}...\textbackslash end\{enumerate\}}
+
+\clearpage
+
+\noindent
+\textbf{
+Плавающий объект --- это нечто, имеющее заголовок, номер и содержимое объекта.}\\
+\medskip
+
+\noindent
+Это делается для автоматизации такого текста как: \texttt{см.~табл.\,2.7 на стр.\,30} и \texttt{см.~рис.\,1.2 на стр.\,8}\\
+\medskip
+
+\noindent
+\texttt{
+\textbackslash \{table\}\\
+\phantom{~~~~}\% ... содержание рисунка ...\\
+\phantom{~~~~}\textbackslash caption\{Удельный вес некоторых веществ\}\\
+\phantom{~~~~}\textbackslash label\{<метка>\}\\
+\textbackslash \{table\}}\\
+\medskip
+
+\noindent
+\texttt{
+\textbackslash \{figure\}\\
+\phantom{~~~~}\% ... содержание рисунка ...\\
+\phantom{~~~~}\textbackslash caption\{Удельный вес некоторых веществ\}\\
+\phantom{~~~~}\textbackslash label\{<метка>\}\\
+\textbackslash \{figure\}}\\
+\medskip
+
+\noindent
+\texttt{
+см.~табл.\textbackslash ,\textbackslash ref\{some\textbackslash \_densities\} на стр.\textbackslash , \textbackslash pageref\{some\textbackslash \_densities\}}\\
+\medskip
+
+\noindent
+Необязательные параметры в окружениях \texttt{table} и \texttt{figure}:\\
+Предписание разместить плавающий объект:\\
+\texttt{t} --- (top) в верхней части страницы;\\
+\texttt{b} --- (bottom) в нижней части страницы;\\
+\texttt{p} --- (page) на отдельной странице;\\
+\texttt{h} --- (here) сразу же после появления в исходном тексте.\\
+\medskip
+
+\noindent
+\texttt{
+\textbackslash \{figure\}[hp]} --- означает, что данный рисунок хотелось бы увидеть размещенным непосредственно в том месте текста, где он описан, если же это не получится --- то вынести его на отдельную страницу.\\
+\textbf{
+\LaTeX \ предпочитает размещать объекты в верхней части страницы.}
+
+\noindent
+\begin{verbatim}
+\begin{table}[h]
+    \begin{tabular}{|r|c|p{0.15\textwidth}|p{0.25\textwidth}|c|r|}
+        \hline No. & Тип & Автор & Заглавие & Год & Тир. \\ \hline
+        1 & книга & Артур Конан Дойл & Собака Баскервилей
+        & 1975 & 10\,000 \\ \hline
+        2 & книга & Жюль Верн & Пять недель на воздушном шаре
+        & 1981 & 7000 \\ \hline
+        3 & журнал & \multicolumn{2}{c|}{Вокруг света No. 5}
+        & 1995 & 5000 \\ \hline
+    \end{tabular}
+    \caption{Пример таблицы}
+    \label{table_example}
+\end{table}
+\end{verbatim}
+
+\noindent
+\begin{table}[ht]
+\begin{tabular}{|r|c|p{0.15\textwidth}|p{0.25\textwidth}|c|r|}
+    \hline No. & Тип & Автор & Заглавие & Год & Тир.\\ \hline
+    1 & книга & \raggedright{Артур Конан Дойл} & Собака Баскервилей
+      & 1975 & 10\,000\\ \hline
+    2 & книга & Жюль Верн & Пять недель на воздушном шаре
+      & 1981 & 7000\\ \hline
+    3 & журнал & \multicolumn{2}{c|}{Вокруг света No. 5}
+      & 1995 & 5000\\ \hline
+\end{tabular}
+\caption{Пример таблицы}
+\label{table_example}
+\end{table}
+\medskip
+
+\noindent
+\texttt{
+\textbackslash begin\{tabular\}...\textbackslash end\{tabular\}} --- окружение для таблицы\\
+\texttt{l} --- left\\
+\texttt{r} --- right\\
+\texttt{c} --- center\\
+\texttt{p\{<ширина>\}} --- часто бывает удобно привязать ширину столбца к общей ширине наборе. Это можно сделать примерно так \texttt{p\{0.7\textbackslash textwidth\}}. Но также можно задать в сантиметрах \texttt{cm}, миллиметрах \texttt{mm} или пунктах \texttt{pt} и прочее. Рисунки:
+
+\begin{verbatim}
+\begin{figure}
+    \begin{picture}(60, 100)(0, 0)
+        \put(5,  50){\line( 1, 2){25}}
+        \put(5,  50){\line( 1,-2){25}}
+        \put(5,  50){\line( 1, 0){50}}
+        \put(55, 50){\line(-1, 2){25}}
+        \put(55, 50){\line(-1,-2){25}}
+        \put(30,  0){\line( 0, 1){100}}
+    \end{picture}
+    \caption{Рисунок из отрезков в \LaTeX-графике}
+    \label{fig_example}
+\end{figure}
+\end{verbatim}
+
+\noindent
+\begin{figure}[ht]
+\begin{picture}(60, 100)(0, 0)
+    \put(5,  50){\line( 1, 2){25}}
+    \put(5,  50){\line( 1,-2){25}}
+    \put(5,  50){\line( 1, 0){50}}
+    \put(55, 50){\line(-1, 2){25}}
+    \put(55, 50){\line(-1,-2){25}}
+    \put(30,  0){\line( 0, 1){100}}
+\end{picture}
+\caption{Рисунок из отрезков в \LaTeX-графике}
+\label{fig_example}
+\end{figure}
+
+\noindent
+\texttt{
+\textbackslash begin\{picture\}(<ширина>, <высота>)(<сдвиг по х>,<сдвиг по y>)}\\
+Начало координат в нижнем левом углу.\\
+\medskip
+
+\noindent
+Рисунок состоит из элементов, каждый из которых задается командой:\\
+\texttt{
+\textbackslash put(<x>,<y>){<описанние>}}
+\begin{verbatim}
+\put(40, 60){просто текст}
+\end{verbatim}
+
+\begin{picture}(100, 100)(0, 0)
+    \put(40, 60){просто текст}
+\end{picture}
+
+\noindent
+\begin{picture}(200, 350)(0, 0)
+    % начало координат
+    \put(0, 0){O}
+
+    % ось ОХ
+    \put(0, 0){\vector(1, 0){200}}
+    \put(200, 0){x}
+
+    % ось OY
+    \put(0, 0){\vector(0, 1){350}}
+    \put(0, 350){y}
+
+    \put(45, 45){A}
+
+    \put(90, 50){\line(0, 1){300}}
+
+    % x1 = 50, x2 = 50, dx = 1, dy = 0, p = 40
+    % tg a = dy / dx = 0 / 1 = 0, a = arctg(0) = 0
+    % x2 = x1 + p = 50 + 40 = 90
+    % y2 = y1 + p * tg(a) = 50 + 40 * 0 = 50
+    \put(50, 50){\line(1, 0){40}} % (90, 50)
+    \put(94, 50){(1,0)}
+    %=======================================================
+
+    % x1 = 50, x2 = 50, dx = 1, dy = 1, p = 40
+    % tg a = dy / dx = 1 / 1 = 0, a = arctg(0) = 45deg
+    % x2 = x1 + p = 50 + 40 = 90
+    % y2 = y1 + p * tg(a) = 50 + 40 * 1 = 90
+    \put(50, 50){\line(1, 1){40}} % (90, 90)
+    \put(94, 90){(1,1)}
+
+
+    \put(50, 50){\line(1, 2){40}} % (90, 130)
+    \put(94, 130){(1, 2)}
+
+    \put(50, 50){\line(1, 3){40}} % (90, 170)
+    \put(50, 50){\line(1, 4){40}} % (90, 210)
+    \put(50, 50){\line(1, 5){40}} % (90, 250)
+    \put(50, 50){\line(1, 6){40}} % (90, 290)
+
+    \put(50, 50){\line(2, 1){40}}
+    \put(50, 50){\line(2, 3){40}}
+    \put(50, 50){\line(2, 5){40}}
+
+    \put(50, 50){\line(3, 1){40}}
+    \put(50, 50){\line(3, 2){40}}
+    \put(50, 50){\line(3, 4){40}}
+    \put(50, 50){\line(3, 5){40}}
+
+    \put(50, 50){\line(4, 1){40}}
+    \put(50, 50){\line(4, 3){40}}
+    \put(50, 50){\line(4, 5){40}}
+
+    \put(50, 50){\line(5, 1){40}}
+    \put(50, 50){\line(5, 2){40}}
+    \put(50, 50){\line(5, 3){40}}
+    \put(50, 50){\line(5, 4){40}}
+    \put(50, 50){\line(5, 6){40}}
+
+    \put(50, 50){\line(6, 1){40}}
+    \put(50, 50){\line(6, 5){40}}
+\end{picture}
+\medskip
+
+\noindent
+\texttt{
+\textbackslash put(x1, y1)\{\textbackslash line(dx, dy)\{p = проекция\_на\_ось\_OX\}} --- $\tg(\alpha) = \frac{dy}{dx}$\\
+dx, dy --- целые числа от ---6...6\\
+если~$dx=0$,~тогда~$x_2 = x_1$, $y_2 = p$,\\
+иначе~$x_2= x_1 + p$,~$y_2 = y_1 + p \tg(\alpha)$\\
+\begin{picture}(110, 110)(-10, -10)
+    \put(0,0){\vector(0, 1){100}}
+    \put(0,0){\vector(1, 0){100}}
+    \put(-7, -7){0}
+    \put(95, -7){$x$}
+    \put(-7, 95){$y$}
+    \put(30, 30){\oval(20, 30)}
+    \put(50, 50){\circle{50}}
+    \put(70, 50){\circle*{15}}
+    \put(60, 90){\frame{~sample~}}
+\end{picture}
+\medskip
+
+\noindent
+\texttt{\textbackslash vector} --- аналогична команде \texttt{\textbackslash line}, только на конце рисует стрелку\\
+\texttt{\textbackslash circle\{<диаметр>\}} --- рисует окружность\\
+\texttt{\textbackslash circle*\{<диаметр>\}} --- рисует круг (закрашенную окружность)\\
+\texttt{\textbackslash oval\{x, y\}} --- рисует овал\\
+\texttt{\textbackslash frame\{<аргумент>\}} --- заключает аргумент в рамку\\
+\medskip
+
+\noindent
+Вставка заранее подготовленного рисунка:
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=0.9\textwidth]{xfig_example}
+%    \caption{Заранее подготовленный рисунок}
+%    \label{xfig_example}
+%\end{figure}
+
+\begin{verbatim}
+% В преамбуле подключить пакет:
+% Для вставки заранее подготовленных рисунков
+\usepackage{graphicx}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{xfig_example}
+    \caption{Заранее подготовленный рисунок}
+    \label{xfig_example}
+\end{figure}
+\end{verbatim}
+
+\noindent
+\texttt{
+\textbackslash includegraphics[<опции>]\{<имя файла>\}}\\
+<имя файла> указывается без расширения, что позволяет использовать один и тот же исходный текст с обычным \LaTeX'ом, так и с программой \texttt{pdflatext}; в первом случае система попытается найти файл с расширением \texttt{.eps} или \texttt{.ps}, во втором --- с расширением \texttt{.png}, \texttt{.pdf}, \texttt{.jpg}, \texttt{.mps}, \texttt{.tif}.\\
+Для подготовки файлов в ОС Linux используется программа XFig. Она сохраняет файлы в формате \texttt{.fig}; сконвертировать такой файл в формат \texttt{.eps} можно с помощью программы \texttt{fig2dev}:\\
+\texttt{fig2dev -j -L eps myfile.fig myfile.eps}\\
+\texttt{fig2dev -L pdf myfile.fig myfile.pdf}\\
+\medskip
+
+\noindent
+Бывает так, что программа просмотра dvi файлов не отображает заранее подготовленные рисунки. Скорее всего это проблема не в dvi файле, а в программе просмотра. Для доказательства можно из dvi файла получить pdf. В последнем всё должно быть в порядке:\\
+\texttt{
+   dvipdf  file.dvi file.pdf}
+
+\noindent
+\texttt{
+\textbackslash begin\{verbatim\}...\textbackslash end\{verbatim\}} --- печает текст как есть (дословно)\\
+\texttt{
+\textbackslash verb <разделитель>...<разделитель>} --- аналогично. Но внутренний текст не переносится на другую строку. Разделитель --- любой символ кроме латинских букв и звёздочки:
+\begin{verbatim}
+\verb:(a[~'$']&b):.
+\end{verbatim}
+\verb:(a[~'$']&b):.\\
+Окружение \texttt{vebrbatim} и команда \texttt{verb} и имеют альтернативную "<звёздочную"> форму. При использовании которых символ пробела превращается в знак "<\textvisiblespace">\\
+Средства из дополнительных пакетов:\\
+\medskip
+
+\noindent
+Пакет \texttt{verbatim}\\
+\texttt{\textbackslash verbatiminput\{<имя файла>\}}
+\\
+\texttt{\textbackslash verbatiminput}
+\verbatiminput{figure.py}
+\texttt{==============================================================}
+
+\noindent
+\texttt{\textbackslash listinginput}
+\listinginput{1}{figure.py}
+\texttt{==============================================================}
+
+\noindent
+\texttt{\textbackslash lstinputlisting}
+\lstinputlisting[language=python, firstnumber=1, numbers=left]{figure.py}
+\texttt{==============================================================}
+
+\clearpage
+
+\noindent
+\texttt{
+\textbackslash footnote\{<текст>\}}\\
+Это сноска\footnote{А это текст сноски!}
+
+\begin{verbatim}
+\marginpar[<левая версия>]{текст}
+\end{verbatim}
+
+\marginpar[]{т1}
+
+\clearpage
+
+\noindent
+Окружения:
+\texttt{
+math \ \ \ \ \ \ \ \ \$ ... \$ \ \ \  \textbackslash( ... \textbackslash) \\
+displaymath \$\$ ... \$\$ \ \ \textbackslash[ ... \textbackslash ] \\
+equation}
+\\
+Дополнительные математические шрифты из пакета \texttt{amsfonts}:\\
+\texttt{\textbackslash mathcal\{\}} --- каллиграфический\\
+\texttt{\textbackslash mathfrak\{\}} --- готический\\
+\texttt{\textbackslash mathbb\{\}} --- ажурный
+
+\end{document}

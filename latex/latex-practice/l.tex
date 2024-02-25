@@ -1,0 +1,46 @@
+\input{preamble.tex}
+
+\begin{document}
+
+\begin{lstlisting}[language=bash]
+    $ # open pdf file in Linux terminal
+    $ xdg-open file.pdf
+    $
+    $ # one more program
+    $ gv file.pdf
+
+\end{lstlisting}
+
+\noindent
+\verb*|\ss|  dgfdsfgfdg
+
+Трали-вали
+
+Latex text:
+\verbatiminput{exampe.tex}
+
+Result:
+\input{exampe.tex}
+
+\begin{table*}[h]
+    \begin{tabular}{ll}
+        %\hline
+
+        \verb*|\LARGE| & \LARGE LARGE \\
+        %\hline
+    \end{tabular}
+\end{table*}
+
+\begin{minipage}{0.1\textwidth}
+    \begin{flushleft}
+        \input{exampe.tex}
+    \end{flushleft}
+\end{minipage}
+
+\begin{minipage}{0.1\textwidth}
+    \begin{flushleft}
+        \verbatiminput{exampe.tex}
+    \end{flushleft}
+\end{minipage}
+
+\end{document}
