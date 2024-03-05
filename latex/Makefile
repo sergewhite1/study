@@ -14,4 +14,4 @@ latex.dvi: $(DEPS)
 
 .PHONY: clean
 clean:
-	rm -fv *.aux *.dvi *.log *.pdf *.toc
+	rm -fv *.aux *.dvi *.log *.pdf *.synctex.gz *.toc
