@@ -1,6 +1,12 @@
 MAIN_FILE = latex.tex
-APPENDIX = appendix-1.tex appendix-2.tex
-DEPS = $(MAIN_FILE) preamble.tex titlepage.tex thebibliography.tex $(APPENDIX)
+
+SECTION = section/01_why_latex.tex \
+          section/02_struct_of_doc.tex
+
+APPENDIX = appendix/appendix-1.tex \
+           appendix/appendix-2.tex
+
+DEPS = $(MAIN_FILE) preamble.tex titlepage.tex thebibliography.tex $(SECTION) $(APPENDIX)
 
 latex.pdf: $(DEPS)
 	@# Need 2 runs. The first run will produce toc file (Table Of Contents)
@@ -15,3 +21,4 @@ latex.dvi: $(DEPS)
 .PHONY: clean
 clean:
 	rm -fv *.aux *.dvi *.log *.pdf *.synctex.gz *.toc
+	rm -fv section/*.log
