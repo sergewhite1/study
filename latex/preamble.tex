@@ -48,6 +48,20 @@
 \usepackage{moreverb}
 \usepackage{listings}
 
+\lstdefinestyle{texstyle}
+{
+    breaklines=true,
+    frame=single,
+    inputencoding=utf8,
+    language=TeX,
+    numbers=left,
+    % для нормального отображения кириллицы в комментариях
+    extendedchars=\true,
+    keepspaces=true
+}
+
+\lstset{style=texstyle}
+
 % Математические формулы
 \usepackage{amsmath}
 \usepackage{amsfonts}
