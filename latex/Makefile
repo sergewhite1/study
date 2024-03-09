@@ -4,7 +4,9 @@ SECTION = section/01_why_latex.tex     \
           section/02_struct_of_doc.tex \
           section/03_preamble.tex      \
           section/04_title_page.tex    \
-          section/05_toc.tex
+          section/05_toc.tex           \
+          section/06_appendix.tex      \
+          section/07_thebibliography.tex
 
 APPENDIX = appendix/appendix-1.tex \
            appendix/appendix-2.tex
