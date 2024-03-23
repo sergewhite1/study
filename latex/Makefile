@@ -25,5 +25,5 @@ latex.dvi: $(DEPS)
 
 .PHONY: clean
 clean:
-	rm -fv *.aux *.dvi *.log *.pdf *.synctex.gz *.toc
+	rm -fv *.aux *.dvi *.log *.out *.pdf *.synctex.gz *.toc
 	rm -fv section/*.log
