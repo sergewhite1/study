@@ -1,12 +1,12 @@
 MAIN_FILE = latex.tex
 
-SECTION = section/01_why_latex.tex     \
-          section/02_struct_of_doc.tex \
-          section/03_preamble.tex      \
-          section/04_title_page.tex    \
-          section/05_toc.tex           \
-          section/06_appendix.tex      \
-          section/07_thebibliography.tex
+SECTION = section/why_latex.tex     \
+          section/struct_of_doc.tex \
+          section/about_preamble.tex      \
+          section/about_titlepage.tex    \
+          section/about_toc.tex           \
+          section/about_appendix.tex      \
+          section/about_thebibliography.tex
 
 APPENDIX = appendix/appendix-1.tex \
            appendix/appendix-2.tex
