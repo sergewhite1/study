@@ -5,15 +5,57 @@
     \label{specsymbols}
     \begin{tabular}{|l|p{0.75\textwidth}|}
         \hline
-        Спецсимвол & Значение \\ \hline
+        \textbf{Спецсимвол} &
+        \textbf{Значение} \\ \hline
+
         \verb|~| & "<неразрывный пробел"> \\ \hline
         \verb|#| & TODO: что это? \\ \hline
         \verb|$| & математическое окружение \\ \hline
-        \verb|^| & показатель степени (в математическом окружении) \\ \hline
+        \verb|^| & верхний индекс или показатель степени (в математическом окружении) \\ \hline
+        \verb|_| & нижний индекс (в математическом окружении) \\ \hline
         \verb|%| & начало комментария; заканчивается комментарий на конце строки \\ \hline
+        \verb|{ }| & группа \\ \hline
     \end{tabular}
 \end{table}
 
-ss
+\bigskip
+
+\noindent
+В пакете \textbf{babel} кавычки являются спецсимволом.
+
+\begin{table}[h!]
+    \caption{Кавычки в пакете babel}
+    \label{quotes_in_babel}
+    \begin{tabular}{|l|l|p{0.7\textwidth}|}
+        \hline
+        \textbf{LATEX} &
+        \textbf{OUT}   &
+        \textbf{Описание} \\ \hline
+        \verb|"<| & "< & левая ёлочка  \\ \hline
+        \verb|">| & "< & правая ёлочка \\ \hline
+        \verb|"`| & "` & открывающая лапка (обратный апостроф) \\ \hline
+        \verb|"'| & "' & закрывающая лапка (прямой апостроф)   \\ \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Пробелы.} В непрерывной последовательности пробелов и знаков табуляции пробел будет печататься только один раз.
+
+\begin{table*}[h!]
+    \begin{tabular}{|l|p{0.7\textwidth}|}
+        \hline
+        \verb|\,| & "<неразрывный пробел"> уменьшенного размера.\\
+        \hline
+    \end{tabular}
+\end{table*}
+
+\textbf{Конец строки.} LATEX в непрерывной последовательности конца строки два символа конца означают переход к новому абзацу. Остальные символы конца строки игнорируются.
+
+\begin{table*}[h!]
+    \begin{tabular}{|l|p{0.7\textwidth}|}
+        \hline
+        \verb|\\| & конец строки\\
+        \hline
+    \end{tabular}
+\end{table*}
 
 \clearpage
