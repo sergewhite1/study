@@ -1,6 +1,6 @@
 \section{Основные понятия}
 
-\begin{table}[h]
+\begin{table}[h!]
     \caption{Спецсимволы}
     \label{specsymbols}
     \begin{tabular}{|l|p{0.75\textwidth}|}
@@ -48,14 +48,31 @@
     \end{tabular}
 \end{table*}
 
-\textbf{Конец строки.} LATEX в непрерывной последовательности конца строки два символа конца означают переход к новому абзацу. Остальные символы конца строки игнорируются.
+\textbf{Конец строки.} LATEX в непрерывной последовательности символов конца строки два символа конца строки означают переход к новому абзацу. Остальные символы конца строки игнорируются.
 
 \begin{table*}[h!]
     \begin{tabular}{|l|p{0.7\textwidth}|}
         \hline
-        \verb|\\| & конец строки\\
+        \verb|\\| & конец строки в выходном документе\\
         \hline
     \end{tabular}
 \end{table*}
+
+\begin{table}[h!]
+    \caption{Дефисы и тире}
+    \begin{tabular}{|l|l|p{0.65\textwidth}|}
+        \hline
+        \textbf{LATEXT} &
+        \textbf{OUT}    &
+        \textbf{Описание} \\ \hline
+        \verb|-| & - & кусочно-непрерывное \\ \hline
+        \verb|--| & -- & краткое тире от--до (например, дорого отнимает тридцать--сорок минут) \\ \hline
+        \verb|---| & --- & длинное тире --- знак препинания \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent\fbox{\parbox[l]{\textwidth}{
+    \textbf{Команда --- это специальная инструкция по отображению контента в выходном файле}
+}}
 
 \clearpage
