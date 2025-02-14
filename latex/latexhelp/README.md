@@ -48,6 +48,7 @@ Description step by step
       "optional":[
         "_comment": "see above"
       ]
+    }
   }
 ]
 ```
