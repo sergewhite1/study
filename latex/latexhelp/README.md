@@ -33,19 +33,19 @@ Description step by step
 ```json
 latexhelp = [
   {
-    "entity"="bfseries",
-    "package"="N/A",  
-    "type"="command", // "environment"
-    "desciption"="/Bold-face font",
-    "arguments"={
-      "mandatory"=[
+    "entity":"bfseries",
+    "package":"N/A",
+    "type":"command", // "environment"
+    "desciption":"/Bold-face font",
+    "arguments":{
+      "mandatory":[
         {
           "argument"="argument example",
           "description"="description"
         },
         // ...
       ],
-      "optional"=[
+      "optional":[
         // see above
       ]
   }
