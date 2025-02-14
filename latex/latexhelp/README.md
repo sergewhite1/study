@@ -12,7 +12,7 @@ To solve this task I'd like to create program on Python. Diagram:
 
 ```
 |--------------|  |------------|  |------------------|  |--------|
-|latexhelp.json|->|latexhelp.py|->|latexhelp_alph.tex|->|pdflatex| 
+|latexhelp.json|->|latexhelp.py|->|latexhelp_alph.tex|->|pdflatex|
 |--------------|  |------------|  |------------------|  |--------|
                                                            \|/
                                                    |------------------|
@@ -23,7 +23,7 @@ To solve this task I'd like to create program on Python. Diagram:
 
 Description step by step
 
-1. File latexhelp.json is some kind of database with latex commands and 
+1. File latexhelp.json is some kind of database with latex commands and
    environment description. This file is input for Python program latexhelp.py.
 2. The output of the program latexhelp.py is tex file latexhelp_alph.tex.
 3. File latexhelp_alph goes to the pdflatex program. The result is nice
@@ -31,25 +31,24 @@ Description step by step
 
 ## JSON description for file latexhelp.json
 ```json
-latexhelp = [
+"latexhelp" : [
   {
     "entity":"bfseries",
     "package":"N/A",
-    "type":"command", // "environment"
+    "type":"command",
+    "type_comment": "command | environment",
     "desciption":"/Bold-face font",
     "arguments":{
       "mandatory":[
         {
-          "argument"="argument example",
-          "description"="description"
-        },
-        // ...
+          "argument":"argument example",
+          "description":"description"
+        }
       ],
       "optional":[
-        // see above
+        "_comment": "see above"
       ]
   }
-  // ...
 ]
 ```
 
