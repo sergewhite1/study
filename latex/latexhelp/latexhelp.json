@@ -1,0 +1,51 @@
+{
+    "latexhelp": [
+        {
+            "entity": "documentclass",
+            "package": "N/A",
+            "type": "command",
+            "desciption": "Define class of the document: artical, book, minimal, etc.",
+            "arguments": {
+                "mandatory": [
+                    {
+                        "argument": "class",
+                        "description": "class"
+                    }
+                ],
+                "optional": [
+                    {
+                        "argument": "options",
+                        "desciption": ""
+                    }
+                ]
+            }
+        },
+        {
+            "entitiy": "begin",
+            "package": "N/A",
+            "type": "command",
+            "description": "Begin of the environment",
+            "arguments": {
+                "mandatory": [
+                    {
+                        "argument": "environment-name",
+                        "desciption": ""
+                    }
+                ]
+            }
+        },
+        {
+            "entity": "end",
+            "package": "N/A",
+            "description": "End of the environment",
+            "arguments": {
+                "mandatory": [
+                    {
+                        "argument": "environment-name",
+                        "desciption": ""
+                    }
+                ]
+            }
+        }
+    ]
+}
