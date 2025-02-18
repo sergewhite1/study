@@ -4,24 +4,66 @@
             "entity": "documentclass",
             "package": "N/A",
             "type": "command",
-            "desciption": "Define class of the document: artical, book, minimal, etc.",
+            "description": "Define class of the document: artical, book, minimal, etc.",
             "arguments": {
                 "mandatory": [
                     {
                         "argument": "class",
-                        "description": "class"
+                        "description": "class",
+                        "values": [
+                            {
+                                "value": "article",
+                                "description": "For articles in scientific journals, presentations, short reports, program documentation, invitations, ..."
+                            },
+                            {
+                                "value": "IEEEtran",
+                                "description": "For articles with the IEEE Transactions format."
+                            },
+                            {
+                                "value": "proc",
+                                "description": "A class for proceedings based on the article class."
+                            },
+                            {
+                                "value": "minimal",
+                                "description": "It is as small as it can get. It only sets a page size and a base font. It is mainly used for debugging purposes."
+                            },
+                            {
+                                "value": "report",
+                                "description": "For longer reports containing several chapters, small books, thesis, ..."
+                            },
+                            {
+                                "value": "book",
+                                "description": "For books."
+                            },
+                            {
+                                "value": "slides",
+                                "description": "For slides. The class uses big sans serif letters."
+                            },
+                            {
+                                "value": "memoir",
+                                "description": "For sensibly changing the output of the document. It is based on the book class."
+                            },
+                            {
+                                "value": "letter",
+                                "description": "For writing letters."
+                            },
+                            {
+                                "value": "beamer",
+                                "description": "For writing presentations."
+                            }
+                        ]
                     }
                 ],
                 "optional": [
                     {
                         "argument": "options",
-                        "desciption": ""
+                        "description": ""
                     }
                 ]
             }
         },
         {
-            "entitiy": "begin",
+            "entity": "begin",
             "package": "N/A",
             "type": "command",
             "description": "Begin of the environment",
@@ -29,7 +71,7 @@
                 "mandatory": [
                     {
                         "argument": "environment-name",
-                        "desciption": ""
+                        "description": ""
                     }
                 ]
             }

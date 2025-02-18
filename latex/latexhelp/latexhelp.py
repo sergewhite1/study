@@ -20,8 +20,18 @@ with open(LATEXHELP_APH_TEX_FILENAME, "w") as f:
 \begin{document}
     \begin{table}[h]
         \begin{tabular}{|l|p{0.9\textwidth}|} \hline
+            \textbf{Command} & \textbf{Description} \\ \hline
 """
     )
+
     for entity in data['latexhelp']:
-        f.write(str(entity))
-        f.write("NEW LINE")
+        f.write(" " * 12)
+        f.write(f"\\commandstyle{{{entity['entity']}}} &\n")
+
+        f.write(" " * 12)
+        f.write(f"\\descstyle{{{entity['description']}}}\\\\ \\hline\n")
+
+    f.write(r"""
+        \end{tabular}
+    \end{table}
+\end{document}""")

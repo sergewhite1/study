@@ -31,26 +31,34 @@ Description step by step
 
 ## JSON description for file latexhelp.json
 ```json
-"latexhelp" : [
-  {
-    "entity":"bfseries",
-    "package":"N/A",
-    "type":"command",
-    "type_comment": "command | environment",
-    "desciption":"/Bold-face font",
-    "arguments":{
-      "mandatory":[
-        {
-          "argument":"argument example",
-          "description":"description"
-        }
-      ],
-      "optional":[
-        "_comment": "see above"
-      ]
+{
+  "latexhelp": [
+    {
+      "entity": "documentclass",
+      "package": "N/A",
+      "type": "command",
+      "type_comment": "command | environment",
+      "description": "/Bold-face font",
+      "arguments": {
+        "mandatory": [
+          {
+            "argument": "argument example",
+            "description": "description",
+            "values": [
+              {
+                "value": "article",
+                "description": "For articles in scientific journals, presentations, short reports, program documentation, invitations, ..."
+              }
+            ]
+          }
+        ],
+        "optional": [
+          "_comment: see above"
+        ]
+      }
     }
-  }
-]
+  ]
+}
 ```
 
 
