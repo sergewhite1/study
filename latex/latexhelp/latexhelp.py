@@ -7,7 +7,7 @@ print(data)
 
 # TODO insert parsing
 
-LATEXHELP_APH_TEX_FILENAME = "out/latexhelp_alph.tex"
+LATEXHELP_APH_TEX_FILENAME = "out/latexhelp.tex"
 
 
 

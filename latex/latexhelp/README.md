@@ -11,22 +11,19 @@ It's latex help created by me. I'd like to have latex handbook in couple views:
 To solve this task I'd like to create program on Python. Diagram:
 
 ```
-|--------------|  |------------|  |------------------|  |--------|
-|latexhelp.json|->|latexhelp.py|->|latexhelp_alph.tex|->|pdflatex|
-|--------------|  |------------|  |------------------|  |--------|
-                                                           \|/
-                                                   |------------------|
-                                                   |latexhelp_alph.pdf|
-                                                   |------------------|
+|--------------|  |------------|  |-------------|  |--------|  |-------------|
+|latexhelp.json|->|latexhelp.py|->|latexhelp.tex|->|pdflatex|->|latexhelp.pdf|
+|--------------|  |------------|  |-------------|  |--------|  |-------------|
+|file          |                  |file         |              |file         |
+|--------------|                  |-------------|              |-------------|
 ```
-
 
 Description step by step
 
 1. File latexhelp.json is some kind of database with latex commands and
    environment description. This file is input for Python program latexhelp.py.
-2. The output of the program latexhelp.py is tex file latexhelp_alph.tex.
-3. File latexhelp_alph goes to the pdflatex program. The result is nice
+2. The output of the program latexhelp.py is tex file latexhelp.tex.
+3. File latexhelp.tex goes to the pdflatex program. The result is nice
    generated pdf file.
 
 ## JSON description for file latexhelp.json
@@ -60,5 +57,3 @@ Description step by step
   ]
 }
 ```
-
-
