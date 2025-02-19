@@ -1,18 +1,33 @@
 import json
 
-with open('latexhelp.json', 'r') as f:
-    data = json.load(f)
+class LatexHelp:
+    def __init__(self):
+        self._data = {}
 
-print(data)
+    def load(self, filename):
+        ret = False
 
-# TODO insert parsing
+        with open(filename, 'r') as f:
+            self._data = json.load(f)
 
-LATEXHELP_APH_TEX_FILENAME = "out/latexhelp.tex"
+        print(f"LatexHelp.load. self._data={self._data}")
 
+        ret = self.validate()
 
+        if ret:
+            print(f"File {filename} has been loaded succeessfully")
+        else:
+            print(f"Error during loading file {filename}.")
 
-with open(LATEXHELP_APH_TEX_FILENAME, "w") as f:
-    f.write(r"""
+        return ret
+
+    def validate(self) -> bool:
+        print("TODO: Inside validate")
+        return True
+
+    def create_texfile(self, filename):
+        with open(filename, "w") as f:
+            f.write(r"""
 \newcommand{\commandstyle}[1]{\texttt{#1}}
 \newcommand{\descstyle}[1]{#1}
 
@@ -24,14 +39,26 @@ with open(LATEXHELP_APH_TEX_FILENAME, "w") as f:
 """
     )
 
-    for entity in data['latexhelp']:
-        f.write(" " * 12)
-        f.write(f"\\commandstyle{{{entity['entity']}}} &\n")
+            for entity in self._data['latexhelp']:
+                f.write(" " * 12)
+                f.write(f"\\commandstyle{{{entity['entity']}}} &\n")
 
-        f.write(" " * 12)
-        f.write(f"\\descstyle{{{entity['description']}}}\\\\ \\hline\n")
+                f.write(" " * 12)
+                f.write(f"\\descstyle{{{entity['description']}}}\\\\ \\hline\n")
 
-    f.write(r"""
+            f.write(r"""
         \end{tabular}
     \end{table}
 \end{document}""")
+        print(f"File {filename} has been created successfully.")
+
+# START =======================================================================
+
+# TODO insert parsing
+
+lh = LatexHelp()
+
+if not lh.load('latexhelp.json'):
+    exit(1)
+
+lh.create_texfile('out/main/latexhelp.tex')
