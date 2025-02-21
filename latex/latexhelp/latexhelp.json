@@ -79,6 +79,7 @@
         {
             "entity": "end",
             "package": "N/A",
+            "type": "command",
             "description": "End of the environment",
             "arguments": {
                 "mandatory": [
