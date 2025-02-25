@@ -1,10 +1,25 @@
-
-\newcommand{\commandstyle}[1]{\texttt{#1}}
-\newcommand{\descstyle}[1]{#1}
-
-\documentclass{article}
+\input{preamble.tex}
 \begin{document}
+
+    \begin{titlepage}
+        \vspace{10cm}
+        \begin{center}
+            \hrule
+            \medskip
+            \LARGE{LATEX handbook}
+            \medskip
+            \hrule
+        \end{center}
+    \end{titlepage}
+
+    \tableofcontents
+    \clearpage
+
+    \section{Command table}
+
     \begin{table}[h]
+        \captionsetup{singlelinecheck=false, justification=justified}
+        \caption{Commands}
         \begin{tabular}{|l|p{0.9\textwidth}|} \hline
             \textbf{Command} & \textbf{Description} \\ \hline
             \commandstyle{documentclass} &
@@ -16,4 +31,25 @@
 
         \end{tabular}
     \end{table}
+
+    \clearpage
+
+    \section{Environment table}
+
+    \begin{table}[h]
+        \captionsetup{singlelinecheck = false, justification=justified}
+        \caption{Environments}
+        \begin{tabular}{|l|p{0.9\textwidth}|} \hline
+            \textbf{Environment} & \textbf{Description} \\ \hline
+            \commandstyle{table} &
+            \descstyle{Contains the caption and defines the float for the table, i.e., where in the document the table should be positioned and whether we want it to be displayed centered. See env: \commandstyle{tabular}}\\ \hline
+            \commandstyle{tabular} &
+            \descstyle{Can be used to typeset tables with optional horizontal and vertical lines. See env: \commandstyle{table}}\\ \hline
+            \commandstyle{document} &
+            \descstyle{Main environment. The body of the document is placed inside this environment.}\\ \hline
+        \end{tabular}
+    \end{table}
+
+    \clearpage
+
 \end{document}
