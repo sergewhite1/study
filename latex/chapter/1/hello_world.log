@@ -1,0 +1,97 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.24)  3 MAR 2025 17:23
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**hello_world.tex
+(./hello_world.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-03-14>
+! Undefined control sequence.
+l.1 \section
+            {Hello World}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section{H
+              ello World}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no H in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no W in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no d in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 1--2
+[]
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \begin{verbatim}
+                    
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 3--3
+[] 
+ []
+
+
+Overfull \hbox (120.74895pt too wide) in paragraph at lines 10--10
+[]\OT1/cmtt/m/n/10 \documentclass{article}[] 
+ []
+
+
+Overfull \hbox (83.99927pt too wide) in paragraph at lines 10--10
+[]\OT1/cmtt/m/n/10 \begin{document}[] 
+ []
+
+
+Overfull \hbox (89.24922pt too wide) in paragraph at lines 10--10
+[]    \OT1/cmtt/m/n/10 Hello, World![] 
+ []
+
+
+Overfull \hbox (73.49936pt too wide) in paragraph at lines 10--10
+[]\OT1/cmtt/m/n/10 \end{document}[] 
+ []
+
+)
+! Emergency stop.
+<*> hello_world.tex
+                   
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 20 strings out of 474104
+ 454 string characters out of 5747502
+ 1925496 words of memory out of 5000000
+ 22491 multiletter control sequences out of 15000+600000
+ 558237 words of font info for 37 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 20i,1n,21p,76b,167s stack positions out of 10000i,1000n,20000p,200000b,200000s
+!  ==> Fatal error occurred, no output PDF file produced!
