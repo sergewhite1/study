@@ -79,4 +79,6 @@
 
 % Определение (sbdef - serge beloff definition)
 \newcommand{\sbdef}[1]{\textbf{#1}}
-\newcommand{\deff}[1]{\noindent\fbox{\parbox[l]{\textwidth}{\textbf{#1}}}}
+
+% 0.98 - to fix compiler warning Overfull \hbox (6.79999pt too wide) in paragraph
+\newcommand{\deff}[1]{\noindent\fbox{\parbox[l]{0.98\textwidth}{\textbf{#1}}}}

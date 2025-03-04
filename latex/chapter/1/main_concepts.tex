@@ -1,6 +1,6 @@
 \section{Основные понятия}
 
-\begin{table}[h!]
+\begin{table}[h]
     \caption{Спецсимволы}
     \label{specsymbols}
     \begin{tabular}{|l|p{0.75\textwidth}|}
@@ -23,7 +23,7 @@
 \noindent
 В пакете \textbf{babel} кавычки являются спецсимволом.
 
-\begin{table}[h!]
+\begin{table}[h]
     \caption{Кавычки в пакете babel}
     \label{quotes_in_babel}
     \begin{tabular}{|l|l|p{0.7\textwidth}|}
@@ -40,9 +40,11 @@
 
 \textbf{Пробелы.} В непрерывной последовательности пробелов и знаков табуляции пробел будет печататься только один раз.
 
-\begin{table*}[h!]
+\begin{table*}[h]
     \begin{tabular}{|l|p{0.7\textwidth}|}
         \hline
+                  & обычный пробел \\ \hline
+        \verb|~|  & "<неразрывный пробел">\\ \hline
         \verb|\,| & "<неразрывный пробел"> уменьшенного размера.\\
         \hline
     \end{tabular}
@@ -50,7 +52,7 @@
 
 \textbf{Конец строки.} LATEX в непрерывной последовательности символов конца строки два символа конца строки означают переход к новому абзацу. Остальные символы конца строки игнорируются.
 
-\begin{table*}[h!]
+\begin{table*}[ht]
     \begin{tabular}{|l|p{0.7\textwidth}|}
         \hline
         \verb|\\| & конец строки в выходном файле\\
@@ -58,7 +60,7 @@
     \end{tabular}
 \end{table*}
 
-\begin{table}[h!]
+\begin{table}[ht]
     \caption{Дефисы и тире}
     \begin{tabular}{|l|l|p{0.65\textwidth}|}
         \hline
@@ -71,7 +73,12 @@
     \end{tabular}
 \end{table}
 
-\deff{Команда --- это специальная инструкция по отображению контента в выходном файле.}\\
+\bigskip
+
+\deff{Команда --- это специальная инструкция по отображению контента в выходном файле.}
+
+\bigskip
+
 
 Синтаксис:
 \begin{verbatim}
@@ -85,6 +92,7 @@
 \begin{verbatim}
     \command[optional argument]{argument}
 \end{verbatim}
+
 
 \begin{figure}[h]
     \includegraphics{fig/input_sequence_for_help.png}
