@@ -3,17 +3,21 @@ DEPS := $(DEPS) $(shell ls *.tex)
 DEPS := $(DEPS) $(shell find section  -name '*.tex')
 DEPS := $(DEPS) $(shell find appendix -name '*.tex')
 
-latex.pdf: $(DEPS)
+OUTDIR = out
+
+$(OUTDIR)/latex.pdf: $(DEPS) | $(OUTDIR)
 	@# Need 2 runs. The first run will produce toc file (Table Of Contents)
-	pdflatex $<
-	pdflatex $<
- 
+	pdflatex -output-directory $(OUTDIR) $<
+	pdflatex -output-directory $(OUTDIR) $<
+
 latex.dvi: $(DEPS)
 	@# Need 2 runs. The first run will produce toc file (Table Of Contents)
 	latex $<
 	latex $<
 
+$(OUTDIR):
+	mkdir $(OUTDIR)
+
 .PHONY: clean
 clean:
-	rm -fv *.aux *.dvi *.log *.out *.pdf *.synctex.gz *.toc
-	rm -fv section/*.log
+	rm -rfv *.aux *.dvi *.log *.out *.pdf *.synctex.gz *.toc section/*.log $(OUTDIR)
