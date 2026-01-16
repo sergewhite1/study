@@ -1,0 +1,48 @@
+\section{Об оглавлении}
+
+\noindent
+\sbdef{
+    Рубрикация (sectioning) --- это разбивка документа на части, главы, параграфы и т.п.}
+
+\bigskip
+
+\noindent
+\verb|\tableofcontents| --- формирование и вставка оглавления.
+
+\begin{table}[h]
+    \caption{Возможный состав рубрикации}
+    \label{sectioning}
+    \begin{tabular}{|r|l|p{0.7\textwidth}|}
+        \hline
+        \textbf{№}        &
+        \textbf{Команда}  &
+        \textbf{Описание}                                              \\ \hline
+        1 & part          & часть                                      \\ \hline
+        2 & chapter       & глава(для класса документа article не
+                            работает)                                  \\ \hline
+        3 & section       & секция (типа параграф, но это слово в
+                            команде №6)                                \\ \hline
+        4 & subsection    & подсекция                                  \\ \hline
+        5 & subsubsection & подподсекция                               \\ \hline
+        6 & paragraph     & пункт (типа абзац)                         \\ \hline
+        7 & subparagraph  & подпункт                                   \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent
+"<звёздочные версии команд"> производят вставку сущности без номера и не влияющую на дальнейшую нумерацию.
+
+\bigskip
+
+\noindent
+\verb|\addcontentsline{toc}{part}{<имя в оглавлении>}| --- принудительное добавление ненумерованной сущности в оглавление. Например:
+
+\medskip
+
+\noindent
+\begin{boxedverbatim}
+\section*{Литерура}
+\addcontentsline{toc}{part}{Литература}
+\end{boxedverbatim}
+
+\clearpage
