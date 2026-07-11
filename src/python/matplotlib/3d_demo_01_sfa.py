@@ -1,3 +1,6 @@
+# 01. Straightforward approach
+# Решение задачи в лоб (при помощи циклов, т.е. без векторизации)
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
