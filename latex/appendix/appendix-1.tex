@@ -1,7 +1,28 @@
 \shorthandoff{"}%
 
-\chapter{Какое-нибудь-1}
+\chapter{Команды в терминале Linux}
 
-Текст приложения "Какое-нибудь-1"
+\begin{lstlisting}[caption={Сборка проекта}, language=bash]
+# Cборка без библиографии и ссылок
+pdflatex cont_sin.tex
+
+# Cборка с заданием выходной директории
+pdflatex -output-directory out cont_sin.tex
+
+# Cборка со ссылками на метки (формулы, рисунки, таблицы)
+# Twice run for reference resolving
+pdf-latex -output-directory out cont_sin.tex
+pdf-latex -output-directory out cont_sin.tex
+
+# Сборка с библиографией
+pdf-latex -output-directory out cont_sin.tex
+bibtex out/cont_sin.aux
+pdf-latex -output-directory out cont_sin.tex
+pdf-latex -output-directory out cont_sin.tex
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Открытие pdf файла в терминале}, language=bash]
+xdg-open out/cont_sin.pdf
+\end{lstlisting}
 
 \shorthandon{"}%
