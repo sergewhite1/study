@@ -10,21 +10,22 @@
 % Пакет babel адаптирует LATEX к работе с русским языком
 \usepackage[russian]{babel}
 
-% Настраивание размера полосы набора BEGIN======================================
-\usepackage{vmargin}
-\setpapersize{A4}
+% packages ====================================================================
+
+% [showframe] - useful option
+\usepackage[margin=2cm]{geometry}
+
+% Отступ (красная строка) для первого абзаца главы или параграфа
+\usepackage{indentfirst}
+
+\usepackage{setspace}
+\usepackage[indent]{parskip}
 
 \usepackage{epigraph}
-
-% Красная строка
-\usepackage{indentfirst}
 
 % Оглавление и ссылки как гиперссылки
 % Это для удобства чтения в электронном виде
 \usepackage[unicode]{hyperref}
-
-% Предотвращение залезания строк на поля, даже если для этого требуется заполнить строку недопустимо длинными пробелами
-\sloppy
 
 % Выравнивание подписей по левому краю
 \usepackage{caption}
@@ -64,8 +65,16 @@
 % Для устранения ворнингов про \circle, \oval...
 \usepackage{pict2e}
 
-% Определение (sbdef - serge beloff definition)
-\newcommand{\sbdef}[1]{\textbf{#1}}
+% layout ====================================================================
 
-% 0.98 - to fix compiler warning Overfull \hbox (6.79999pt too wide) in paragraph
-\newcommand{\deff}[1]{\noindent\fbox{\parbox[l]{0.98\textwidth}{\textbf{#1}}}}
+% Предотвращение залезания строк на поля, даже если для этого требуется заполнить строку недопустимо длинными пробелами
+\sloppy
+
+% Установка межстрочного интервала
+% \onehalfspacing
+
+% Установка интервала между абзацами
+% \setlength{\parskip}{1em}
+
+% macros ====================================================================
+\input{tex/commands.tex}
