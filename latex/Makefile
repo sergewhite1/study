@@ -1,17 +1,19 @@
-DEPS := latex.tex
-DEPS := $(DEPS) $(shell ls *.tex)
-DEPS := $(DEPS) $(shell find section  -name '*.tex')
-DEPS := $(DEPS) $(shell find appendix -name '*.tex')
-
+MAIN_TARGET_BASE_NAME = osr
 OUTDIR = out
+LATEX = pdflatex
 
-$(OUTDIR)/latex.pdf: $(DEPS) | $(OUTDIR)
-	@# Need 2 runs. The first run will produce toc file (Table Of Contents)
-	pdflatex -output-directory $(OUTDIR) $<
-	pdflatex -output-directory $(OUTDIR) $<
+DEPS := latex.tex
+DEPS := $(DEPS) $(shell find tex  -name '*.tex')
+
+CLEAN_FILES := $(OUTDIR)
+
+$(OUTDIR)/$(MAIN_TARGET_BASE_NAME).pdf: $(DEPS) | $(OUTDIR)
+	# Twice run for reference resolving
+	$(LATEX) -output-directory $(OUTDIR) $<
+	$(LATEX) -output-directory $(OUTDIR) $<
 
 latex.dvi: $(DEPS)
-	@# Need 2 runs. The first run will produce toc file (Table Of Contents)
+	# Twice run for reference resolving
 	latex $<
 	latex $<
 
@@ -20,4 +22,8 @@ $(OUTDIR):
 
 .PHONY: clean
 clean:
-	rm -rfv *.aux *.dvi *.log *.out *.pdf *.synctex.gz *.toc section/*.log $(OUTDIR)
+	rm -rfv $(CLEAN_FILES)
+
+.PHONY: print_deps
+print_deps:
+	@echo DEPS=$(DEPS)
