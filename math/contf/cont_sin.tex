@@ -1,0 +1,204 @@
+\documentclass[a4paper, 12pt, final]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+% [showframe] - useful option
+\usepackage[margin=2cm]{geometry}
+
+% Установка межстрочного интервала
+\usepackage{setspace}
+\onehalfspacing
+
+% Установка интервала между абзацами
+\setlength{\parskip}{1em}
+
+% Отступ (красная строка) для первого абзаца главы или параграфа
+\usepackage{indentfirst}
+
+\usepackage{amsmath}
+\usepackage{amsfonts} % шрифты в формулах
+\usepackage{amsthm}   % теоремы
+
+% dcases
+\usepackage{mathtools}
+
+\newtheorem{definition}{Определение}
+
+% Оглавление и ссылки как гиперссылки
+% Это для удобства чтения в электронном виде
+\usepackage[unicode, breaklinks]{hyperref}
+
+\usepackage{xcolor}
+
+\begin{document}
+
+\begin{center}
+    \scshape
+    \hrule
+    НЕПРЕРЫВНОСТЬ ФУНКЦИИ
+    \vspace{0.7em} \hrule
+\end{center}
+
+\begin{flushleft}
+    Serge Beloff \& Chat GPT
+    \vspace{0.7em} \hrule
+\end{flushleft}
+
+\tableofcontents
+
+\section{Аннотация}
+
+Из курса школьной математики известны такие свойства функции $y=f(x)$ как область определения $D$ и область значений $E$.
+Например, для функции $f(x)=\frac{1}{x}$ областью определения $D(f)$ будут все вещественные числа кроме нуля: $D(f) = (-\infty; 0) \cup (0; +\infty)$.
+Такая же и область значений: $E(f) = (-\infty; 0) \cup (0; +\infty)$.
+Для параболы $f(x)=x^2$: $D(f)=\mathbb{R}$, $E(f)=[0; +\infty)$.
+
+Еще одним свойством функции $y=f(x)$ является \textbf{непрерывность}.
+Рассмотрим это свойство, докажем непрерывность функции синуса $f(x)=\sin(x)$ и укажем приложения и практический смысл этого свойства.
+
+Интуитивно свойство непрерывности означает плавное (постепенное) изменение значения функции в зависимости от плавного (постепенного) изменения аргумента.
+Например, рассмотрим прямолинейное движение поезда, или, вообще материальной точки.
+Пусть $x(t)$ --- это уравнение движения.
+Мы понимаем, что расстояние $x$ будет изменяться плавно (постепенно).
+
+\section{Определение непрерывности}
+
+\begin{definition}
+    Приращением функции $y=f(x)$ в точке $x_0$ называется разность:
+    \begin{equation}
+        \Delta y = f(x_0 + \Delta x) - f(x_0),
+        \label{eq:delta_y}
+    \end{equation}
+    где $\Delta x$ --- приращение аргумента.
+    \label{def:delta_y}
+\end{definition}
+
+\begin{definition}
+    Функция $y=f(x)$ называется непрерывной в точке $x_0$, если эта функция определена в какой-нибудь окрестности точки $x_0$ и если
+    \begin{equation}
+        \lim_{\Delta x \to 0} \Delta y = 0,
+        \label{eq:cont_def_1}
+    \end{equation}
+    т.е. если бесконечно малому приращению аргумента $\Delta x$ соответствует бесконечно малое приращение функции $\Delta y$.
+    \label{def:cont_def_1}
+\end{definition}
+
+\begin{definition}
+    Функция $y=f(x)$ называется непрерывной в интервале $[a;b]$, если она непрерывна в каждой его точке.
+    \label{def:cont_def_interval}
+\end{definition}
+Здесь необходимо сделать уточнение для концов интервала.
+В точке $x=a$ при вычислении предела мы можем оставаться внутри интервала подходя только справа: $\Delta x \to 0+$.
+Аналогично к точке $x=b$ мы можем двигаться только слева: $\Delta x \to 0-$.
+Таким образом, функция $y=f(x)$ непрерывна на интервале $[a;b]$, если:
+\begin{equation}
+    \begin{dcases}
+        \lim_{\Delta x \to 0 } &\Delta y = 0, \quad x \in (a;b),\\
+        \lim_{\Delta x \to 0+} &\Delta y = 0, \quad x = a,      \\
+        \lim_{\Delta x \to 0-} &\Delta y = 0, \quad x = b,
+    \end{dcases}
+    \label{eq:cont_def_inerval_1}
+\end{equation}
+
+Формулу \eqref{eq:cont_def_1} можно записать следующим образом:
+\begin{align*}
+    \lim_{\Delta x \to 0} \Delta y = 0 \\
+    \lim_{\Delta x \to 0} \left[ f(x_0 + \Delta x) - f(x_0) \right] = 0
+\end{align*}
+Пусть $x=x_0 + \Delta x$.
+Тогда при $\Delta x \to 0$, имеем $x \to x_0$.
+Значит,
+\begin{equation*}
+    \lim_{x \to x_0} \left[ f(x) - f(x_0) \right] = 0
+\end{equation*}
+Выражение $f(x_0)$ не зависит от $x$.
+Т.е. является константой.
+Поэтому его можно вынести за знак передела:
+\begin{equation}
+    \lim_{x \to x_0} f(x) = f(x_0)
+    \label{eq:cont_def_2}
+\end{equation}
+В итоге мы получили еще одно определение непрерывности функции:
+\begin{definition}
+    Функция $y=f(x)$ непрерывна в точке $x_0$, если она определена в какой-нибудь окрестности этой точки и если предел функции при стремлении независимой переменной $x$ к $x_0$ существует и равен значению функции при $x=x_0$.
+    \label{def:conf_def_2}
+\end{definition}
+
+Из этого следует, что совокупность формул \eqref{eq:cont_def_inerval_1}, описывающая непрерывность функции в интервале, может быть эквивалентно записана следующим образом:
+\begin{equation}
+    \begin{dcases}
+        \lim_{x \to x_0} &f(x) = f(x_0), \quad x_0 \in (a;b),\\
+        \lim_{x \to a+ } &f(x) = f(a),                     \\
+        \lim_{x \to b- } &f(x) = f(b),
+    \end{dcases}
+    \label{eq:cont_def_inerval_2}
+\end{equation}
+
+\section{Непрерывность синуса}
+
+Докажем непрерывность функции синуса $f(x)=\sin(x)$.
+Возможно у Вас, дрогой читатель, есть соблазн воспользоваться определением \ref{def:conf_def_2} и формулой \eqref{eq:cont_def_2}:
+\begin{equation*}
+    \lim_{x \to x_0} \sin(x) = \sin(x_0)
+\end{equation*}
+И на том и написать ЧТД.
+Но этот путь ложный!
+Дело в том, что такая подстановка предполагает, что непрерывность функции $\sin(x)$ уже доказана.
+То есть если непрерывность функции доказана, тогда действительно можно смело применять формулу \eqref{eq:cont_def_2}.
+
+Ну что же, пойдем другим путём и сделает настоящее ТРУ доказательство!
+Для этого воспользуемся определением \ref{def:cont_def_1} и формулой \eqref{eq:cont_def_1}:
+\begin{align*}
+    \lim_{\Delta x \to 0} \Delta y =
+    \lim_{\Delta x \to 0} \left( \sin(x_0 + \Delta x) - \sin(x_0) \right) = \dots
+\end{align*}
+Применим формулу синуса суммы:
+\begin{equation*}
+    \sin (\alpha + \beta) = \sin \alpha \cos \beta + \cos \alpha \sin \beta
+\end{equation*}
+\begin{align*}
+    &= \lim_{\Delta x \to 0} \left( \sin(x_0) \cos(\Delta x) + \cos (x_0) \sin(\Delta x) - \sin(x_0) \right) = \\
+    &= \lim_{\Delta x \to 0} \sin(x_0) \cos(\Delta x) +
+       \lim_{\Delta x \to 0} \cos(x_0) \sin(\Delta x) -
+       \lim_{\Delta x \to 0} \sin(x_0)
+\end{align*}
+С последним слагаемым всё понятно.
+Оно не зависит от $\Delta x$.
+То есть:
+\begin{equation}
+    \lim_{\Delta x \to 0} \Delta y =
+    \sin(x_0) \lim_{\Delta x \to 0} \cos(\Delta x) +
+    \cos(x_0) \lim_{\Delta x \to 0} \sin(\Delta x) -
+    \sin(x_0)
+\end{equation}
+
+И вот здесь мы подходим к следующим, так сказать, фундаментальным пределам:
+\begin{equation}
+    \lim_{x \to 0} \cos(x) = 1
+    \label{eq:lim_cos_zero}
+\end{equation}
+\begin{equation}
+    \lim_{x \to 0} \sin(x) = 0
+    \label{eq:lim_sin_zero}
+\end{equation}
+Можно рассмотреть единичную тригонометрическую окружность.
+На ней пределы \eqref{eq:lim_cos_zero} и \eqref{eq:lim_sin_zero} интуитивно понятны.
+
+\textcolor{red}{
+    TODO: Строгие доказательства пределов \eqref{eq:lim_cos_zero} и \eqref{eq:lim_sin_zero}. Язык $\varepsilon$--$\delta$.
+}
+
+\section{Приложения непрерывности}
+
+\phantomsection
+\addcontentsline{toc}{section}{Список литературы}
+
+\nocite{Bermant}
+\nocite{Fikhtengolts}
+
+\bibliographystyle{apalike}
+\bibliography{bib}
+
+\end{document}
